@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">EduShare Android</string>
+    <string name="title_home">Home</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_notifications">Notificaciones</string>
+    <string name="title_perfil">Perfil</string>
+    <string name="title_usuarios">Usuarios</string>
+    <string name="contraseña">contraseña</string>
+    <string name="correo_gmail_com">correo@gmail.com</string>
+    <!-- Títulos principales -->
+    <string name="crear_cuenta_titulo">  Crear cuenta</string>
+    <string name="datos_personales_titulo">  Datos personales</string>
+    <string name="personalizacion_cuenta_titulo">  Personalización de la cuenta</string>
+    <string name="notificaciones_titulo">  Notificaciones</string>
+
+    <!-- Campos de formulario -->
+    <string name="nombre_label">  Nombre(s)</string>
+    <string name="nombre_hint">  Ingrese su nombre</string>
+    <string name="primer_apellido_label">  Primer Apellido</string>
+    <string name="primer_apellido_hint">  Ingrese su primer apellido</string>
+    <string name="segundo_apellido_label">  Segundo Apellido</string>
+    <string name="segundo_apellido_hint">  Ingrese su segundo apellido</string>
+    <string name="correo_label">  Correo</string>
+    <string name="correo_hint">  Ingrese su correo</string>
+    <string name="usuario_label">  Nombre de usuario</string>
+    <string name="usuario_hint">  Ingrese su nombre de usuario</string>
+    <string name="contrasena_label">  Contraseña</string>
+    <string name="contrasena_hint">  Ingrese su contraseña</string>
+    <string name="confirmar_contrasena_label">  Confirmar contraseña</string>
+    <string name="confirmar_contrasena_hint">  Por favor confirme su contraseña</string>
+    <string name="nivel_educativo_label">  Nivel Educativo</string>
+    <string name="nivel_educativo_hint">  Ingrese su nivel educativo</string>
+    <string name="institucion_educativa_label">  Institución Educativa</string>
+    <string name="institucion_educativa_hint">  Ingrese su Institución Educativa</string>
+    <string name="carrera_label">  Carrera</string>
+    <string name="carrera_hint">  Ingrese su carrera</string>
+    <string name="materias_interes_label">  Materias de interés</string>
+    <string name="materias_interes_hint">  Ingrese su materia de interés</string>
+
+    <!-- Opciones de preferencias -->
+    <string name="apuntes_opcion">  Apuntes</string>
+    <string name="examenes_opcion">  Exámenes</string>
+    <string name="resumenes_opcion">  Resúmenes</string>
+    <string name="presentaciones_opcion">  Presentaciones</string>
+
+    <!-- Notificaciones -->
+    <string name="notificaciones_descripcion">Seleccione el tipo de notificaciones que desea recibir (Puede cambiar esta configuración más adelante en la opción "Ajustes")</string>
+    <string name="notificaciones_documentos">Recibir notificaciones de nuevos documentos</string>
+    <string name="notificaciones_seguidores">Recibir notificaciones cuando me sigan</string>
+    <string name="notificaciones_semanales">Recibir notificaciones semanales</string>
+
+    <!-- Botones -->
+    <string name="cancelar_boton">Cancelar</string>
+    <string name="crear_cuenta_boton">Crear cuenta</string>
+    <string name="actualizar_cuenta_boton">Actualizar datos</string>
+
+    <!-- Mensajes de error/validación -->
+    <string name="error_campo_requerido">Este campo es requerido</string>
+    <string name="error_correo_invalido">Ingrese un correo válido</string>
+    <string name="error_contrasenas_no_coinciden">Las contraseñas no coinciden</string>
+    <string name="editar_perfil">Editar Perfil</string>
+    <string name="ver_archivo">Ver archivo</string>
+    <string name="programar_chat">Programar Chat</string>
+    <string name="vista_del_chat">Vista del Chat</string>
+</resources>

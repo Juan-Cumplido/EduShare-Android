@@ -1,0 +1,22 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.EduShareAndroid" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">#2E1F14</item> <!-- Marrón oscuro -->
+        <item name="colorPrimaryVariant">#1C120A</item> <!-- Más oscuro -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- Texto claro -->
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">#D4AF37</item> <!-- Dorado -->
+        <item name="colorSecondaryVariant">#A67C00</item>
+        <item name="colorOnSecondary">#000000</item>
+
+        <!-- Fondos -->
+        <item name="android:colorBackground">#12100E</item> <!-- Fondo general muy oscuro -->
+        <item name="android:statusBarColor">#1C120A</item>
+        <item name="android:navigationBarColor">#1C120A</item>
+
+        <!-- Otros elementos -->
+        <item name="android:textColor">#F5F0E6</item> <!-- Beige claro para texto -->
+    </style>
+</resources>
