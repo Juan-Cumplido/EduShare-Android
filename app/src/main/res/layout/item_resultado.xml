@@ -7,20 +7,22 @@
     android:padding="8dp">
 
     <!-- Imagen de portada -->
+
+    <!-- Botón de acción -->
     <ImageView
         android:id="@+id/imagePortada"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_archivo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <!-- Botón de acción -->
     <ImageButton
         android:id="@+id/buttonVerMas"
         android:layout_width="57dp"
@@ -65,4 +67,16 @@
         app:layout_constraintStart_toStartOf="@id/textTitulo"
         app:layout_constraintEnd_toEndOf="@id/textTitulo"
         app:layout_constraintTop_toBottomOf="@id/textSubtitulo" />
+
+    <ImageButton
+        android:id="@+id/btnOpciones"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_more_vert"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@id/buttonVerMas"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="8dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

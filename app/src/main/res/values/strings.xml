@@ -62,4 +62,8 @@
     <string name="ver_archivo">Ver archivo</string>
     <string name="programar_chat">Programar Chat</string>
     <string name="vista_del_chat">Vista del Chat</string>
+    <string name="buscar_usuario">Buscar usuario...</string>
+    <string name="logo_edushare">Logo EduShare</string>
+    <string name="dejar_de_seguir">Dejar de seguir</string>
+    <string name="seguir">Seguir</string>
 </resources>

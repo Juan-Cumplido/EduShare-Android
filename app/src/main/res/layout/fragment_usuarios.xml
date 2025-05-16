@@ -6,17 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".ui.usuarios.UsuariosFragment">
 
-    <TextView
-        android:id="@+id/text_usuarios"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/imageViewBack"
+        android:layout_width="193dp"
+        android:layout_height="187dp"
+        android:background="@drawable/backgroundnavigation"
+        android:layout_marginTop="-65dp"
+        android:layout_marginStart="-69dp"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="107dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="-24dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/logo_edushare"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logoedushare" />
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/backgroundtext"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/buscar_usuario"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewResults"
+        android:layout_width="410dp"
+        android:layout_height="528dp"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewResults" />
+    <TextView
+        android:id="@+id/textNoSesion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Por favor inicie sesión para buscar usuarios."
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

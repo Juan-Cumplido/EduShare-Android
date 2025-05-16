@@ -32,7 +32,11 @@
         android:id="@+id/navigation_usuarios"
         android:name="com.example.edushareandroid.ui.usuarios.UsuariosFragment"
         android:label="@string/title_usuarios"
-        tools:layout="@layout/fragment_usuarios"/>
+        tools:layout="@layout/fragment_usuarios">
+        <action
+            android:id="@+id/action_navigation_usuarios_to_perfilUsuarioFragment"
+            app:destination="@id/perfilUsuarioFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -49,6 +53,9 @@
         <action
             android:id="@+id/action_navigation_perfil_to_editarPerfilFragment"
             app:destination="@id/navigation_editarPerfil" />
+        <action
+            android:id="@+id/action_navigation_perfil_to_navigation_verArchivo"
+            app:destination="@id/navigation_verArchivo" />
     </fragment>
 
     <fragment
@@ -79,6 +86,16 @@
         <argument android:name="fecha" app:argType="string" />
         <argument android:name="hora" app:argType="string" />
         <argument android:name="usuario" app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/perfilUsuarioFragment"
+        android:name="com.example.edushareandroid.ui.usuarios.PerfilUsuarioFragment"
+        android:label="Usuario"
+        tools:layout="@layout/fragment_perfilusuario">
+        <action
+            android:id="@+id/action_perfilUsuarioFragment_to_navigation_verArchivo"
+            app:destination="@id/navigation_verArchivo" />
     </fragment>
 
 </navigation>
