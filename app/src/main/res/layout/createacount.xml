@@ -185,6 +185,44 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvUsuario" />
 
+        <!-- FOTO DE PERFIL -->
+        <TextView
+            android:id="@+id/tvFotoPerfil"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="Foto de perfil"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTextUsuario"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageViewFotoPerfil"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="Foto seleccionada"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_perfil"
+        app:layout_constraintTop_toBottomOf="@id/tvFotoPerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/buttonSeleccionarImagen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Seleccionar imagen"
+            app:layout_constraintTop_toBottomOf="@id/imageViewFotoPerfil"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <!-- CONTRASEÑA -->
         <TextView
             android:id="@+id/tvContraseña"
@@ -198,7 +236,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextUsuario" />
+            app:layout_constraintTop_toBottomOf="@id/buttonSeleccionarImagen" />
 
         <EditText
             android:id="@+id/editTextPassword"
@@ -375,111 +413,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvMateria" />
 
-        <!-- CheckBoxes -->
-        <CheckBox
-            android:id="@+id/checkBoxApuntes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/apuntes_opcion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextMateria" />
-
-        <CheckBox
-            android:id="@+id/checkBoxExamenes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/examenes_opcion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxApuntes" />
-
-        <CheckBox
-            android:id="@+id/checkBoxResumenes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/resumenes_opcion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxExamenes" />
-
-        <CheckBox
-            android:id="@+id/checkBoxPresentaciones"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/presentaciones_opcion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxResumenes" />
-
-        <!-- Notificaciones -->
-        <TextView
-            android:id="@+id/tvNotificaciones"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:text="@string/notificaciones_titulo"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxPresentaciones" />
-
-        <!-- Descripción de notificaciones -->
-        <TextView
-            android:id="@+id/tvDescripcion"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:gravity="center"
-            android:text="@string/notificaciones_descripcion"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNotificaciones" />
-
-        <!-- CheckBox: Documentos -->
-        <CheckBox
-            android:id="@+id/checkBoxDocumentos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/notificaciones_documentos"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDescripcion" />
-
-        <!-- CheckBox: Seguidores -->
-        <CheckBox
-            android:id="@+id/checkBoxSeguidor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/notificaciones_seguidores"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxDocumentos" />
-
-        <!-- CheckBox: Semanales -->
-        <CheckBox
-            android:id="@+id/checkBoxSemanales"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/notificaciones_semanales"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxSeguidor" />
-
         <!-- Botones -->
         <Button
             android:id="@+id/buttonCancelar"
@@ -493,7 +426,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/buttonCrearCuenta"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxSemanales" />
+            app:layout_constraintTop_toBottomOf="@id/editTextMateria" />
 
         <Button
             android:id="@+id/buttonCrearCuenta"
