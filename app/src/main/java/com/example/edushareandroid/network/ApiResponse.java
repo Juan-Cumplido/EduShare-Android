@@ -5,10 +5,15 @@ public class ApiResponse {
         return error;
     }
 
+
     public void setError(boolean error) {
         this.error = error;
     }
 
+    public ApiResponse(boolean error, String mensaje) {
+        this.error = error;
+        this.mensaje = mensaje;
+    }
     public int getEstado() {
         return estado;
     }

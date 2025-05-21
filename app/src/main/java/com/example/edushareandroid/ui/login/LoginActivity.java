@@ -2,44 +2,92 @@ package com.example.edushareandroid.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.edushareandroid.MainActivity;
 import com.example.edushareandroid.R;
-import com.example.edushareandroid.ui.createacount.CreateAcountActivity;
+import com.example.edushareandroid.ui.createacount.CreateAccountActivity;
 import com.example.edushareandroid.ui.recoverypassword.RecoverypasswordActivity;
+import com.example.edushareandroid.utils.HashUtil;
+import com.example.edushareandroid.utils.SesionUsuario;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private EditText etIdentificador, etPassword;
+    private LoginViewModel loginViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        Button forgotPasswordButton = findViewById(R.id.ForgotPasword);
-        forgotPasswordButton.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, RecoverypasswordActivity.class);
-            startActivity(intent);
-        });
-
+        etIdentificador = findViewById(R.id.editTextTextEmailAddress);
+        etPassword = findViewById(R.id.editTextNumberPassword);
+        ImageView imageViewTogglePassword = findViewById(R.id.imageViewTogglePassword);
         Button loginButton = findViewById(R.id.btnLogin);
+
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
+        imageViewTogglePassword.setOnClickListener(v -> togglePasswordVisibility(etPassword, imageViewTogglePassword));
+
         loginButton.setOnClickListener(v -> {
-            // Aquí podrías validar campos de correo/contraseña antes de continuar
+            String identificador = etIdentificador.getText().toString().trim();
+            String contrasenia = etPassword.getText().toString().trim();
 
-            // Navegar a la pantalla principal (MainActivity)
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+            if (identificador.isEmpty() || contrasenia.isEmpty()) {
+                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            // Opcional: cerrar LoginActivity para que no se regrese con botón atrás
-            finish();
+            String contraseniaHash = HashUtil.sha256(contrasenia);
+            loginViewModel.login(identificador, contraseniaHash);
         });
 
-        Button registerButton = findViewById(R.id.btnRegister);
-        registerButton.setOnClickListener(v ->{
-            Intent intent = new Intent(LoginActivity.this, CreateAcountActivity.class );
-            startActivity(intent);
+        loginViewModel.getLoginResult().observe(this, response -> {
+            if (!response.isError()) {
+                // Guardar estado de sesión como logueado
+                SesionUsuario.guardarEstadoLogueado(this, true);
+
+                Toast.makeText(this, "¡Inicio de sesión exitoso!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+            } else {
+                Toast.makeText(this, response.getMensaje(), Toast.LENGTH_LONG).show();
+            }
         });
 
+
+        loginViewModel.getErrorMessage().observe(this, mensaje -> {
+            if (mensaje != null) {
+                Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        findViewById(R.id.ForgotPasword).setOnClickListener(v ->
+                startActivity(new Intent(this, RecoverypasswordActivity.class))
+        );
+
+        findViewById(R.id.btnRegister).setOnClickListener(v ->
+                startActivity(new Intent(this, CreateAccountActivity.class))
+        );
+    }
+
+    private void togglePasswordVisibility(EditText editText, ImageView toggleIcon) {
+        if (editText.getInputType() == (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            toggleIcon.setImageResource(R.drawable.ic_eye_open);
+        } else {
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            toggleIcon.setImageResource(R.drawable.ic_eye_closed);
+        }
+        editText.setSelection(editText.getText().length());
     }
 }

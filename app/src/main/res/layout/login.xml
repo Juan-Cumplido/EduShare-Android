@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!-- Correo -->
 
+    <!-- Título -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/backgroundtext"
         android:gravity="center"
         android:padding="12dp"
@@ -22,29 +22,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Contraseña -->
+    <!-- Etiqueta Correo/Usuario -->
 
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="350dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="316dp"
-        android:background="@drawable/backgroundtext"
-        android:gravity="center"
-        android:hint="usuario123 o correo@gmail.com"
-        android:inputType="textEmailAddress"
-        android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.85" />
-
+    <!-- Campo Correo/Usuario -->
     <TextView
         android:id="@+id/tvCorreoUsuario"
         android:layout_width="278dp"
         android:layout_height="50dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="52dp"
         android:background="@drawable/backgroundlabel"
         android:gravity="center"
         android:padding="12dp"
@@ -52,31 +37,35 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/tvTitle"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@+id/tvTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
+    <!-- Etiqueta Contraseña -->
     <EditText
-        android:id="@+id/editTextNumberPassword"
+        android:id="@+id/editTextTextEmailAddress"
         android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="56dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="0dp"
         android:background="@drawable/backgroundtext"
         android:gravity="center"
-        android:hint="@string/contraseña"
-        android:inputType="textPassword"
+        android:hint="usuario123 o correo@gmail.com"
+        android:inputType="textEmailAddress"
         android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="@id/editTextTextEmailAddress"
-        app:layout_constraintStart_toStartOf="@id/editTextTextEmailAddress"
-        app:layout_constraintTop_toBottomOf="@id/editTextTextEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCorreoUsuario"
         app:layout_constraintWidth_percent="0.85" />
+
+    <!-- Layout para Contraseña con icono -->
 
     <TextView
         android:id="@+id/tvContraseña"
         android:layout_width="278dp"
         android:layout_height="50dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/backgroundlabel"
         android:gravity="center"
         android:padding="12dp"
@@ -84,50 +73,91 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/tvCorreoUsuario"
-        app:layout_constraintStart_toStartOf="@id/tvCorreoUsuario"
-        app:layout_constraintTop_toBottomOf="@id/tvCorreoUsuario" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutcontraseña"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvContraseña">
+
+        <EditText
+            android:id="@+id/editTextNumberPassword"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/backgroundtext"
+            android:gravity="center"
+            android:hint="@string/contraseña"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.85" />
+
+        <ImageView
+            android:id="@+id/imageViewTogglePassword"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="Mostrar/Ocultar contraseña"
+            android:src="@drawable/ic_eye_closed"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextNumberPassword"
+            app:layout_constraintEnd_toEndOf="@+id/editTextNumberPassword"
+            app:layout_constraintTop_toTopOf="@+id/editTextNumberPassword"
+            android:layout_marginEnd="16dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Botón Olvidó contraseña -->
     <Button
         android:id="@+id/ForgotPasword"
         android:layout_width="226dp"
         android:layout_height="57dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/backgroundlabel"
         android:gravity="center"
         android:text="¿Olvidó su contraseña?"
         android:textColor="#f5f5f5"
         android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNumberPassword"
-        app:layout_constraintStart_toStartOf="@+id/editTextNumberPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberPassword" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutcontraseña" />
 
+    <!-- Botones Inferiores -->
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="153dp"
+        android:layout_width="0dp"
         android:layout_height="61dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/backgroundbutton"
         android:text="Registrarse"
         android:textColor="@color/black"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/btnLogin"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ForgotPasword"
-        app:layout_constraintWidth_percent="0.4"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/ForgotPasword" />
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="165dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/backgroundbutton"
         android:text="Iniciar Sesion"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnRegister"
-        app:layout_constraintTop_toTopOf="@+id/btnRegister"
-        app:layout_constraintWidth_percent="0.4" />
+        app:layout_constraintTop_toTopOf="@+id/btnRegister" />
 </androidx.constraintlayout.widget.ConstraintLayout>

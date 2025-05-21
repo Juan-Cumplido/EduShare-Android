@@ -1,7 +1,6 @@
 package com.example.edushareandroid.ui.usuarios;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +14,10 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.edushareandroid.R;
-import com.example.edushareandroid.databinding.FragmentHomeBinding;
 import com.example.edushareandroid.databinding.FragmentPerfilusuarioBinding;
-import com.example.edushareandroid.model.home.adapter.ResultadoAdapter;
-import com.example.edushareandroid.model.home.bd.Documento;
+import com.example.edushareandroid.model.adapter.ResultadoAdapter;
+import com.example.edushareandroid.model.bd.Documento;
 import com.example.edushareandroid.ui.home.HomeViewModel;
-import com.example.edushareandroid.ui.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;

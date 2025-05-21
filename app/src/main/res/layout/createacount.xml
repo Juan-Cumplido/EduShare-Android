@@ -64,6 +64,7 @@
             android:layout_marginEnd="32dp"
             android:background="@drawable/backgroundtext"
             android:hint="@string/nombre_hint"
+            android:gravity="center"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +95,7 @@
             android:background="@drawable/backgroundtext"
             android:hint="@string/primer_apellido_hint"
             android:inputType="text"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvPrimerApellido" />
@@ -123,6 +125,7 @@
             android:background="@drawable/backgroundtext"
             android:hint="@string/segundo_apellido_hint"
             android:inputType="text"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvSegundoApellido" />
@@ -152,6 +155,7 @@
             android:background="@drawable/backgroundtext"
             android:hint="@string/correo_hint"
             android:inputType="textEmailAddress"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvCorreo" />
@@ -181,6 +185,7 @@
             android:background="@drawable/backgroundtext"
             android:hint="@string/usuario_hint"
             android:inputType="text"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvUsuario" />
@@ -209,9 +214,9 @@
             android:contentDescription="Foto seleccionada"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_perfil"
-        app:layout_constraintTop_toBottomOf="@id/tvFotoPerfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tvFotoPerfil"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/buttonSeleccionarImagen"
@@ -238,19 +243,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/buttonSeleccionarImagen" />
 
-        <EditText
-            android:id="@+id/editTextPassword"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_height="52dp"
+            android:id="@+id/layoutcontraseña"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
-            android:background="@drawable/backgroundtext"
-            android:hint="@string/contrasena_hint"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvContraseña" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvContraseña">
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:background="@drawable/backgroundtext"
+                android:hint="@string/contrasena_hint"
+                android:inputType="textPassword"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewTogglePassword"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:id="@+id/imageViewTogglePassword"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_eye_closed"
+                android:contentDescription="Mostrar/Ocultar contraseña"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/editTextPassword"
+                app:layout_constraintBottom_toBottomOf="@id/editTextPassword" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- CONFIRMAR CONTRASEÑA -->
         <TextView
@@ -265,21 +291,44 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextPassword" />
+            app:layout_constraintTop_toBottomOf="@id/layoutcontraseña" />
 
-        <EditText
-            android:id="@+id/editTextConfirmPassword"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_height="52dp"
+            android:id="@+id/layoutcontraseñaconfirmar"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
-            android:background="@drawable/backgroundtext"
-            android:hint="@string/confirmar_contrasena_hint"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvConfirmarContraseña" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvConfirmarContraseña">
+
+            <EditText
+                android:id="@+id/editTextConfirmPassword"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:textSize="16dp"
+                android:background="@drawable/backgroundtext"
+                android:hint="@string/confirmar_contrasena_hint"
+                android:inputType="textPassword"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewToggleConfirmPassword"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:id="@+id/imageViewToggleConfirmPassword"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_eye_closed"
+                android:contentDescription="Mostrar/Ocultar contraseña"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/editTextConfirmPassword"
+                app:layout_constraintBottom_toBottomOf="@id/editTextConfirmPassword" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <!-- Personalización de la cuenta -->
         <TextView
@@ -295,7 +344,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextConfirmPassword" />
+            app:layout_constraintTop_toBottomOf="@id/layoutcontraseñaconfirmar" />
 
         <!-- Nivel Educativo -->
         <TextView
@@ -322,6 +371,7 @@
             android:background="@drawable/backgroundtext"
             android:hint="@string/nivel_educativo_hint"
             android:inputType="text"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvNivelEducativo" />
@@ -351,6 +401,7 @@
             android:background="@drawable/backgroundtext"
             android:hint="@string/institucion_educativa_hint"
             android:inputType="text"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvInstitucionEducativa" />
@@ -380,6 +431,7 @@
             android:background="@drawable/backgroundtext"
             android:hint="@string/carrera_hint"
             android:inputType="text"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvCarrera" />
@@ -409,6 +461,7 @@
             android:background="@drawable/backgroundtext"
             android:hint="@string/materias_interes_hint"
             android:inputType="text"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvMateria" />

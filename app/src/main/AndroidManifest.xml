@@ -26,7 +26,7 @@
         </activity>
         <activity android:name=".ui.login.LoginActivity"/>
         <activity android:name=".ui.recoverypassword.RecoverypasswordActivity"/>
-        <activity android:name=".ui.createacount.CreateAcountActivity"/>
+        <activity android:name=".ui.createacount.CreateAccountActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>

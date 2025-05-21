@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.edushareandroid.R;
 import com.example.edushareandroid.databinding.FragmentUsuariosBinding;
-import com.example.edushareandroid.model.home.adapter.UsuarioAdapter;
-import com.example.edushareandroid.model.home.bd.Usuario;
-import com.example.edushareandroid.model.home.bd.UsuarioConInstitucion;
+import com.example.edushareandroid.model.adapter.UsuarioAdapter;
+import com.example.edushareandroid.model.bd.Usuario;
+import com.example.edushareandroid.model.bd.UsuarioConInstitucion;
 import com.example.edushareandroid.utils.SesionUsuario;
 
 import java.util.ArrayList;

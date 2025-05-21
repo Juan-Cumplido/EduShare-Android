@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.edushareandroid.databinding.FragmentNotificationsBinding;
-import com.example.edushareandroid.model.home.adapter.NotificacionAdapter;
-import com.example.edushareandroid.model.home.bd.Notificacion;
+import com.example.edushareandroid.model.adapter.NotificacionAdapter;
+import com.example.edushareandroid.model.bd.Notificacion;
 import com.example.edushareandroid.utils.SesionUsuario;
 
 import java.util.ArrayList;

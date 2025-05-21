@@ -14,8 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.edushareandroid.R;
 import com.example.edushareandroid.databinding.FragmentChatBinding;
-import com.example.edushareandroid.model.home.adapter.ChatAdapter;
-import com.example.edushareandroid.model.home.bd.AgendaChat;
+import com.example.edushareandroid.model.adapter.ChatAdapter;
+import com.example.edushareandroid.model.bd.AgendaChat;
+import com.example.edushareandroid.ui.programarchatfragment.ProgramarChatViewModel;
 import com.example.edushareandroid.utils.SesionUsuario;
 
 import java.util.ArrayList;

@@ -15,6 +15,7 @@ public class ImageUtil {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         byte[] imageBytes = outputStream.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+
     }
 
     // Convertir Base64 a Bitmap
@@ -22,11 +23,4 @@ public class ImageUtil {
         byte[] decodedBytes = Base64.decode(base64Str, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
-    // Convertir Bitmap a byte[]
-    public static byte[] bitmapToBytes(Bitmap bitmap) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-        return outputStream.toByteArray();
-    }
-
 }

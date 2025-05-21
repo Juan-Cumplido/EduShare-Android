@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.edushareandroid.R;
 import com.example.edushareandroid.databinding.FragmentEditarperfilBinding;
-import com.example.edushareandroid.model.home.adapter.FotoAdapter;
+import com.example.edushareandroid.model.adapter.FotoAdapter;
 import com.example.edushareandroid.ui.recoverypassword.RecoverypasswordActivity;
 
 public class EditarPerfilFragment extends Fragment {

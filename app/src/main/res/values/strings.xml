@@ -53,6 +53,7 @@
     <string name="cancelar_boton">Cancelar</string>
     <string name="crear_cuenta_boton">Crear cuenta</string>
     <string name="actualizar_cuenta_boton">Actualizar datos</string>
+    <string name="subir_publicacion">Subir publicación</string>
 
     <!-- Mensajes de error/validación -->
     <string name="error_campo_requerido">Este campo es requerido</string>
@@ -66,4 +67,8 @@
     <string name="logo_edushare">Logo EduShare</string>
     <string name="dejar_de_seguir">Dejar de seguir</string>
     <string name="seguir">Seguir</string>
+    <string name="advertencia_inicarsesion">Debes iniciar sesión para ver esta sección.</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="informacion_personal">Información personal</string>
+    <string name="mis_publicaciones">Mis publicaciones</string>
 </resources>

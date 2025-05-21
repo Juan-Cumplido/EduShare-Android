@@ -72,13 +72,13 @@
 
     <fragment
         android:id="@+id/programarChatFragment"
-        android:name="com.example.edushareandroid.ui.chat.ProgramarChatFragment"
+        android:name="com.example.edushareandroid.ui.programarchatfragment.ProgramarChatFragment"
         android:label="@string/programar_chat"
         tools:layout="@layout/fragment_programarchat" />
 
     <fragment
         android:id="@+id/vistaChatFragment"
-        android:name="com.example.edushareandroid.ui.chat.VistaChatFragment"
+        android:name="com.example.edushareandroid.ui.vistachat.VistaChatFragment"
         android:label="@string/vista_del_chat"
         tools:layout="@layout/fragment_vistachat">
         <argument android:name="titulo" app:argType="string" />

@@ -17,16 +17,25 @@ public class ValidationUtil {
     }
 
     public static boolean isValidNombre(String nombre) {
-        return nombre != null && nombre.length() <= 30;
+        return nombre != null && nombre.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}$");
     }
 
     public static boolean isValidApellido(String apellido) {
-        return apellido != null && apellido.length() <= 30;
+        return apellido != null && apellido.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}$");
     }
 
     public static boolean isValidInstitucion(String nombre, String carrera, String nivel) {
         return nombre != null && nombre.length() <= 100 &&
                 carrera != null && carrera.length() <= 70 &&
                 nivel != null && nivel.length() <= 20;
+    }
+
+    public static boolean noEstaVacio(String... campos) {
+        for (String campo : campos) {
+            if (campo == null || campo.trim().isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

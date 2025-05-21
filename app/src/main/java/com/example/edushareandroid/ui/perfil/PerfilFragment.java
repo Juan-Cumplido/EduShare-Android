@@ -14,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.edushareandroid.R;
 import com.example.edushareandroid.databinding.FragmentPerfilBinding;
-import com.example.edushareandroid.model.home.adapter.ResultadoAdapter;
-import com.example.edushareandroid.model.home.bd.Documento;
-import android.widget.Toast;
+import com.example.edushareandroid.model.adapter.ResultadoAdapter;
+import com.example.edushareandroid.model.bd.Documento;
 import com.example.edushareandroid.utils.SesionUsuario;
 
 import java.util.ArrayList;
@@ -72,7 +71,7 @@ public class PerfilFragment extends Fragment {
             binding.tvCarrera.setVisibility(View.GONE);
             binding.tvPublicaciones.setVisibility(View.GONE);
             binding.infoTitle.setVisibility(View.GONE);
-
+            binding.btnSubirPublicacion.setVisibility(View.GONE);
             return root;
         }
 

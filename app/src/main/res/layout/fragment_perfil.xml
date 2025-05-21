@@ -12,7 +12,7 @@
         android:id="@+id/titlePerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mi perfil"
+        android:text="@string/title_perfil"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -27,7 +27,6 @@
         android:layout_height="93dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/circle_background"
-        android:contentDescription="Imagen de perfil"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_perfil"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Información personal"
+        android:text="@string/informacion_personal"
         android:textColor="#000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +52,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Nombre:"
+        android:text="@string/nombre_label"
         android:textColor="#000"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +65,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Usuario:"
+        android:text="@string/usuario_label"
         android:textColor="#000"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +78,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Nivel educativo:"
+        android:text="@string/nivel_educativo_label"
         android:textColor="#000"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
-        android:text="Carrera:"
+        android:text="@string/carrera_label"
         android:textColor="#000"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Mis publicaciones"
+        android:text="@string/mis_publicaciones"
         android:textColor="#000"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -143,48 +142,76 @@
 
     <!-- Botón: Editar perfil -->
 
-    <!-- Botón: Cerrar sesión -->
+    <!-- Botones de acciones del perfil -->
+
+    <!-- Botones en fila: Subir publicación - Editar perfil - Cerrar sesión -->
+
+    <Button
+        android:id="@+id/btnSubirPublicacion"
+        android:layout_width="123dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/backgroundbutton1"
+        android:text="@string/subir_publicacion"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_marginStart="18dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnEditarPerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPublicaciones"
+        app:layout_constraintWidth_percent="0.33" />
 
     <Button
         android:id="@+id/btnEditarPerfil"
-        android:layout_width="165dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="298dp"
+        android:layout_width="110dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/backgroundbutton1"
-        android:text="Editar perfil"
+        android:text="@string/editar_perfil"
         android:textColor="@android:color/white"
+        android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@+id/recyclerViewPublicaciones"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintEnd_toStartOf="@+id/btnCerrarSesion"
+        app:layout_constraintStart_toEndOf="@+id/btnSubirPublicacion"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPublicaciones"
+        app:layout_constraintWidth_percent="0.33" />
 
     <Button
         android:id="@+id/btnCerrarSesion"
-        android:layout_width="159dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="296dp"
+        android:layout_width="105dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/backgroundbutton1"
-        android:text="Cerrar sesión"
+        android:text="@string/cerrar_sesion"
         android:textColor="@android:color/white"
+        android:textSize="12sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnEditarPerfil"
-        app:layout_constraintTop_toTopOf="@+id/recyclerViewPublicaciones"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPublicaciones"
+        app:layout_constraintWidth_percent="0.33" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerViewPublicaciones" />
+        app:layout_constraintTop_toBottomOf="@id/btnSubirPublicacion"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/tvIniciaSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Debes iniciar sesión para ver esta sección."
+        android:text="@string/advertencia_inicarsesion"
         android:textColor="#000"
         android:textSize="16sp"
         android:visibility="gone"

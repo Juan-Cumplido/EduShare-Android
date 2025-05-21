@@ -19,9 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.edushareandroid.R;
 import com.example.edushareandroid.databinding.FragmentVerarchivoBinding;
-import com.example.edushareandroid.model.home.adapter.ComentarioAdapter;
-import com.example.edushareandroid.model.home.bd.Comentario;
-import com.example.edushareandroid.model.home.bd.Documento;
+import com.example.edushareandroid.model.adapter.ComentarioAdapter;
+import com.example.edushareandroid.model.bd.Comentario;
+import com.example.edushareandroid.model.bd.Documento;
 import com.example.edushareandroid.utils.SesionUsuario;
 
 import java.util.ArrayList;

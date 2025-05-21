@@ -10,7 +10,7 @@ public class SesionUsuario {
 
     public static boolean isUsuarioLogueado(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        return prefs.getBoolean(KEY_LOGUEADO, true);
+        return prefs.getBoolean(KEY_LOGUEADO, false);
     }
 
     public static void guardarEstadoLogueado(Context context, boolean logueado) {
