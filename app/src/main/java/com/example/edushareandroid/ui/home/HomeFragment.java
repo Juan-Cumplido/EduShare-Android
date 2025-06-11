@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -39,13 +40,13 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         // Acción del botón de login
-        binding.buttonLogin.setOnClickListener(view -> {
+        binding.btnIniciarSesion.setOnClickListener(view -> {
             Intent intent = new Intent(requireActivity(), LoginActivity.class);
             startActivity(intent);
         });
 
         // Inicializar RecyclerView
-        binding.recyclerViewResults.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvResultados.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Crear lista completa
         documentos = new ArrayList<>();
@@ -68,14 +69,14 @@ public class HomeFragment extends Fragment {
             navController.navigate(R.id.action_navigation_home_to_navigation_verArchivo, bundle);
         });
 
-        binding.recyclerViewResults.setAdapter(adapter);
+        binding.rvResultados.setAdapter(adapter);
 
         // Configurar lógica de búsqueda
-        binding.searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+        binding.seavBuscarDocumento.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 filtrarDocumentos(query);
-                binding.searchView.clearFocus();
+                binding.seavBuscarDocumento.clearFocus();
                 return true;
             }
 
@@ -86,7 +87,7 @@ public class HomeFragment extends Fragment {
             }
         });
         root.setOnTouchListener((v, event) -> {
-            binding.searchView.clearFocus();
+            binding.seavBuscarDocumento.clearFocus();
             return false;
         });
         return root;

@@ -12,21 +12,21 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textTituloNoti"
+            android:id="@+id/txt_titulo_notificaciones"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/textMensajeNoti"
+            android:id="@+id/txt_mensaje_notificaciones"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:layout_marginTop="4dp" />
 
         <TextView
-            android:id="@+id/textFechaNoti"
+            android:id="@+id/txt_fecha_notificaciones"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"

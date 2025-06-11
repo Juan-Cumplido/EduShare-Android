@@ -4,6 +4,7 @@ public class LoginResponse {
     private boolean error;
     private int estado;
     private String mensaje;
+    private String token;
     private UsuarioData datos; // datos del usuario logueado
 
     public boolean isError() {
@@ -13,7 +14,12 @@ public class LoginResponse {
     public void setError(boolean error) {
         this.error = error;
     }
-
+    public String getToken() {
+        return token;
+    }
+    public void setToken(String token) {
+        this.token = token;
+    }
     public int getEstado() {
         return estado;
     }

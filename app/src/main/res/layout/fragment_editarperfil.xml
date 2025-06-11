@@ -13,7 +13,7 @@
 
         <!-- Título principal -->
         <TextView
-            android:id="@+id/tvEditarPerfil"
+            android:id="@+id/txt_editar_perfil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -26,7 +26,7 @@
 
         <!-- DATOS PERSONALES -->
         <TextView
-            android:id="@+id/tvDatosPersonales"
+            android:id="@+id/txt_datos_personales"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -38,11 +38,11 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvEditarPerfil" />
+            app:layout_constraintTop_toBottomOf="@id/txt_editar_perfil" />
 
         <!-- NOMBRE -->
         <TextView
-            android:id="@+id/tvNombre"
+            android:id="@+id/txt_nombre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -53,10 +53,10 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDatosPersonales" />
+            app:layout_constraintTop_toBottomOf="@id/txt_datos_personales" />
 
         <EditText
-            android:id="@+id/editTextNombre"
+            android:id="@+id/edt_nombre"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="32dp"
@@ -67,11 +67,11 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNombre" />
+            app:layout_constraintTop_toBottomOf="@id/txt_nombre" />
 
         <!-- PRIMER APELLIDO -->
         <TextView
-            android:id="@+id/tvPrimerApellido"
+            android:id="@+id/txt_primer_apellido"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -82,10 +82,10 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextNombre" />
+            app:layout_constraintTop_toBottomOf="@id/edt_nombre" />
 
         <EditText
-            android:id="@+id/editTextPrimerApellido"
+            android:id="@+id/edt_primer_apellido"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="32dp"
@@ -96,11 +96,11 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvPrimerApellido" />
+            app:layout_constraintTop_toBottomOf="@id/txt_primer_apellido" />
 
         <!-- SEGUNDO APELLIDO -->
         <TextView
-            android:id="@+id/tvSegundoApellido"
+            android:id="@+id/txt_segundo_apellido"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -111,10 +111,10 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextPrimerApellido" />
+            app:layout_constraintTop_toBottomOf="@id/edt_primer_apellido" />
 
         <EditText
-            android:id="@+id/editTextSegundoApellido"
+            android:id="@+id/edt_segundo_apellido"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="32dp"
@@ -125,11 +125,11 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSegundoApellido" />
+            app:layout_constraintTop_toBottomOf="@id/txt_segundo_apellido" />
 
         <!-- CORREO -->
         <TextView
-            android:id="@+id/tvCorreo"
+            android:id="@+id/txt_correo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -140,10 +140,10 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextSegundoApellido" />
+            app:layout_constraintTop_toBottomOf="@id/edt_segundo_apellido" />
 
         <EditText
-            android:id="@+id/editTextCorreo"
+            android:id="@+id/edt_correo"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="32dp"
@@ -154,11 +154,11 @@
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCorreo" />
+            app:layout_constraintTop_toBottomOf="@id/txt_correo" />
 
         <!-- USUARIO -->
         <TextView
-            android:id="@+id/tvUsuario"
+            android:id="@+id/txt_usuario"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -169,10 +169,10 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextCorreo" />
+            app:layout_constraintTop_toBottomOf="@id/edt_correo" />
 
         <EditText
-            android:id="@+id/editTextUsuario"
+            android:id="@+id/edt_usuario"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="32dp"
@@ -183,17 +183,17 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvUsuario" />
+            app:layout_constraintTop_toBottomOf="@id/txt_usuario" />
 
         <ScrollView
-            android:id="@+id/scrollableImage"
+            android:id="@+id/sv_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
-            app:layout_constraintTop_toBottomOf="@id/editTextUsuario">
+            app:layout_constraintTop_toBottomOf="@id/edt_usuario">
 
             <LinearLayout
-                android:id="@+id/contenedorPrincipal"
+                android:id="@+id/ll_contenedor_principal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -201,49 +201,49 @@
 
                 <!-- Imagen actual seleccionada -->
                 <ImageView
-                    android:id="@+id/ivFotoPerfil"
+                    android:id="@+id/img_foto_perfil"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_perfil"
-                    android:scaleType="centerCrop"
                     android:background="@drawable/circle_background"
-                    android:padding="4dp" />
+                    android:padding="4dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_perfil" />
 
                 <!-- Botón para seleccionar -->
                 <Button
-                    android:id="@+id/btnSeleccionarFoto"
+                    android:id="@+id/btn_seleccionar_foto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Seleccionar imagen"
                     android:layout_gravity="center"
-                    android:layout_marginTop="12dp" />
+                    android:layout_marginTop="12dp"
+                    android:text="Seleccionar imagen" />
 
                 <!-- Opciones de imágenes -->
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerFotos"
+                    android:id="@+id/rv_fotos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:visibility="gone"
-                    android:orientation="horizontal"/>
+                    android:orientation="horizontal"
+                    android:visibility="gone" />
             </LinearLayout>
         </ScrollView>
 
         <!-- BOTÓN CAMBIAR CONTRASEÑA -->
         <Button
-            android:id="@+id/btnCambiarContrasena"
+            android:id="@+id/btn_cambiar_contraseña"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cambiar Contraseña"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/scrollableImage"
+            android:text="@string/cambiar_contraseña"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/sv_image" />
 
         <!-- Personalización de la cuenta -->
         <TextView
-            android:id="@+id/tvPersonalizarCuenta"
+            android:id="@+id/txt_personalizar_cuenta"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -255,10 +255,11 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnCambiarContrasena" />
+            app:layout_constraintTop_toBottomOf="@id/btn_cambiar_contraseña" />
+
         <!-- Nivel Educativo -->
         <TextView
-            android:id="@+id/tvNivelEducativo"
+            android:id="@+id/txt_nivel_educativo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -269,10 +270,10 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvPersonalizarCuenta" />
+            app:layout_constraintTop_toBottomOf="@id/txt_personalizar_cuenta" />
 
         <EditText
-            android:id="@+id/editTextNivelEducativo"
+            android:id="@+id/edt_nivel_educativo"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="32dp"
@@ -283,11 +284,11 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNivelEducativo" />
+            app:layout_constraintTop_toBottomOf="@id/txt_nivel_educativo" />
 
         <!-- Institución Educativa -->
         <TextView
-            android:id="@+id/tvInstitucionEducativa"
+            android:id="@+id/txt_institucion_educativa"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -298,10 +299,10 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextNivelEducativo" />
+            app:layout_constraintTop_toBottomOf="@id/edt_nivel_educativo" />
 
         <EditText
-            android:id="@+id/editTextInstitucionEducativa"
+            android:id="@+id/edt_institucion_educativa"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="32dp"
@@ -312,11 +313,11 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvInstitucionEducativa" />
+            app:layout_constraintTop_toBottomOf="@id/txt_institucion_educativa" />
 
         <!-- Carrera -->
         <TextView
-            android:id="@+id/tvCarrera"
+            android:id="@+id/txt_carrera"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -327,10 +328,10 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextInstitucionEducativa" />
+            app:layout_constraintTop_toBottomOf="@id/edt_institucion_educativa" />
 
         <EditText
-            android:id="@+id/editTextCarrera"
+            android:id="@+id/edt_carrera"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="32dp"
@@ -341,11 +342,11 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCarrera" />
+            app:layout_constraintTop_toBottomOf="@id/txt_carrera" />
 
         <!-- Materias de interés -->
         <TextView
-            android:id="@+id/tvMateria"
+            android:id="@+id/txt_materia"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -356,10 +357,10 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextCarrera" />
+            app:layout_constraintTop_toBottomOf="@id/edt_carrera" />
 
         <EditText
-            android:id="@+id/editTextMateria"
+            android:id="@+id/edt_materia"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="32dp"
@@ -370,52 +371,52 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvMateria" />
+            app:layout_constraintTop_toBottomOf="@id/txt_materia" />
 
         <!-- CheckBoxes -->
         <CheckBox
-            android:id="@+id/checkBoxApuntes"
+            android:id="@+id/chk_apuntes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:text="@string/apuntes_opcion"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextMateria" />
+            app:layout_constraintTop_toBottomOf="@id/edt_materia" />
 
         <CheckBox
-            android:id="@+id/checkBoxExamenes"
+            android:id="@+id/chk_examenes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:text="@string/examenes_opcion"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxApuntes" />
+            app:layout_constraintTop_toBottomOf="@id/chk_apuntes" />
 
         <CheckBox
-            android:id="@+id/checkBoxResumenes"
+            android:id="@+id/chk_resumenes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:text="@string/resumenes_opcion"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxExamenes" />
+            app:layout_constraintTop_toBottomOf="@id/chk_examenes" />
 
         <CheckBox
-            android:id="@+id/checkBoxPresentaciones"
+            android:id="@+id/chk_presentaciones"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:text="@string/presentaciones_opcion"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxResumenes" />
+            app:layout_constraintTop_toBottomOf="@id/chk_resumenes" />
 
         <!-- Notificaciones -->
         <TextView
-            android:id="@+id/tvNotificaciones"
+            android:id="@+id/txt_notificaciones"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -427,11 +428,11 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxPresentaciones" />
+            app:layout_constraintTop_toBottomOf="@id/chk_presentaciones" />
 
         <!-- Descripción de notificaciones -->
         <TextView
-            android:id="@+id/tvDescripcion"
+            android:id="@+id/txt_descripcion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -442,44 +443,44 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNotificaciones" />
+            app:layout_constraintTop_toBottomOf="@id/txt_notificaciones" />
 
         <!-- CheckBox: Documentos -->
         <CheckBox
-            android:id="@+id/checkBoxDocumentos"
+            android:id="@+id/chk_documentos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:text="@string/notificaciones_documentos"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDescripcion" />
+            app:layout_constraintTop_toBottomOf="@id/txt_descripcion" />
 
         <!-- CheckBox: Seguidores -->
         <CheckBox
-            android:id="@+id/checkBoxSeguidor"
+            android:id="@+id/chk_seguidor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:text="@string/notificaciones_seguidores"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxDocumentos" />
+            app:layout_constraintTop_toBottomOf="@id/chk_documentos" />
 
         <!-- CheckBox: Semanales -->
         <CheckBox
-            android:id="@+id/checkBoxSemanales"
+            android:id="@+id/chk_semanales"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:text="@string/notificaciones_semanales"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxSeguidor" />
+            app:layout_constraintTop_toBottomOf="@id/chk_seguidor" />
 
         <!-- Botones -->
         <Button
-            android:id="@+id/buttonCancelar"
+            android:id="@+id/btn_cancelar"
             android:layout_width="0dp"
             android:layout_height="67dp"
             android:layout_marginStart="32dp"
@@ -488,12 +489,12 @@
             android:background="@drawable/backgroundbutton2"
             android:text="@string/cancelar_boton"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/buttonEditarPerfil"
+            app:layout_constraintEnd_toStartOf="@id/btn_editar_perfil"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxSemanales" />
+            app:layout_constraintTop_toBottomOf="@id/chk_semanales" />
 
         <Button
-            android:id="@+id/buttonEditarPerfil"
+            android:id="@+id/btn_editar_perfil"
             android:layout_width="0dp"
             android:layout_height="69dp"
             android:layout_marginStart="8dp"
@@ -503,14 +504,15 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/buttonCancelar"
-            app:layout_constraintTop_toTopOf="@id/buttonCancelar" />
+            app:layout_constraintStart_toEndOf="@id/btn_cancelar"
+            app:layout_constraintTop_toTopOf="@id/btn_cancelar" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/buttonEditarPerfil"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/btn_editar_perfil" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

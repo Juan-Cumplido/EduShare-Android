@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.example.edushareandroid.model.adapter.ChatMessageAdapter;
 import com.example.edushareandroid.model.bd.Message;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,10 +41,10 @@ public class VistaChatFragment extends Fragment {
             String hora = getArguments().getString("hora");
             String usuario = getArguments().getString("usuario");
 
-            binding.tvTituloDetalle.setText(titulo);
-            binding.tvDescripcionDetalle.setText(descripcion);
-            binding.tvFechaHoraDetalle.setText(fecha + " " + hora);
-            binding.tvUsuarioDetalle.setText(usuario);
+            binding.txtTituloDetalle.setText(titulo);
+            binding.txtDescripcionDetalle.setText(descripcion);
+            binding.txtFechaHoraDetalle.setText(fecha + " " + hora);
+            binding.txtUsuarioDetalle.setText(usuario);
         }
 
         setupChat();
@@ -66,12 +67,12 @@ public class VistaChatFragment extends Fragment {
         mensajes.add(new Message("8", "Yo", "Nos vemos 👋", "2025-05-14 12:07", true));
 
         adapter = new ChatMessageAdapter(mensajes);
-        binding.recyclerMensajes.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.recyclerMensajes.setAdapter(adapter);
-        binding.recyclerMensajes.scrollToPosition(mensajes.size() - 1);
+        binding.rvMensajes.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvMensajes.setAdapter(adapter);
+        binding.rvMensajes.scrollToPosition(mensajes.size() - 1);
 
         binding.btnEnviarMensaje.setOnClickListener(v -> {
-            String nuevoMensaje = binding.etMensaje.getText().toString().trim();
+            String nuevoMensaje = binding.edtMensaje.getText().toString().trim();
             if (!nuevoMensaje.isEmpty()) {
                 // Aquí generas los valores requeridos para el constructor
                 String id = String.valueOf(System.currentTimeMillis()); // o UUID.randomUUID().toString()
@@ -81,8 +82,8 @@ public class VistaChatFragment extends Fragment {
 
                 mensajes.add(new Message(id, autor, nuevoMensaje, fecha, esPropio));
                 adapter.notifyItemInserted(mensajes.size() - 1);
-                binding.recyclerMensajes.scrollToPosition(mensajes.size() - 1);
-                binding.etMensaje.setText("");
+                binding.rvMensajes.scrollToPosition(mensajes.size() - 1);
+                binding.edtMensaje.setText("");
             }
         });
 
@@ -93,6 +94,7 @@ public class VistaChatFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
     private String obtenerFechaActual() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         return sdf.format(new Date());

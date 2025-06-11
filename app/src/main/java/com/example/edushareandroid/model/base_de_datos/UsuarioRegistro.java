@@ -1,7 +1,7 @@
 package com.example.edushareandroid.model.base_de_datos;
 
 public class UsuarioRegistro {
-    public UsuarioRegistro(String correo, String contrasenia, String nombreUsuario, String nombre, String primerApellido, String segundoApellido, int idInstitucion,String imagenBase64) {
+    public UsuarioRegistro(String correo, String contrasenia, String nombreUsuario, String nombre, String primerApellido, String segundoApellido, int idInstitucion,String fotoPerfil) {
         this.correo = correo;
         this.contrasenia = contrasenia;
         this.nombreUsuario = nombreUsuario;
@@ -9,7 +9,7 @@ public class UsuarioRegistro {
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.idInstitucion = idInstitucion;
-        this.imagenBase64 = imagenBase64;
+        this.fotoPerfil = fotoPerfil;
     }
 
     public String getCorreo() {
@@ -67,12 +67,12 @@ public class UsuarioRegistro {
     public void setIdInstitucion(int idInstitucion) {
         this.idInstitucion = idInstitucion;
     }
-    public String getImagenBase64() {
-        return imagenBase64;
+    public String getFotoPerfil() {
+        return fotoPerfil;
     }
 
-    public void setImagenBase64(String imagenBase64) {
-        this.imagenBase64 = imagenBase64;
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 
     private String correo;
@@ -81,10 +81,7 @@ public class UsuarioRegistro {
     private String nombre;
     private String primerApellido;
     private String segundoApellido;
+    private String fotoPerfil;
     private int idInstitucion;
-
-
-    private String imagenBase64;
-
 
 }

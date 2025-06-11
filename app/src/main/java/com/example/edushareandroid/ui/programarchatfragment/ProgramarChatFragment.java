@@ -41,7 +41,7 @@ public class ProgramarChatFragment extends Fragment {
     }
 
     private void configurarFechaPicker() {
-        binding.etFecha.setOnClickListener(v -> {
+        binding.edtFecha.setOnClickListener(v -> {
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -49,21 +49,21 @@ public class ProgramarChatFragment extends Fragment {
             DatePickerDialog datePicker = new DatePickerDialog(requireContext(),
                     (view, year1, month1, dayOfMonth) -> {
                         String fecha = String.format("%02d/%02d/%04d", dayOfMonth, month1 + 1, year1);
-                        binding.etFecha.setText(fecha);
+                        binding.edtFecha.setText(fecha);
                     }, year, month, day);
             datePicker.show();
         });
     }
 
     private void configurarHoraPicker() {
-        binding.etHora.setOnClickListener(v -> {
+        binding.edtHora.setOnClickListener(v -> {
             int hour = calendar.get(Calendar.HOUR_OF_DAY);
             int minute = calendar.get(Calendar.MINUTE);
 
             TimePickerDialog timePicker = new TimePickerDialog(requireContext(),
                     (view, hourOfDay, minute1) -> {
                         String hora = String.format("%02d:%02d", hourOfDay, minute1);
-                        binding.etHora.setText(hora);
+                        binding.edtHora.setText(hora);
                     }, hour, minute, true);
             timePicker.show();
         });
@@ -71,10 +71,10 @@ public class ProgramarChatFragment extends Fragment {
 
     private void configurarBotonGuardar() {
         binding.btnGuardarChat.setOnClickListener(v -> {
-            String titulo = binding.etTitulo.getText().toString().trim();
-            String descripcion = binding.etDescripcion.getText().toString().trim();
-            String fecha = binding.etFecha.getText().toString().trim();
-            String hora = binding.etHora.getText().toString().trim();
+            String titulo = binding.edtTitulo.getText().toString().trim();
+            String descripcion = binding.edtDescripcion.getText().toString().trim();
+            String fecha = binding.edtFecha.getText().toString().trim();
+            String hora = binding.edtHora.getText().toString().trim();
 
             if (titulo.isEmpty() || descripcion.isEmpty() || fecha.isEmpty() || hora.isEmpty()) {
                 Toast.makeText(requireContext(), "Completa todos los campos", Toast.LENGTH_SHORT).show();

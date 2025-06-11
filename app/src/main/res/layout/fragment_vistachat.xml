@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,38 +7,38 @@
 
     <!-- Cabecera del chat (título, descripción, fecha, usuario) -->
     <LinearLayout
-        android:id="@+id/layoutCabecera"
-        android:orientation="vertical"
+        android:id="@+id/ll_cabecera"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvTituloDetalle"
-            android:textStyle="bold"
+            android:id="@+id/txt_titulo_detalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvDescripcionDetalle"
+            android:id="@+id/txt_descripcion_detalle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp" />
 
         <TextView
-            android:id="@+id/tvFechaHoraDetalle"
+            android:id="@+id/txt_fecha_hora_detalle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp" />
 
         <TextView
-            android:id="@+id/tvUsuarioDetalle"
+            android:id="@+id/txt_usuario_detalle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp" />
     </LinearLayout>
 
     <!-- Lista de mensajes -->
@@ -47,20 +46,19 @@
     <!-- Barra inferior para escribir mensaje -->
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerMensajes"
+        android:id="@+id/rv_mensajes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
         android:overScrollMode="never"
-
-        app:layout_constraintBottom_toTopOf="@+id/layoutEscribir"
+        app:layout_constraintBottom_toTopOf="@+id/ll_escribir"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutCabecera" />
+        app:layout_constraintTop_toBottomOf="@id/ll_cabecera" />
 
     <LinearLayout
-        android:id="@+id/layoutEscribir"
+        android:id="@+id/ll_escribir"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
@@ -74,22 +72,21 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/etMensaje"
+            android:id="@+id/edt_mensaje"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Escribe tu mensaje"
+            android:hint="@string/escribe_tu_mensaje"
             android:inputType="textMultiLine"
             android:maxLines="3" />
 
         <ImageButton
-            android:id="@+id/btnEnviarMensaje"
+            android:id="@+id/btn_enviar_mensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Enviar mensaje"
+            android:contentDescription="@string/enviar_mensaje"
             android:src="@drawable/ic_send" />
-
     </LinearLayout>
 
     <View
@@ -99,5 +96,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutEscribir" />
+        app:layout_constraintTop_toBottomOf="@id/ll_escribir" />
 </androidx.constraintlayout.widget.ConstraintLayout>

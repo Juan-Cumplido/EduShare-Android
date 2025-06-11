@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.edushareandroid.model.base_de_datos.LoginRequest;
 import com.example.edushareandroid.model.base_de_datos.LoginResponse;
-import com.example.edushareandroid.network.ApiService;
-import com.example.edushareandroid.network.RetrofitClient;
+import com.example.edushareandroid.network.api.ApiService;
+import com.example.edushareandroid.network.api.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;

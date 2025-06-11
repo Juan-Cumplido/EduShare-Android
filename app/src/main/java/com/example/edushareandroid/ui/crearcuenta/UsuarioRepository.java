@@ -1,11 +1,11 @@
-package com.example.edushareandroid.ui.createacount;
+package com.example.edushareandroid.ui.crearcuenta;
 
 import android.util.Log;
 
 import com.example.edushareandroid.model.base_de_datos.UsuarioRegistro;
-import com.example.edushareandroid.network.ApiResponse;
-import com.example.edushareandroid.network.ApiService;
-import com.example.edushareandroid.network.RetrofitClient;
+import com.example.edushareandroid.network.api.ApiResponse;
+import com.example.edushareandroid.network.api.ApiService;
+import com.example.edushareandroid.network.api.RetrofitClient;
 
 import java.io.IOException;
 
@@ -76,4 +76,6 @@ public class UsuarioRepository {
             }
         });
     }
+
+
 }

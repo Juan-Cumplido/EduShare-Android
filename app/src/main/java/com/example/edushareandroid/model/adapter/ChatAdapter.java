@@ -59,11 +59,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         ImageButton verMas;
         public ChatViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitulo = itemView.findViewById(R.id.tvTituloChat);
-            tvDescripcion = itemView.findViewById(R.id.tvDescripcionChat);
-            tvFechaHora = itemView.findViewById(R.id.tvFechaHoraChat);
-            tvUsuario = itemView.findViewById(R.id.tvUsuario);
-            verMas = itemView.findViewById(R.id.buttonVerMas); // Asegúrate de que este ID exista
+            tvTitulo = itemView.findViewById(R.id.txt_titulo_chat);
+            tvDescripcion = itemView.findViewById(R.id.txt_descripcion_chat);
+            tvFechaHora = itemView.findViewById(R.id.txt_fecha_hora_chat);
+            tvUsuario = itemView.findViewById(R.id.txt_usuario);
+            verMas = itemView.findViewById(R.id.btn_ver_mas); // Asegúrate de que este ID exista
         }
 
     }

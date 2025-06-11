@@ -1,4 +1,4 @@
-package com.example.edushareandroid.network;
+package com.example.edushareandroid.network.api;
 
 public class ApiResponse {
     public boolean isError() {

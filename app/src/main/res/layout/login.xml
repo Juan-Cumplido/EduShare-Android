@@ -7,14 +7,14 @@
 
     <!-- Título -->
     <TextView
-        android:id="@+id/tvTitle"
+        android:id="@+id/txt_recuperar_contraseña"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:background="@drawable/backgroundtext"
         android:gravity="center"
         android:padding="12dp"
-        android:text="¡Bienvenido a Edushare!"
+        android:text="@string/bienvenido_a_edushare"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -26,68 +26,68 @@
 
     <!-- Campo Correo/Usuario -->
     <TextView
-        android:id="@+id/tvCorreoUsuario"
+        android:id="@+id/txt_correo_usuario"
         android:layout_width="278dp"
         android:layout_height="50dp"
         android:layout_marginTop="52dp"
         android:background="@drawable/backgroundlabel"
         android:gravity="center"
         android:padding="12dp"
-        android:text="Ingrese correo o usuario:"
+        android:text="@string/ingrese_correo_o_usuario"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_recuperar_contraseña" />
 
     <!-- Etiqueta Contraseña -->
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/edt_correo"
         android:layout_width="0dp"
         android:layout_height="65dp"
         android:layout_marginTop="0dp"
         android:background="@drawable/backgroundtext"
         android:gravity="center"
-        android:hint="usuario123 o correo@gmail.com"
+        android:hint="@string/usuario123_o_correo_gmail_com"
         android:inputType="textEmailAddress"
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCorreoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/txt_correo_usuario"
         app:layout_constraintWidth_percent="0.85" />
 
     <!-- Layout para Contraseña con icono -->
 
     <TextView
-        android:id="@+id/tvContraseña"
+        android:id="@+id/txt_contraseña"
         android:layout_width="278dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/backgroundlabel"
         android:gravity="center"
         android:padding="12dp"
-        android:text="Ingrese su contraseña:"
+        android:text="@string/ingrese_su_contraseña"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_correo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutcontraseña"
+        android:id="@+id/cl_contraseña"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvContraseña">
+        app:layout_constraintTop_toBottomOf="@+id/txt_contraseña">
 
         <EditText
-            android:id="@+id/editTextNumberPassword"
+            android:id="@+id/edt_contraseña"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginTop="0dp"
@@ -103,61 +103,61 @@
             app:layout_constraintWidth_percent="0.85" />
 
         <ImageView
-            android:id="@+id/imageViewTogglePassword"
+            android:id="@+id/img_alternar_contraseña"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:contentDescription="Mostrar/Ocultar contraseña"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/mostrar_ocultar_contraseña"
             android:src="@drawable/ic_eye_closed"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextNumberPassword"
-            app:layout_constraintEnd_toEndOf="@+id/editTextNumberPassword"
-            app:layout_constraintTop_toTopOf="@+id/editTextNumberPassword"
-            android:layout_marginEnd="16dp"/>
+            app:layout_constraintBottom_toBottomOf="@+id/edt_contraseña"
+            app:layout_constraintEnd_toEndOf="@+id/edt_contraseña"
+            app:layout_constraintTop_toTopOf="@+id/edt_contraseña" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Botón Olvidó contraseña -->
     <Button
-        android:id="@+id/ForgotPasword"
+        android:id="@+id/btn_olvido_contraseña"
         android:layout_width="226dp"
         android:layout_height="57dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/backgroundlabel"
         android:gravity="center"
-        android:text="¿Olvidó su contraseña?"
+        android:text="@string/olvid_su_contraseña"
         android:textColor="#f5f5f5"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutcontraseña" />
+        app:layout_constraintTop_toBottomOf="@+id/cl_contraseña" />
 
     <!-- Botones Inferiores -->
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/btn_registrar"
         android:layout_width="0dp"
         android:layout_height="61dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/backgroundbutton"
-        android:text="Registrarse"
+        android:text="@string/registrarse"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/btnLogin"
+        app:layout_constraintEnd_toStartOf="@+id/btn_iniciar_sesion"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ForgotPasword" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_olvido_contraseña" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btn_iniciar_sesion"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/backgroundbutton"
-        android:text="Iniciar Sesion"
+        android:text="@string/iniciar_sesion"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnRegister"
-        app:layout_constraintTop_toTopOf="@+id/btnRegister" />
+        app:layout_constraintStart_toEndOf="@+id/btn_registrar"
+        app:layout_constraintTop_toTopOf="@+id/btn_registrar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

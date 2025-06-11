@@ -105,12 +105,12 @@ public class ResultadoAdapter extends RecyclerView.Adapter<ResultadoAdapter.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imagen = itemView.findViewById(R.id.imagePortada);
-            titulo = itemView.findViewById(R.id.textTitulo);
-            subtitulo = itemView.findViewById(R.id.textSubtitulo);
-            detalles = itemView.findViewById(R.id.textDetalles);
-            boton = itemView.findViewById(R.id.buttonVerMas);
-            btnOpciones = itemView.findViewById(R.id.btnOpciones);
+            imagen = itemView.findViewById(R.id.img_portada);
+            titulo = itemView.findViewById(R.id.txt_recuperar_contraseña);
+            subtitulo = itemView.findViewById(R.id.txt_subtitulo);
+            detalles = itemView.findViewById(R.id.txt_detalles);
+            boton = itemView.findViewById(R.id.btn_ver_mas);
+            btnOpciones = itemView.findViewById(R.id.btn_opciones);
 
         }
     }

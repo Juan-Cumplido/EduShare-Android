@@ -37,9 +37,9 @@ public class ChatFragment extends Fragment {
         boolean usuarioAutenticado = SesionUsuario.isUsuarioLogueado(requireContext());
 
         if (usuarioAutenticado) {
-            binding.textNoSesion.setVisibility(View.GONE);
-            binding.textChat.setVisibility(View.VISIBLE);
-            binding.recyclerViewAgendaChats.setVisibility(View.VISIBLE);
+            binding.txtNoSesion.setVisibility(View.GONE);
+            binding.txtChat.setVisibility(View.VISIBLE);
+            binding.rvAgendaChats.setVisibility(View.VISIBLE);
             binding.btnProgramarChat.setVisibility(View.VISIBLE);
 
             configurarRecyclerView();
@@ -59,9 +59,9 @@ public class ChatFragment extends Fragment {
             });
 
         } else {
-            binding.textNoSesion.setVisibility(View.VISIBLE);
-            binding.textChat.setVisibility(View.GONE);
-            binding.recyclerViewAgendaChats.setVisibility(View.GONE);
+            binding.txtNoSesion.setVisibility(View.VISIBLE);
+            binding.txtChat.setVisibility(View.GONE);
+            binding.rvAgendaChats.setVisibility(View.GONE);
             binding.btnProgramarChat.setVisibility(View.GONE);
         }
 
@@ -71,8 +71,8 @@ public class ChatFragment extends Fragment {
     private void configurarRecyclerView() {
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
         adapter = new ChatAdapter(chatList, navController);
-        binding.recyclerViewAgendaChats.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.recyclerViewAgendaChats.setAdapter(adapter);
+        binding.rvAgendaChats.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvAgendaChats.setAdapter(adapter);
     }
 
     private void cargarDatosSimulados() {

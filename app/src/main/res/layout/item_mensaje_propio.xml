@@ -12,18 +12,18 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/tvContenidoMensaje"
+            android:id="@+id/txt_contenido_mensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hola, soy yo"
+            android:text="@string/hola_soy_yo"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tvFechaMensaje"
+            android:id="@+id/txt_fecha_mensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12:10"
+            android:text="@string/_12_10"
             android:textColor="@color/white"
             android:textSize="10sp" />
     </LinearLayout>

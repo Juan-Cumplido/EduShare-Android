@@ -4,34 +4,35 @@
     android:padding="8dp">
 
     <LinearLayout
-        android:id="@+id/layoutMensaje"
+        android:id="@+id/ll_mensaje"
         android:layout_width="296dp"
         android:layout_height="104dp"
         android:background="@drawable/backgroundtext_user"
         android:orientation="vertical"
         android:padding="8dp">
-        <TextView
-            android:id="@+id/tvAutorMensaje"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pedro"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textSize="13sp" />
 
         <TextView
-            android:id="@+id/tvContenidoMensaje"
+            android:id="@+id/txt_autor_mensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mensaje de prueba"
+            android:text="@string/nombre_mensaje"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_contenido_mensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mensaje_de_prueba"
             android:textColor="@color/black"
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tvFechaMensaje"
+            android:id="@+id/txt_fecha_mensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hace 2 minutos"
+            android:text="@string/hace_2_minutos"
             android:textColor="@color/white"
             android:textSize="10sp" />
     </LinearLayout>

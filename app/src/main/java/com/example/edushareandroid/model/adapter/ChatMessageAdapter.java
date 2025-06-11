@@ -69,8 +69,8 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         MensajePropioViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvContenido = itemView.findViewById(R.id.tvContenidoMensaje);
-            tvFecha = itemView.findViewById(R.id.tvFechaMensaje);
+            tvContenido = itemView.findViewById(R.id.txt_contenido_mensaje);
+            tvFecha = itemView.findViewById(R.id.txt_fecha_mensaje);
         }
     }
 
@@ -79,9 +79,9 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         MensajeAjenoViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvAutor = itemView.findViewById(R.id.tvAutorMensaje);
-            tvContenido = itemView.findViewById(R.id.tvContenidoMensaje);
-            tvFecha = itemView.findViewById(R.id.tvFechaMensaje);
+            tvAutor = itemView.findViewById(R.id.txt_autor_mensaje);
+            tvContenido = itemView.findViewById(R.id.txt_contenido_mensaje);
+            tvFecha = itemView.findViewById(R.id.txt_fecha_mensaje);
         }
     }
 }

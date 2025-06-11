@@ -10,7 +10,7 @@
 
     <!-- Botón de acción -->
     <ImageView
-        android:id="@+id/imagePortada"
+        android:id="@+id/img_portada"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/buttonVerMas"
+        android:id="@+id/btn_ver_mas"
         android:layout_width="57dp"
         android:layout_height="56dp"
         android:layout_marginEnd="8dp"
@@ -36,47 +36,47 @@
     <!-- Contenedor de texto (Título, Subtítulo, Detalles) -->
 
     <TextView
-        android:id="@+id/textTitulo"
+        android:id="@+id/txt_recuperar_contraseña"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Título del documento"
+        android:text="@string/titulo_del_documento"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/buttonVerMas"
+        app:layout_constraintEnd_toStartOf="@id/btn_ver_mas"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/imagePortada"
-        app:layout_constraintTop_toTopOf="@id/imagePortada" />
+        app:layout_constraintStart_toEndOf="@id/img_portada"
+        app:layout_constraintTop_toTopOf="@id/img_portada" />
 
     <TextView
-        android:id="@+id/textSubtitulo"
+        android:id="@+id/txt_subtitulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Subtítulo o descripción del documento"
+        android:text="@string/descripcion_o_subtitulo"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/textTitulo"
-        app:layout_constraintEnd_toEndOf="@id/textTitulo"
-        app:layout_constraintTop_toBottomOf="@id/textTitulo" />
+        app:layout_constraintEnd_toEndOf="@id/txt_recuperar_contraseña"
+        app:layout_constraintStart_toStartOf="@id/txt_recuperar_contraseña"
+        app:layout_constraintTop_toBottomOf="@id/txt_recuperar_contraseña" />
 
     <TextView
-        android:id="@+id/textDetalles"
+        android:id="@+id/txt_detalles"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="3k Vistas · 556 Páginas · 2h ago"
-        android:textSize="12sp"
+        android:text="@string/_3k_vistas_556_p_ginas_2h_ago"
         android:textColor="@android:color/darker_gray"
-        app:layout_constraintStart_toStartOf="@id/textTitulo"
-        app:layout_constraintEnd_toEndOf="@id/textTitulo"
-        app:layout_constraintTop_toBottomOf="@id/textSubtitulo" />
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/txt_recuperar_contraseña"
+        app:layout_constraintStart_toStartOf="@id/txt_recuperar_contraseña"
+        app:layout_constraintTop_toBottomOf="@id/txt_subtitulo" />
 
     <ImageButton
-        android:id="@+id/btnOpciones"
+        android:id="@+id/btn_opciones"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/ic_more_vert"
         android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@id/buttonVerMas"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="8dp"/>
+        app:layout_constraintEnd_toStartOf="@id/btn_ver_mas"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,40 +7,40 @@
     tools:context=".ui.home.HomeFragment">
 
     <ImageView
-        android:id="@+id/imageViewBack"
+        android:id="@+id/img_volver"
         android:layout_width="193dp"
         android:layout_height="187dp"
-        android:background="@drawable/backgroundnavigation"
-        android:layout_marginTop="-65dp"
         android:layout_marginStart="-69dp"
+        android:layout_marginTop="-65dp"
+        android:background="@drawable/backgroundnavigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_logo"
         android:layout_width="107dp"
         android:layout_height="108dp"
         android:layout_marginTop="-24dp"
         android:layout_marginEnd="16dp"
-        android:contentDescription="Logo EduShare"
+        android:contentDescription="@string/logo_edushare"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logoedushare" />
 
     <SearchView
-        android:id="@+id/searchView"
+        android:id="@+id/seav_buscar_documento"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/backgroundtext"
         android:iconifiedByDefault="false"
         android:queryHint="Buscar documentos..."
-        app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/img_logo" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewResults"
+        android:id="@+id/rv_resultados"
         android:layout_width="412dp"
         android:layout_height="527dp"
         android:clipToPadding="false"
@@ -49,15 +49,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintTop_toBottomOf="@id/seav_buscar_documento"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/buttonLogin"
+        android:id="@+id/btn_iniciar_sesion"
         android:layout_width="56dp"
         android:layout_height="60dp"
         android:background="@android:color/transparent"
-        android:contentDescription="Botón perfil"
+        android:contentDescription="@string/bot_n_perfil"
         android:src="@drawable/ic_perfil"
         android:tint="@android:color/white"
         tools:ignore="MissingConstraints,UseAppTint"
@@ -71,5 +71,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerViewResults" />
+        app:layout_constraintTop_toBottomOf="@id/rv_resultados" />
 </androidx.constraintlayout.widget.ConstraintLayout>

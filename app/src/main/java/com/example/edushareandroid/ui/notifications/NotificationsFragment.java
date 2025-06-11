@@ -33,18 +33,18 @@ public class NotificationsFragment extends Fragment {
         boolean usuarioAutenticado = SesionUsuario.isUsuarioLogueado(requireContext());
 
         if (usuarioAutenticado) {
-            binding.recyclerNotifications.setVisibility(View.VISIBLE);
-            binding.textNotifications.setVisibility(View.GONE);
+            binding.rvNotificaciones.setVisibility(View.VISIBLE);
+            binding.txtNotificaciones.setVisibility(View.GONE);
 
             // Simular datos
             List<Notificacion> lista = obtenerNotificacionesEjemplo();
             NotificacionAdapter adapter = new NotificacionAdapter(lista);
-            binding.recyclerNotifications.setLayoutManager(new LinearLayoutManager(requireContext()));
-            binding.recyclerNotifications.setAdapter(adapter);
+            binding.rvNotificaciones.setLayoutManager(new LinearLayoutManager(requireContext()));
+            binding.rvNotificaciones.setAdapter(adapter);
         } else {
-            binding.recyclerNotifications.setVisibility(View.GONE);
-            binding.textNotifications.setVisibility(View.VISIBLE);
-            binding.textNotifications.setText("Debes iniciar sesión para ver tus notificaciones.");
+            binding.rvNotificaciones.setVisibility(View.GONE);
+            binding.txtNotificaciones.setVisibility(View.VISIBLE);
+            binding.txtNotificaciones.setText("Debes iniciar sesión para ver tus notificaciones.");
         }
 
         return root;

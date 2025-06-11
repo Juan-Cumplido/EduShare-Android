@@ -24,9 +24,8 @@ public class ValidationUtil {
         return apellido != null && apellido.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}$");
     }
 
-    public static boolean isValidInstitucion(String nombre, String carrera, String nivel) {
+    public static boolean isValidInstitucion(String nombre, String nivel) {
         return nombre != null && nombre.length() <= 100 &&
-                carrera != null && carrera.length() <= 70 &&
                 nivel != null && nivel.length() <= 20;
     }
 

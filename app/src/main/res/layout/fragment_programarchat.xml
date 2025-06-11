@@ -7,62 +7,62 @@
 
     <!-- Título -->
     <EditText
-        android:id="@+id/etTitulo"
+        android:id="@+id/edt_titulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Título del chat"
+        android:hint="@string/titulo_del_chat"
         android:inputType="text"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Descripción -->
     <EditText
-        android:id="@+id/etDescripcion"
+        android:id="@+id/edt_descripcion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Descripción"
+        android:layout_marginTop="12dp"
+        android:hint="@string/descripcion"
         android:inputType="textMultiLine"
         android:minLines="3"
-        app:layout_constraintTop_toBottomOf="@id/etTitulo"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_titulo" />
 
     <!-- Fecha -->
     <EditText
-        android:id="@+id/etFecha"
+        android:id="@+id/edt_fecha"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Seleccionar fecha"
-        android:focusable="false"
+        android:layout_marginTop="12dp"
         android:clickable="true"
-        app:layout_constraintTop_toBottomOf="@id/etDescripcion"
-        app:layout_constraintStart_toStartOf="parent"
+        android:focusable="false"
+        android:hint="@string/seleccionar_fecha"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_descripcion" />
 
     <!-- Hora -->
     <EditText
-        android:id="@+id/etHora"
+        android:id="@+id/edt_hora"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Seleccionar hora"
-        android:focusable="false"
+        android:layout_marginTop="12dp"
         android:clickable="true"
-        app:layout_constraintTop_toBottomOf="@id/etFecha"
-        app:layout_constraintStart_toStartOf="parent"
+        android:focusable="false"
+        android:hint="@string/seleccionar_hora"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_fecha" />
 
     <!-- Botón para programar -->
     <Button
-        android:id="@+id/btnGuardarChat"
+        android:id="@+id/btn_guardar_chat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Programar chat"
-        app:layout_constraintTop_toBottomOf="@id/etHora"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="@string/programar_chat"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_hora" />
 </androidx.constraintlayout.widget.ConstraintLayout>

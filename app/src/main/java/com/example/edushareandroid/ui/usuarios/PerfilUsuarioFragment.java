@@ -37,7 +37,7 @@ public class PerfilUsuarioFragment extends Fragment {
         binding = FragmentPerfilusuarioBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         // Inicializar RecyclerView
-        binding.recyclerViewPublicaciones.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvPublicaciones.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Crear lista completa
         documentos = new ArrayList<>();
@@ -60,19 +60,19 @@ public class PerfilUsuarioFragment extends Fragment {
             navController.navigate(R.id.action_perfilUsuarioFragment_to_navigation_verArchivo, bundle);
         });
 
-        binding.recyclerViewPublicaciones.setAdapter(adapter);
+        binding.rvPublicaciones.setAdapter(adapter);
         Bundle args = getArguments();
         if (args != null) {
             String nombre = args.getString("nombre", "Nombre no disponible");
             String institucion = args.getString("institucion", "Institución no disponible");
 
             // Mostrar en los TextView
-            binding.tvNombre.setText("Nombre: " + nombre);
-            binding.tvUsuario.setText("Usuario: " + institucion);
+            binding.txtNombre.setText("Nombre: " + nombre);
+            binding.txtUsuario.setText("Usuario: " + institucion);
 
             // Puedes actualizar estos otros también si más adelante agregas datos reales
-            binding.tvNivel.setText("Nivel educativo: (por definir)");
-            binding.tvCarrera.setText("Carrera: (por definir)");
+            binding.txtNivel.setText("Nivel educativo: (por definir)");
+            binding.txtCarrera.setText("Carrera: (por definir)");
         }
 
 

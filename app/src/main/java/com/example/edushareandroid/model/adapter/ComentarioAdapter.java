@@ -65,10 +65,10 @@
 
             public ComentarioViewHolder(@NonNull View itemView) {
                 super(itemView);
-                tvNombreUsuario = itemView.findViewById(R.id.tvNombreUsuario);
-                tvFechaComentario = itemView.findViewById(R.id.tvFechaComentario);
-                tvTextoComentario = itemView.findViewById(R.id.tvTextoComentario);
-                btnEliminarComentario = itemView.findViewById(R.id.btnEliminarComentario); // este botón se agregará en el siguiente paso
+                tvNombreUsuario = itemView.findViewById(R.id.txt_nombre_usuario);
+                tvFechaComentario = itemView.findViewById(R.id.txt_fecha_comentario);
+                tvTextoComentario = itemView.findViewById(R.id.txt_comentario);
+                btnEliminarComentario = itemView.findViewById(R.id.btn_eliminar_comentario); // este botón se agregará en el siguiente paso
             }
         }
     }

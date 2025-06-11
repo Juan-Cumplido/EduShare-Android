@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp"
-    android:background="?attr/selectableItemBackground">
+    android:background="?attr/selectableItemBackground"
+    android:padding="12dp">
 
     <!-- Foto de perfil -->
     <ImageView
-        android:id="@+id/imgFotoPerfil"
+        android:id="@+id/img_foto_perfil"
         android:layout_width="56dp"
         android:layout_height="56dp"
+        android:background="@drawable/circle_background"
+        android:contentDescription="@string/foto_de_perfil"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_perfil"
-    android:background="@drawable/circle_background"
-    android:contentDescription="Foto de perfil"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Nombre completo -->
     <TextView
-        android:id="@+id/tvNombreCompleto"
+        android:id="@+id/txt_nombre_completo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Juan Pérez López"
+        android:layout_marginStart="12dp"
+        android:text="@string/nombre_usuario"
+        android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="#000000"
-        app:layout_constraintStart_toEndOf="@id/imgFotoPerfil"
-        app:layout_constraintTop_toTopOf="@id/imgFotoPerfil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
-        android:layout_marginStart="12dp" />
+        app:layout_constraintStart_toEndOf="@id/img_foto_perfil"
+        app:layout_constraintTop_toTopOf="@id/img_foto_perfil" />
 
     <!-- Institución -->
     <TextView
-        android:id="@+id/tvInstitucion"
+        android:id="@+id/txt_institucion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Universidad Nacional"
-        android:textSize="14sp"
+        android:text="@string/universidad_nacional"
         android:textColor="#555555"
-        app:layout_constraintTop_toBottomOf="@id/tvNombreCompleto"
-        app:layout_constraintStart_toStartOf="@id/tvNombreCompleto"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/txt_nombre_completo"
+        app:layout_constraintTop_toBottomOf="@id/txt_nombre_completo" />
+
     <ImageButton
-        android:id="@+id/buttonVerMas"
+        android:id="@+id/btn_ver_mas"
         android:layout_width="57dp"
         android:layout_height="56dp"
         android:layout_marginEnd="8dp"

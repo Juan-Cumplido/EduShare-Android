@@ -68,10 +68,10 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
 
         public UsuarioViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvNombreCompleto = itemView.findViewById(R.id.tvNombreCompleto);
-            tvInstitucion = itemView.findViewById(R.id.tvInstitucion);
-            imgFotoPerfil = itemView.findViewById(R.id.imgFotoPerfil);
-            buttonVerMas = itemView.findViewById(R.id.buttonVerMas);
+            tvNombreCompleto = itemView.findViewById(R.id.txt_nombre_completo);
+            tvInstitucion = itemView.findViewById(R.id.txt_institucion);
+            imgFotoPerfil = itemView.findViewById(R.id.img_foto_perfil);
+            buttonVerMas = itemView.findViewById(R.id.btn_ver_mas);
         }
     }
 }

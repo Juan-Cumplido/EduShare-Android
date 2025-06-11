@@ -8,10 +8,10 @@
 
     <!-- Mensaje cuando no ha iniciado sesión -->
     <TextView
-        android:id="@+id/textNotifications"
+        android:id="@+id/txt_notificaciones"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Por favor inicie sesión"
+        android:text="@string/por_favor_inicie_sesion"
         android:textSize="18sp"
         android:gravity="center"
         android:visibility="gone"
@@ -22,7 +22,7 @@
 
     <!-- Lista de notificaciones -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerNotifications"
+        android:id="@+id/rv_notificaciones"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"

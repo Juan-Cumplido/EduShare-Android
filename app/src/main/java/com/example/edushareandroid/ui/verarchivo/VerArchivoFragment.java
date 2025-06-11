@@ -45,14 +45,14 @@ public class VerArchivoFragment extends Fragment {
         estaLogueado = SesionUsuario.isUsuarioLogueado(requireContext());
 
         // Mostrar u ocultar advertencia
-        binding.tvAdvertencia.setVisibility(estaLogueado ? View.GONE : View.VISIBLE);
+        binding.txtAdvertencia.setVisibility(estaLogueado ? View.GONE : View.VISIBLE);
 
         // Deshabilitar botón de descarga si no está logueado
         binding.btnDescargarDocumento.setEnabled(estaLogueado);
 
         // Ocultar elementos de comentarios si no está logueado
         if (!estaLogueado) {
-            binding.layoutNuevoComentario.setVisibility(View.GONE);
+            binding.clNuevoComentario.setVisibility(View.GONE);
         }
         // Obtener datos del documento
         Documento documento = null;
@@ -60,9 +60,9 @@ public class VerArchivoFragment extends Fragment {
         if (args != null) {
             documento = (Documento) args.getSerializable("documentoSeleccionado");
             if (documento != null) {
-                binding.tvTituloDocumento.setText(documento.getTitulo());
-                binding.tvSubtitulo.setText(documento.getSubtitulo());
-                binding.tvDetallesExtra.setText(documento.getDetalles());
+                binding.txtTituloDocumento.setText(documento.getTitulo());
+                binding.txtSubtitulo.setText(documento.getSubtitulo());
+                binding.txtDetallesExtra.setText(documento.getDetalles());
             }
         }
 
@@ -159,7 +159,7 @@ public class VerArchivoFragment extends Fragment {
     }
 
     private void agregarComentario() {
-        String texto = binding.etNuevoComentario.getText().toString().trim();
+        String texto = binding.edtNuevoComentario.getText().toString().trim();
         if (texto.isEmpty()) {
             Toast.makeText(getContext(), "Escribe un comentario", Toast.LENGTH_SHORT).show();
             return;
@@ -168,7 +168,7 @@ public class VerArchivoFragment extends Fragment {
         Comentario nuevo = new Comentario("Tú", "Ahora", texto);
         comentarios.add(nuevo);
         adapter.notifyItemInserted(comentarios.size() - 1);
-        binding.etNuevoComentario.setText("");
+        binding.edtNuevoComentario.setText("");
         binding.rvComentarios.scrollToPosition(comentarios.size() - 1);
     }
 
@@ -179,7 +179,7 @@ public class VerArchivoFragment extends Fragment {
     }
 
     private void actualizarLikeUI() {
-        binding.tvLikeCount.setText(String.valueOf(likeCount));
+        binding.txtContadorMeGusta.setText(String.valueOf(likeCount));
         int drawableRes = liked ? R.drawable.ic_like_filled : R.drawable.ic_like_outline;
         binding.btnLike.setBackground(ContextCompat.getDrawable(requireContext(), drawableRes));
     }

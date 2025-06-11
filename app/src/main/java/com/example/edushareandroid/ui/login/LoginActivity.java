@@ -13,8 +13,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.edushareandroid.MainActivity;
 import com.example.edushareandroid.R;
-import com.example.edushareandroid.ui.createacount.CreateAccountActivity;
-import com.example.edushareandroid.ui.recoverypassword.RecoverypasswordActivity;
+import com.example.edushareandroid.model.base_de_datos.UsuarioData;
+import com.example.edushareandroid.ui.crearcuenta.CreateAccountActivity;
+import com.example.edushareandroid.ui.recuperarcontrasenia.RecoverypasswordActivity;
 import com.example.edushareandroid.utils.HashUtil;
 import com.example.edushareandroid.utils.SesionUsuario;
 
@@ -28,10 +29,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        etIdentificador = findViewById(R.id.editTextTextEmailAddress);
-        etPassword = findViewById(R.id.editTextNumberPassword);
-        ImageView imageViewTogglePassword = findViewById(R.id.imageViewTogglePassword);
-        Button loginButton = findViewById(R.id.btnLogin);
+        etIdentificador = findViewById(R.id.edt_correo);
+        etPassword = findViewById(R.id.edt_contraseña);
+        ImageView imageViewTogglePassword = findViewById(R.id.img_alternar_contraseña);
+        Button loginButton = findViewById(R.id.btn_iniciar_sesion);
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
@@ -52,8 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loginViewModel.getLoginResult().observe(this, response -> {
             if (!response.isError()) {
-                // Guardar estado de sesión como logueado
-                SesionUsuario.guardarEstadoLogueado(this, true);
+                loginViewModel.manejarRespuestaLogin(response, this);
 
                 Toast.makeText(this, "¡Inicio de sesión exitoso!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, MainActivity.class));
@@ -64,6 +64,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+
+
         loginViewModel.getErrorMessage().observe(this, mensaje -> {
             if (mensaje != null) {
                 Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
@@ -71,11 +73,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        findViewById(R.id.ForgotPasword).setOnClickListener(v ->
+        findViewById(R.id.btn_olvido_contraseña).setOnClickListener(v ->
                 startActivity(new Intent(this, RecoverypasswordActivity.class))
         );
 
-        findViewById(R.id.btnRegister).setOnClickListener(v ->
+        findViewById(R.id.btn_registrar).setOnClickListener(v ->
                 startActivity(new Intent(this, CreateAccountActivity.class))
         );
     }

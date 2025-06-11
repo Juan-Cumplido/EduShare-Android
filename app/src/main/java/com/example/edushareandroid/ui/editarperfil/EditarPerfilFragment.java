@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.edushareandroid.R;
 import com.example.edushareandroid.databinding.FragmentEditarperfilBinding;
 import com.example.edushareandroid.model.adapter.FotoAdapter;
-import com.example.edushareandroid.ui.recoverypassword.RecoverypasswordActivity;
+import com.example.edushareandroid.ui.recuperarcontrasenia.RecoverypasswordActivity;
 
 public class EditarPerfilFragment extends Fragment {
     private FragmentEditarperfilBinding binding;
@@ -37,20 +37,20 @@ public class EditarPerfilFragment extends Fragment {
         View root = binding.getRoot();
 
         // Configurar RecyclerView
-        binding.recyclerFotos.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.rvFotos.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         FotoAdapter adapter = new FotoAdapter(imagenesDisponibles, resId -> {
-            binding.ivFotoPerfil.setImageResource(resId);
-            binding.recyclerFotos.setVisibility(View.GONE);
+            binding.imgFotoPerfil.setImageResource(resId);
+            binding.rvFotos.setVisibility(View.GONE);
             mostrandoSelector = false;
         });
-        binding.recyclerFotos.setAdapter(adapter);
+        binding.rvFotos.setAdapter(adapter);
         binding.btnSeleccionarFoto.setOnClickListener(v -> {
             mostrandoSelector = !mostrandoSelector;
-            binding.recyclerFotos.setVisibility(mostrandoSelector ? View.VISIBLE : View.GONE);
+            binding.rvFotos.setVisibility(mostrandoSelector ? View.VISIBLE : View.GONE);
         });
 
         // Botón para cambiar contraseña
-        binding.btnCambiarContrasena.setOnClickListener(v -> {
+        binding.btnCambiarContraseA.setOnClickListener(v -> {
             Intent intent = new Intent(requireContext(), RecoverypasswordActivity.class);
             startActivity(intent);
         });

@@ -9,7 +9,7 @@
 
     <!-- Título -->
     <TextView
-        android:id="@+id/titlePerfil"
+        android:id="@+id/txt_perfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_perfil"
@@ -22,7 +22,7 @@
 
     <!-- Imagen de perfil -->
     <ImageView
-        android:id="@+id/profileImage"
+        android:id="@+id/img_perfil"
         android:layout_width="91dp"
         android:layout_height="93dp"
         android:layout_marginTop="16dp"
@@ -31,11 +31,11 @@
         android:src="@drawable/ic_perfil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titlePerfil" />
+        app:layout_constraintTop_toBottomOf="@id/txt_perfil" />
 
     <!-- Título información -->
     <TextView
-        android:id="@+id/infoTitle"
+        android:id="@+id/txt_informacion_personal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -44,11 +44,11 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profileImage" />
+        app:layout_constraintTop_toBottomOf="@id/img_perfil" />
 
     <!-- Nombre -->
     <TextView
-        android:id="@+id/tvNombre"
+        android:id="@+id/txt_nombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -57,11 +57,11 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/infoTitle" />
+        app:layout_constraintTop_toBottomOf="@id/txt_informacion_personal" />
 
     <!-- Usuario -->
     <TextView
-        android:id="@+id/tvUsuario"
+        android:id="@+id/txt_usuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -70,11 +70,11 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvNombre" />
+        app:layout_constraintTop_toBottomOf="@id/txt_nombre" />
 
     <!-- Nivel educativo -->
     <TextView
-        android:id="@+id/tvNivelEducativo"
+        android:id="@+id/txt_nivel_educativo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -83,11 +83,11 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvUsuario" />
+        app:layout_constraintTop_toBottomOf="@id/txt_usuario" />
 
     <!-- Carrera -->
     <TextView
-        android:id="@+id/tvCarrera"
+        android:id="@+id/txt_carrera"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -97,11 +97,11 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvNivelEducativo" />
+        app:layout_constraintTop_toBottomOf="@id/txt_nivel_educativo" />
 
     <!-- Título publicaciones -->
     <TextView
-        android:id="@+id/tvPublicaciones"
+        android:id="@+id/txt_publicaciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -110,32 +110,32 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCarrera" />
+        app:layout_constraintTop_toBottomOf="@id/txt_carrera" />
 
     <!-- RecyclerView Publicaciones -->
 
     <!-- Grupo de botones inferiores -->
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewPublicaciones"
+        android:id="@+id/rv_publicaciones"
         android:layout_width="369dp"
         android:layout_height="290dp"
         android:clipToPadding="false"
         android:paddingBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomButtonsGroup"
+        app:layout_constraintBottom_toTopOf="@id/cl_grupo_botones"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPublicaciones"
+        app:layout_constraintTop_toBottomOf="@id/txt_publicaciones"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/bottomButtonsGroup"
+        android:id="@+id/cl_grupo_botones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:visibility="visible"
-        app:constraint_referenced_ids="btnEditarPerfil,btnCerrarSesion"
+        app:constraint_referenced_ids="btn_editar_perfil,btn_cerrar_sesion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -147,9 +147,10 @@
     <!-- Botones en fila: Subir publicación - Editar perfil - Cerrar sesión -->
 
     <Button
-        android:id="@+id/btnSubirPublicacion"
+        android:id="@+id/btn_subir_publicacion"
         android:layout_width="123dp"
         android:layout_height="48dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/backgroundbutton1"
@@ -157,14 +158,13 @@
         android:textColor="@android:color/white"
         android:textSize="12sp"
         android:textStyle="bold"
-        android:layout_marginStart="18dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnEditarPerfil"
+        app:layout_constraintEnd_toStartOf="@+id/btn_editar_perfil"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPublicaciones"
+        app:layout_constraintTop_toBottomOf="@+id/rv_publicaciones"
         app:layout_constraintWidth_percent="0.33" />
 
     <Button
-        android:id="@+id/btnEditarPerfil"
+        android:id="@+id/btn_editar_perfil"
         android:layout_width="110dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
@@ -175,13 +175,13 @@
         android:textColor="@android:color/white"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/btnCerrarSesion"
-        app:layout_constraintStart_toEndOf="@+id/btnSubirPublicacion"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPublicaciones"
+        app:layout_constraintEnd_toStartOf="@+id/btn_cerrar_sesion"
+        app:layout_constraintStart_toEndOf="@+id/btn_subir_publicacion"
+        app:layout_constraintTop_toBottomOf="@+id/rv_publicaciones"
         app:layout_constraintWidth_percent="0.33" />
 
     <Button
-        android:id="@+id/btnCerrarSesion"
+        android:id="@+id/btn_cerrar_sesion"
         android:layout_width="105dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
@@ -193,8 +193,8 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnEditarPerfil"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPublicaciones"
+        app:layout_constraintStart_toEndOf="@+id/btn_editar_perfil"
+        app:layout_constraintTop_toBottomOf="@+id/rv_publicaciones"
         app:layout_constraintWidth_percent="0.33" />
 
     <View
@@ -204,19 +204,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnSubirPublicacion"
+        app:layout_constraintTop_toBottomOf="@id/btn_subir_publicacion"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/tvIniciaSesion"
+        android:id="@+id/txt_iniciar_sesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/advertencia_inicarsesion"
         android:textColor="#000"
         android:textSize="16sp"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

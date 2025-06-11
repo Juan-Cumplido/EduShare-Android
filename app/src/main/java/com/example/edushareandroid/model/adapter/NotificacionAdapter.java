@@ -48,9 +48,9 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            titulo = itemView.findViewById(R.id.textTituloNoti);
-            mensaje = itemView.findViewById(R.id.textMensajeNoti);
-            fecha = itemView.findViewById(R.id.textFechaNoti);
+            titulo = itemView.findViewById(R.id.txt_titulo_notificaciones);
+            mensaje = itemView.findViewById(R.id.txt_mensaje_notificaciones);
+            fecha = itemView.findViewById(R.id.txt_fecha_notificaciones);
         }
     }
 }

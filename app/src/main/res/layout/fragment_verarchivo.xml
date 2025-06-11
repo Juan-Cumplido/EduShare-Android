@@ -1,182 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        tools:context=".ui.verarchivo.VerArchivoFragment">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ui.verarchivo.VerArchivoFragment">
 
-        <!-- Scroll general -->
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScroll"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:fillViewport="true"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/layoutNuevoComentario"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+    <!-- Scroll general -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_archivo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/cl_nuevo_comentario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Tarjeta del documento -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_margin="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
 
-                <!-- Tarjeta del documento -->
-                <androidx.cardview.widget.CardView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
+                    <ImageView
+                        android:id="@+id/img_documento"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/ic_archivo" />
+
+                    <!-- Botones Abrir y Descargar -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
-                        <ImageView
-                            android:id="@+id/ivDocumento"
-                            android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:layout_marginBottom="8dp"
-                            android:src="@drawable/ic_archivo" />
+                        <Button
+                            android:id="@+id/btn_abrir_documento"
+                            android:layout_width="156dp"
+                            android:layout_height="40dp"
+                            android:text="@string/abrir" />
 
-                        <!-- Botones Abrir y Descargar -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <Button
-                                android:id="@+id/btnAbrirDocumento"
-                                android:layout_width="156dp"
-                                android:layout_height="40dp"
-                                android:text="Abrir documento" />
-
-                            <Button
-                                android:id="@+id/btnDescargarDocumento"
-                                android:layout_width="156dp"
-                                android:layout_height="40dp"
-                                android:text="Descargar" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/tvTituloDocumento"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Título del documento"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvSubtitulo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Descripción o subtítulo"
-                            android:textColor="?android:attr/textColorSecondary" />
-
-                        <TextView
-                            android:id="@+id/tvDetallesExtra"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="1.2k Vistas · 23 Páginas · 1h ago"
-                            android:textColor="?android:attr/textColorTertiary" />
-
-                        <TextView
-                            android:id="@+id/tvAdvertencia"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Para visualizar por completo el documento es necesario crear una cuenta o iniciar sesión."
-                            android:textColor="@color/design_default_color_error" />
+                        <Button
+                            android:id="@+id/btn_descargar_documento"
+                            android:layout_width="156dp"
+                            android:layout_height="40dp"
+                            android:text="@string/descargar" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <!-- Sección like -->
-                <LinearLayout
-                    android:id="@+id/likeSection"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="8dp">
-
-                    <ImageButton
-                        android:id="@+id/btnLike"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:background="@drawable/ic_like_outline"
-                        android:contentDescription="Me gusta" />
 
                     <TextView
-                        android:id="@+id/tvLikeCount"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/txt_titulo_documento"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="8dp"
-                        android:text="0" />
+                        android:text="@string/titulo_del_documento"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_subtitulo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/descripcion_o_subtitulo"
+                        android:textColor="?android:attr/textColorSecondary" />
+
+                    <TextView
+                        android:id="@+id/txt_detalles_extra"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/_1_2k_vistas_23_p_ginas_1h_ago"
+                        android:textColor="?android:attr/textColorTertiary" />
+
+                    <TextView
+                        android:id="@+id/txt_advertencia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/para_visualizar_por_completo_el_documento_es_necesario_crear_una_cuenta_o_iniciar_sesion"
+                        android:textColor="@color/design_default_color_error" />
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-                <!-- Lista de comentarios -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvComentarios"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    tools:listitem="@layout/item_comentario" />
-
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-
-        <!-- Campo y botón de nuevo comentario -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layoutNuevoComentario"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toTopOf="@id/btnAccionDocumento"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <EditText
-                android:id="@+id/etNuevoComentario"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:background="@drawable/backgroundtext"
-                android:hint="Escribe un comentario..."
-                android:padding="12dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btnEnviarComentario"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <ImageButton
-                android:id="@+id/btnEnviarComentario"
+            <!-- Sección like -->
+            <LinearLayout
+                android:id="@+id/ll_seccion_me_gusta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_send"
-                android:contentDescription="Enviar comentario"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
-        <!-- Botón principal -->
+                <ImageButton
+                    android:id="@+id/btn_like"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/ic_like_outline"
+                    android:contentDescription="@string/me_gusta" />
+
+                <TextView
+                    android:id="@+id/txt_contador_me_gusta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/_0" />
+            </LinearLayout>
+
+            <!-- Lista de comentarios -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_comentarios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_comentario" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Campo y botón de nuevo comentario -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_nuevo_comentario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_accion_documento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/edt_nuevo_comentario"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:background="@drawable/backgroundtext"
+            android:hint="@string/escribe_un_comentario"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_enviar_comentario"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_enviar_comentario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/enviar_comentario"
+            android:src="@drawable/ic_send"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Botón principal -->
     <Button
-        android:id="@+id/btnAccionDocumento"
+        android:id="@+id/btn_accion_documento"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:text="Ver documento completo"
+        android:text="@string/ver_documento_completo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

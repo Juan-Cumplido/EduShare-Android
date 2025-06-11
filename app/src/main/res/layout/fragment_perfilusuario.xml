@@ -9,7 +9,7 @@
 
     <!-- Imagen de perfil -->
     <ImageView
-        android:id="@+id/imgPerfil"
+        android:id="@+id/img_perfil"
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:src="@drawable/ic_perfil"
@@ -21,86 +21,86 @@
 
     <!-- Información Personal -->
     <TextView
-        android:id="@+id/tvTituloInfo"
+        android:id="@+id/txt_informacion_personal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Información personal"
+        android:text="@string/informacion_personal"
         android:textStyle="bold"
         android:textColor="#000"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/imgPerfil"
+        app:layout_constraintTop_toBottomOf="@id/img_perfil"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp" />
 
     <TextView
-        android:id="@+id/tvNombre"
+        android:id="@+id/txt_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre:"
+        android:text="@string/nombre"
         android:textColor="#000"
-        app:layout_constraintTop_toBottomOf="@id/tvTituloInfo"
+        app:layout_constraintTop_toBottomOf="@id/txt_informacion_personal"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="8dp" />
 
     <TextView
-        android:id="@+id/tvUsuario"
+        android:id="@+id/txt_usuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Usuario:"
+        android:text="@string/usuario"
         android:textColor="#000"
-        app:layout_constraintTop_toBottomOf="@id/tvNombre"
+        app:layout_constraintTop_toBottomOf="@id/txt_nombre"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="4dp" />
 
     <TextView
-        android:id="@+id/tvNivel"
+        android:id="@+id/txt_nivel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nivel educativo:"
+        android:text="@string/nivel_educativo"
         android:textColor="#000"
-        app:layout_constraintTop_toBottomOf="@id/tvUsuario"
+        app:layout_constraintTop_toBottomOf="@id/txt_usuario"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="4dp" />
 
     <TextView
-        android:id="@+id/tvCarrera"
+        android:id="@+id/txt_carrera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Carrera:"
+        android:text="@string/carrera"
         android:textColor="#000"
-        app:layout_constraintTop_toBottomOf="@id/tvNivel"
+        app:layout_constraintTop_toBottomOf="@id/txt_nivel"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="4dp" />
 
     <!-- Publicaciones -->
     <TextView
-        android:id="@+id/tvPublicaciones"
+        android:id="@+id/txt_publicaciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Publicaciones"
+        android:text="@string/publicaciones"
         android:textStyle="bold"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tvCarrera"
+        app:layout_constraintTop_toBottomOf="@id/txt_carrera"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp" />
 
     <!-- Botones -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewPublicaciones"
+        android:id="@+id/rv_publicaciones"
         android:layout_width="377dp"
         android:layout_height="312dp"
         android:layout_marginTop="8dp"
         android:clipToPadding="false"
         android:paddingBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@id/btnSeguir"
+        app:layout_constraintBottom_toTopOf="@id/btn_seguir"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPublicaciones"
+        app:layout_constraintTop_toBottomOf="@id/txt_publicaciones"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/btnDejarSeguir"
+        android:id="@+id/btn_dejar_seguir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="44dp"
@@ -108,11 +108,11 @@
         android:text="@string/dejar_de_seguir"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPublicaciones"
+        app:layout_constraintTop_toBottomOf="@+id/rv_publicaciones"
         app:layout_constraintVertical_bias="0.777" />
 
     <Button
-        android:id="@+id/btnSeguir"
+        android:id="@+id/btn_seguir"
         android:layout_width="119dp"
         android:layout_height="47dp"
         android:layout_marginBottom="44dp"
@@ -122,7 +122,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.768"
-        app:layout_constraintStart_toEndOf="@+id/btnDejarSeguir" />
+        app:layout_constraintStart_toEndOf="@+id/btn_dejar_seguir" />
 
     <View
         android:layout_width="match_parent"
@@ -131,5 +131,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerViewPublicaciones" />
+        app:layout_constraintTop_toBottomOf="@id/rv_publicaciones" />
 </androidx.constraintlayout.widget.ConstraintLayout>

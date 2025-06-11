@@ -37,14 +37,14 @@ public class UsuariosFragment extends Fragment {
 
         if (usuarioAutenticado) {
             // Mostrar elementos
-            binding.textNoSesion.setVisibility(View.GONE);
-            binding.searchView.setVisibility(View.VISIBLE);
-            binding.recyclerViewResults.setVisibility(View.VISIBLE);
+            binding.txtNoSesion.setVisibility(View.GONE);
+            binding.seavBuscarDocumento.setVisibility(View.VISIBLE);
+            binding.rvResultados.setVisibility(View.VISIBLE);
 
             configurarRecyclerView();
             cargarUsuarios();
 
-            binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            binding.seavBuscarDocumento.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
                     filtrar(query);
@@ -60,16 +60,16 @@ public class UsuariosFragment extends Fragment {
 
         } else {
             // Ocultar elementos y mostrar mensaje
-            binding.textNoSesion.setVisibility(View.VISIBLE);
-            binding.searchView.setVisibility(View.GONE);
-            binding.recyclerViewResults.setVisibility(View.GONE);
+            binding.txtNoSesion.setVisibility(View.VISIBLE);
+            binding.seavBuscarDocumento.setVisibility(View.GONE);
+            binding.rvResultados.setVisibility(View.GONE);
         }
 
         return view;
     }
 
     private void configurarRecyclerView() {
-        binding.recyclerViewResults.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvResultados.setLayoutManager(new LinearLayoutManager(getContext()));
 
         adapter = new UsuarioAdapter(new ArrayList<>(), usuario -> {
             Bundle bundle = new Bundle();
@@ -81,7 +81,7 @@ public class UsuariosFragment extends Fragment {
             navController.navigate(R.id.action_navigation_usuarios_to_perfilUsuarioFragment, bundle);
         });
 
-        binding.recyclerViewResults.setAdapter(adapter);
+        binding.rvResultados.setAdapter(adapter);
     }
 
     private void cargarUsuarios() {
