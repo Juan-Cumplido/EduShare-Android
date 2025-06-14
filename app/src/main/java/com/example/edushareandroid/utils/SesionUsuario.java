@@ -3,11 +3,13 @@ package com.example.edushareandroid.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
-import com.example.edushareandroid.model.base_de_datos.UsuarioData;
+import com.example.edushareandroid.model.base_de_datos.Login.UsuarioData;
 
 public class SesionUsuario {
-    private static final String PREF_NAME = "usuario_prefs";
+    private static final String PREF_NAME = "sesion_usuario";
+
     private static final String KEY_TOKEN = "token_jwt";
     private static final String KEY_LOGUEADO = "usuario_logueado";
 
@@ -35,9 +37,10 @@ public class SesionUsuario {
     }
 
     public static void guardarDatosUsuario(Context context, UsuarioData usuario) {
+        Log.d("SesionUsuario", "Guardando ID: " + usuario.getIdUsuario());
         SharedPreferences prefs = context.getSharedPreferences("sesion_usuario", Context.MODE_PRIVATE);
         prefs.edit()
-                .putInt("idUsuarioRegistrado", usuario.getIdUsuarioRegistrado())
+                .putInt("idUsuarioRegistrado", usuario.getIdUsuario())
                 .putString("nombre", usuario.getNombre())
                 .putString("fotoPerfil", usuario.getFotoPerfil())
                 .apply();
@@ -46,10 +49,19 @@ public class SesionUsuario {
     public static UsuarioData obtenerDatosUsuario(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("sesion_usuario", Context.MODE_PRIVATE);
         UsuarioData usuario = new UsuarioData();
-        usuario.setIdUsuarioRegistrado(prefs.getInt("idUsuarioRegistrado", -1));
+        usuario.setIdUsuario(prefs.getInt("idUsuarioRegistrado", -1));
         usuario.setNombre(prefs.getString("nombre", ""));
         usuario.setFotoPerfil(prefs.getString("fotoPerfil", ""));
         return usuario;
+    }
+    public static void guardarNombreUsuario(Context context, String nombreUsuario) {
+        SharedPreferences prefs = context.getSharedPreferences("sesion", Context.MODE_PRIVATE);
+        prefs.edit().putString("nombre_usuario", nombreUsuario).apply();
+    }
+
+    public static String obtenerNombreUsuario(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("sesion", Context.MODE_PRIVATE);
+        return prefs.getString("nombre_usuario", null);
     }
 
 }

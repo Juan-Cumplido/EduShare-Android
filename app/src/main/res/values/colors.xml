@@ -12,4 +12,5 @@
     <color name="container_background">#F5F5F5</color>
     <color name="cafe">#2E1F14</color>
     <color name="fondo">#b5a68a</color>
+    <color name="rojo">#FF0000</color>
 </resources>

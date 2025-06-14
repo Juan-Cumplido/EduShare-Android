@@ -1,20 +1,52 @@
-package com.example.edushareandroid.model.base_de_datos;
+package com.example.edushareandroid.ui.perfil;
 
-public class UsuarioPerfil {
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class UsuarioPerfil implements Parcelable {
     private int idUsuarioRegistrado;
     private String nombre;
     private String primerApellido;
     private String segundoApellido;
     private String fotoPerfil;
-    private String correo;
     private String nombreUsuario;
     private int idInstitucion;
     private String nombreInstitucion;
     private String nivelEducativo;
     private int numeroSeguidores;
     private int numeroSeguidos;
+    private String correo;
 
-    // Getters y Setters
+    protected UsuarioPerfil(Parcel in) {
+        idUsuarioRegistrado = in.readInt();
+        nombre = in.readString();
+        primerApellido = in.readString();
+        segundoApellido = in.readString();
+        correo = in.readString();
+        nombreUsuario = in.readString();
+        fotoPerfil = in.readString();
+        idInstitucion = in.readInt();
+        nombreInstitucion = in.readString();
+        nivelEducativo = in.readString();
+        numeroSeguidores = in.readInt();
+        numeroSeguidos = in.readInt();
+    }
+
+    public static final Creator<UsuarioPerfil> CREATOR = new Creator<UsuarioPerfil>() {
+        @Override
+        public UsuarioPerfil createFromParcel(Parcel in) {
+            return new UsuarioPerfil(in);
+        }
+
+        @Override
+        public UsuarioPerfil[] newArray(int size) {
+            return new UsuarioPerfil[size];
+        }
+    };
+
     public int getIdUsuarioRegistrado() {
         return idUsuarioRegistrado;
     }
@@ -109,5 +141,26 @@ public class UsuarioPerfil {
 
     public void setNumeroSeguidos(int numeroSeguidos) {
         this.numeroSeguidos = numeroSeguidos;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(idUsuarioRegistrado);
+        dest.writeString(nombre);
+        dest.writeString(primerApellido);
+        dest.writeString(segundoApellido);
+        dest.writeString(correo);
+        dest.writeString(nombreUsuario);
+        dest.writeString(fotoPerfil);
+        dest.writeInt(idInstitucion);
+        dest.writeString(nombreInstitucion);
+        dest.writeString(nivelEducativo);
+        dest.writeInt(numeroSeguidores);
+        dest.writeInt(numeroSeguidos);
     }
 }

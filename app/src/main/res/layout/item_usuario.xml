@@ -4,18 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
-    android:padding="12dp">
+    android:padding="16dp">
 
     <!-- Foto de perfil -->
     <ImageView
         android:id="@+id/img_foto_perfil"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:background="@drawable/circle_background"
         android:contentDescription="@string/foto_de_perfil"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_perfil"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,36 +23,78 @@
         android:id="@+id/txt_nombre_completo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="@string/nombre_usuario"
-        android:textColor="#000000"
-        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@id/btn_ver_mas"
         app:layout_constraintStart_toEndOf="@id/img_foto_perfil"
         app:layout_constraintTop_toTopOf="@id/img_foto_perfil" />
 
-    <!-- Institución -->
+    <!-- Nombre de usuario -->
     <TextView
-        android:id="@+id/txt_institucion"
+        android:id="@+id/txt_nombre_usuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/universidad_nacional"
-        android:textColor="#555555"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/txt_nombre_completo"
+        android:textColor="#555555"
+        app:layout_constraintEnd_toStartOf="@id/btn_ver_mas"
+        app:layout_constraintStart_toEndOf="@id/img_foto_perfil"
         app:layout_constraintTop_toBottomOf="@id/txt_nombre_completo" />
 
+    <!-- Nivel educativo -->
+    <TextView
+        android:id="@+id/txt_nivel_educativo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:textSize="14sp"
+        android:textColor="#555555"
+        app:layout_constraintEnd_toStartOf="@id/btn_ver_mas"
+        app:layout_constraintStart_toEndOf="@id/img_foto_perfil"
+        app:layout_constraintTop_toBottomOf="@id/txt_nombre_usuario" />
+
+    <!-- Estadísticas (Publicaciones y Seguidores) -->
+    <LinearLayout
+        android:id="@+id/layout_stats"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@id/btn_ver_mas"
+        app:layout_constraintStart_toEndOf="@id/img_foto_perfil"
+        app:layout_constraintTop_toBottomOf="@id/txt_nivel_educativo">
+
+        <TextView
+            android:id="@+id/txt_publicaciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textSize="13sp"
+            android:textColor="#555555" />
+
+        <TextView
+            android:id="@+id/txt_seguidores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="#555555" />
+    </LinearLayout>
+
+    <!-- Botón Ver más -->
     <ImageButton
         android:id="@+id/btn_ver_mas"
-        android:layout_width="57dp"
-        android:layout_height="56dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_irarchivo"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/img_foto_perfil"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/img_foto_perfil" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

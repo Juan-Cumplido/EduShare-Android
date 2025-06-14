@@ -1,11 +1,6 @@
-package com.example.edushareandroid.model.bd;
+package com.example.edushareandroid.model.base_de_datos;
 
 public class Rama {
-    public Rama(int idRama, String nombreRama) {
-        this.idRama = idRama;
-        this.nombreRama = nombreRama;
-    }
-
     public int getIdRama() {
         return idRama;
     }
@@ -24,6 +19,4 @@ public class Rama {
 
     private int idRama;
     private String nombreRama;
-
-    // Getters y Setters
 }

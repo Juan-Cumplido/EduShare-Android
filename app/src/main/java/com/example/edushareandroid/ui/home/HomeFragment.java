@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.edushareandroid.R;
 import com.example.edushareandroid.databinding.FragmentHomeBinding;
 import com.example.edushareandroid.model.adapter.ResultadoAdapter;
-import com.example.edushareandroid.model.bd.Documento;
+import com.example.edushareandroid.model.base_de_datos.Documento;
 import com.example.edushareandroid.ui.login.LoginActivity;
 
 import java.util.ArrayList;

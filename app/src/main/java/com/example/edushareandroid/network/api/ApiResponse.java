@@ -4,8 +4,6 @@ public class ApiResponse {
     public boolean isError() {
         return error;
     }
-
-
     public void setError(boolean error) {
         this.error = error;
     }
@@ -50,7 +48,7 @@ public class ApiResponse {
     private boolean error;
     private int estado;
     private String mensaje;
-    private String errorDetalle; // Nuevo campo para detalles técnicos
+    private String errorDetalle;
 
 
 }

@@ -13,11 +13,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.edushareandroid.MainActivity;
 import com.example.edushareandroid.R;
-import com.example.edushareandroid.model.base_de_datos.UsuarioData;
 import com.example.edushareandroid.ui.crearcuenta.CreateAccountActivity;
 import com.example.edushareandroid.ui.recuperarcontrasenia.RecoverypasswordActivity;
 import com.example.edushareandroid.utils.HashUtil;
-import com.example.edushareandroid.utils.SesionUsuario;
 
 public class LoginActivity extends AppCompatActivity {
 

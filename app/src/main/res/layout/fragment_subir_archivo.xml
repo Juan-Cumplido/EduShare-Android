@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Título principal -->
+        <TextView
+            android:id="@+id/txt_titulo_principal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/inspira_con_tu_contenido"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Campo de título del documento -->
+        <TextView
+            android:id="@+id/txt_label_titulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/titulo"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_titulo_principal" />
+
+        <EditText
+            android:id="@+id/input_layout_titulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/backgroundtext"
+            android:gravity="center|start"
+            android:hint="@string/escribe_un_titulo"
+            android:minHeight="59dp"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_label_titulo" />
+
+        <!-- Campo de contenido/descripción -->
+        <TextView
+            android:id="@+id/txt_label_contenido"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/contenido"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_layout_titulo" />
+
+        <EditText
+            android:id="@+id/input_contenido"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/backgroundtext"
+            android:gravity="top|start"
+            android:hint="@string/descripcion_contenido"
+            android:inputType="textMultiLine|textCapSentences"
+            android:maxLines="4"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_label_contenido" />
+
+        <!-- Sección de categorización -->
+        <LinearLayout
+            android:id="@+id/layout_categorias"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_contenido">
+
+            <!-- Nivel Educativo -->
+            <TextView
+                android:id="@+id/txt_nivel_educativo_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/nivel_educativo_label"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spn_nivel_educativo"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/backgroundtext"
+                android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:prompt="@string/nivel_educativo_hint" />
+
+            <!-- Categoría -->
+            <TextView
+                android:id="@+id/txt_categoria_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/categoria"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spn_categoria"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/backgroundtext"
+                android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:prompt="@string/selecciona_categoria" />
+
+            <!-- Rama -->
+            <TextView
+                android:id="@+id/txt_rama_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/rama"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spn_rama"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/backgroundtext"
+                android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:prompt="@string/rama" />
+
+            <!-- Materia -->
+            <TextView
+                android:id="@+id/txt_materia_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/materia"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spn_materia"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/backgroundtext"
+                android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp" />
+        </LinearLayout>
+
+        <!-- Área de carga de archivos -->
+        <TextView
+            android:id="@+id/txt_subir_archivo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/subir_archivo_pdf"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_categorias" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_upload"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_subir_archivo">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_upload"
+                    android:tint="#757575"
+                    tools:ignore="UseAppTint" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/haz_clic_o_arrastra_para_subir"
+                    android:textColor="#757575" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <!-- Dentro de tu ConstraintLayout, después del CardView de upload -->
+        <LinearLayout
+            android:id="@+id/upload_success_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_upload">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/archivo_subido"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/txt_file_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/vista_previa_de_portada"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <ImageView
+                android:id="@+id/img_preview"
+                android:layout_width="match_parent"
+                android:layout_height="550dp"
+                android:scaleType="centerCrop"
+                android:background="@color/cardview_light_background"
+                android:contentDescription="@string/vista_previa_del_documento"/>
+        </LinearLayout>
+        <!-- Botón de subir - ANCLADO AL FONDO -->
+        <Button
+            android:id="@+id/btn_subir"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#D1A06E"
+            android:minHeight="48dp"
+            android:text="@string/subir"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upload_success_layout" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_subir" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

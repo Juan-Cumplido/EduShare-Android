@@ -1,12 +1,20 @@
-package com.example.edushareandroid.model.base_de_datos;
+package com.example.edushareandroid.model.base_de_datos.Login;
 
 public class UsuarioData {
-    public int getIdUsuarioRegistrado() {
-        return idUsuarioRegistrado;
+    private int idUsuario;
+    private String nombre;
+    private String primerApellido;
+    private String segundoApellido;
+    private String correo;
+    private String nombreUsuario;
+    private String fotoPerfil;
+    private String tipoAcceso;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdUsuarioRegistrado(int idUsuarioRegistrado) {
-        this.idUsuarioRegistrado = idUsuarioRegistrado;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -64,20 +72,6 @@ public class UsuarioData {
     public void setTipoAcceso(String tipoAcceso) {
         this.tipoAcceso = tipoAcceso;
     }
-
-    private int idUsuarioRegistrado;
-    private String nombre;
-    private String fotoPerfil;
-    private String correo;
-    private String nombreUsuario;
-    private String primerApellido;
-    private String segundoApellido;
-    private String tipoAcceso;
-
-
-
-
-
 
 
 }

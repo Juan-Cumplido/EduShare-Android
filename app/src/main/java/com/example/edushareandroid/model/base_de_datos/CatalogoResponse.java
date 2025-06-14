@@ -1,12 +1,6 @@
 package com.example.edushareandroid.model.base_de_datos;
 
-public class LoginResponse {
-    private boolean error;
-    private int estado;
-    private String mensaje;
-    private String token;
-    private UsuarioData datos; // datos del usuario logueado
-
+public class CatalogoResponse<T> {
     public boolean isError() {
         return error;
     }
@@ -14,12 +8,7 @@ public class LoginResponse {
     public void setError(boolean error) {
         this.error = error;
     }
-    public String getToken() {
-        return token;
-    }
-    public void setToken(String token) {
-        this.token = token;
-    }
+
     public int getEstado() {
         return estado;
     }
@@ -36,11 +25,17 @@ public class LoginResponse {
         this.mensaje = mensaje;
     }
 
-    public UsuarioData getDatos() {
+    public T getDatos() {
         return datos;
     }
 
-    public void setDatos(UsuarioData datos) {
+    public void setDatos(T datos) {
         this.datos = datos;
     }
+
+    private boolean error;
+    private int estado;
+    private String mensaje;
+    private T datos;
+
 }

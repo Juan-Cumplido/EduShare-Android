@@ -56,19 +56,31 @@
         <action
             android:id="@+id/action_navigation_perfil_to_navigation_verArchivo"
             app:destination="@id/navigation_verArchivo" />
+        <action
+            android:id="@+id/action_navigation_perfil_to_navigation_publicacion"
+            app:destination="@id/navigation_publicacion" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_editarPerfil"
         android:name="com.example.edushareandroid.ui.editarperfil.EditarPerfilFragment"
         android:label="@string/editar_perfil"
-        tools:layout="@layout/fragment_editarperfil"/>
+        tools:layout="@layout/fragment_editarperfil">
+        <argument
+        android:name="usuarioPerfil"
+        app:argType="com.example.edushareandroid.ui.perfil.UsuarioPerfil" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_verArchivo"
         android:name="com.example.edushareandroid.ui.verarchivo.VerArchivoFragment"
         android:label="@string/ver_archivo"
-        tools:layout="@layout/fragment_verarchivo"/>
+        tools:layout="@layout/fragment_verarchivo">
+        <argument
+            android:name="documento"
+            app:argType="com.example.edushareandroid.ui.perfil.DocumentoResponse" />
+    </fragment>
 
     <fragment
         android:id="@+id/programarChatFragment"
@@ -97,5 +109,11 @@
             android:id="@+id/action_perfilUsuarioFragment_to_navigation_verArchivo"
             app:destination="@id/navigation_verArchivo" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_publicacion"
+        android:name="com.example.edushareandroid.ui.subirPublicacion.PublicacionFragment"
+        android:label="Publicación"
+        tools:layout="@layout/fragment_subir_archivo" />
 
 </navigation>

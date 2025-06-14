@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".ui.verarchivo.VerArchivoFragment">
 
     <!-- Scroll general -->
@@ -21,14 +20,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <!-- Tarjeta del documento -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="8dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
                 <LinearLayout
@@ -37,81 +37,186 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
+                    <!-- Portada del documento -->
                     <ImageView
                         android:id="@+id/img_documento"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/ic_archivo" />
 
-                    <!-- Botones Abrir y Descargar -->
+                    <!-- Información principal -->
+                    <TextView
+                        android:id="@+id/txt_titulo_documento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:lineSpacingExtra="4sp"
+                        tools:text="Título del documento" />
+
+                    <TextView
+                        android:id="@+id/txt_autor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="14sp"
+                        tools:text="Publicado por: Nombre Completo" />
+
+                    <!-- Estadísticas en fila -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_eye_open" />
+
+                        <TextView
+                            android:id="@+id/txt_visualizaciones"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="12dp"
+                            android:textSize="12sp"
+                            tools:text="1.2K vistas" />
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_download"/>
+
+                        <TextView
+                            android:id="@+id/txt_descargas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="12dp"
+                            android:textSize="12sp"
+                            tools:text="556 descargas" />
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_calendar"/>
+
+                        <TextView
+                            android:id="@+id/txt_fecha"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:textSize="12sp"
+                            tools:text="2 días atrás" />
+                    </LinearLayout>
+
+                    <!-- Detalles del documento -->
+                    <TextView
+                        android:id="@+id/txt_subtitulo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4sp"
+                        tools:text="Descripción o resumen del contenido del documento..." />
+
+                    <!-- Información educativa -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/nivel_educativo"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/txt_nivel_educativo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:textSize="13sp"
+                            android:textColor="@color/blue_dark"
+                            android:textStyle="bold"
+                            tools:text="Secundaria" />
+                    </LinearLayout>
+
+                    <!-- Estado del documento -->
+                    <TextView
+                        android:id="@+id/txt_estado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        tools:text="Publicado" />
+
+                    <!-- Botones de acción -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
                         android:gravity="center_horizontal"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
                         <Button
                             android:id="@+id/btn_abrir_documento"
-                            android:layout_width="156dp"
-                            android:layout_height="40dp"
-                            android:text="@string/abrir" />
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/cafe"
+                            android:text="@string/abrir"
+                            android:textColor="@color/white"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
                         <Button
                             android:id="@+id/btn_descargar_documento"
-                            android:layout_width="156dp"
-                            android:layout_height="40dp"
-                            android:text="@string/descargar" />
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/cafe"
+                            android:text="@string/descargar"
+                            android:textColor="@color/white"
+                            style="@style/Widget.MaterialComponents.Button" />
                     </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/txt_titulo_documento"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/titulo_del_documento"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_subtitulo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/descripcion_o_subtitulo"
-                        android:textColor="?android:attr/textColorSecondary" />
-
-                    <TextView
-                        android:id="@+id/txt_detalles_extra"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/_1_2k_vistas_23_p_ginas_1h_ago"
-                        android:textColor="?android:attr/textColorTertiary" />
 
                     <TextView
                         android:id="@+id/txt_advertencia"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="@string/para_visualizar_por_completo_el_documento_es_necesario_crear_una_cuenta_o_iniciar_sesion"
-                        android:textColor="@color/design_default_color_error" />
+                        android:textSize="12sp"
+                        android:textColor="@color/rojo"
+                        android:visibility="gone"
+                        tools:text="Para visualizar completamente el documento es necesario iniciar sesión" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Sección like -->
+            <!-- Sección de interacción -->
             <LinearLayout
-                android:id="@+id/ll_seccion_me_gusta"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal">
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
 
                 <ImageButton
                     android:id="@+id/btn_like"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="@drawable/ic_like_outline"
                     android:contentDescription="@string/me_gusta" />
 
@@ -120,8 +225,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/_0" />
+                    android:layout_marginStart="4dp"
+                    android:textSize="16sp"
+                    tools:text="125" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/txt_comentarios_titulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/comentario"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <!-- Lista de comentarios -->
@@ -135,12 +255,15 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Campo y botón de nuevo comentario -->
+    <!-- Campo de nuevo comentario -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_nuevo_comentario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_margin="8dp"
+        android:background="@color/white"
+        android:elevation="4dp"
+        android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@id/btn_accion_documento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -148,9 +271,10 @@
         <EditText
             android:id="@+id/edt_nuevo_comentario"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:background="@drawable/backgroundtext"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:hint="@string/escribe_un_comentario"
+            android:minHeight="48dp"
             android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_enviar_comentario"
@@ -159,8 +283,8 @@
 
         <ImageButton
             android:id="@+id/btn_enviar_comentario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/enviar_comentario"
             android:src="@drawable/ic_send"
@@ -173,12 +297,14 @@
     <Button
         android:id="@+id/btn_accion_documento"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
         android:text="@string/ver_documento_completo"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

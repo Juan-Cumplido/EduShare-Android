@@ -133,9 +133,32 @@
     <string name="nueva_contraseña">Nueva Contraseña</string>
     <string name="volver">Volver</string>
     <string name="ingrese_codigo_y_nueva_contraseña">Ingrese código y nueva contraseña</string>
+    <string name="aun_no_has_subido_publicaciones">Aún no has subido publicaciones.</string>
+    <string name="correo">Correo</string>
     <string-array name="niveles_educativos">
         <item>Seleccione su nivel educativo</item>
         <item>Preparatoria</item>
         <item>Universidad</item>
     </string-array>
+    <string name="informacion_contacto">Información de Contacto</string>
+    <string name="informacion_academica">Información Académica</string>
+    <string name="seguidores">Seguidores</string>
+    <string name="siguiendo">Siguiendo</string>
+    <string name="inspira_con_tu_contenido">Inspira con tu contenido: súbelo ahora</string>
+    <string name="titulo">Título</string>
+    <string name="escribe_un_titulo">Escribe un título</string>
+    <string name="contenido">Contenido</string>
+    <string name="descripcion_contenido">Escribe un resumen rápido: ¿De qué se trata? ¿Dónde se originó? ¿Quién podría encontrarlo útil?</string>
+    <string name="categoria">Categoría</string>
+    <string name="selecciona_categoria">Selecciona una categoría</string>
+    <string name="rama">Rama</string>
+    <string name="subir_archivo_pdf">Subir archivo PDF</string>
+    <string name="haz_clic_o_arrastra_para_subir">Haz clic o arrastra aquí para subir tu PDF</string>
+    <string name="subir">Subir</string>
+    <string name="materia">Materia</string>
+    <string name="archivo_subido">Archivo subido:</string>
+    <string name="vista_previa_de_portada">Vista previa de portada:</string>
+    <string name="vista_previa_del_documento">Vista previa del documento</string>
+    <string name="estado">Estado</string>
+    <string name="comentario">Comentario</string>
 </resources>

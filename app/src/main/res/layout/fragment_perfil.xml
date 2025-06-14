@@ -208,6 +208,20 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
+        android:id="@+id/txtSinPublicaciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:padding="16dp"
+        android:text="@string/aun_no_has_subido_publicaciones"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/rv_publicaciones"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
         android:id="@+id/txt_iniciar_sesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

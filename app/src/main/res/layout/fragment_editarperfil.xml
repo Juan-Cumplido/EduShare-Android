@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/crear_cuenta_titulo"
+            android:text="@string/editar_perfil"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,6 +65,7 @@
             android:background="@drawable/backgroundtext"
             android:hint="@string/nombre_hint"
             android:inputType="text"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_nombre" />
@@ -94,6 +95,7 @@
             android:background="@drawable/backgroundtext"
             android:hint="@string/primer_apellido_hint"
             android:inputType="text"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_primer_apellido" />
@@ -123,6 +125,7 @@
             android:background="@drawable/backgroundtext"
             android:hint="@string/segundo_apellido_hint"
             android:inputType="text"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_segundo_apellido" />
@@ -152,6 +155,7 @@
             android:background="@drawable/backgroundtext"
             android:hint="@string/correo_hint"
             android:inputType="textEmailAddress"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_correo" />
@@ -181,65 +185,26 @@
             android:background="@drawable/backgroundtext"
             android:hint="@string/usuario_hint"
             android:inputType="text"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_usuario" />
 
-        <ScrollView
-            android:id="@+id/sv_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            app:layout_constraintTop_toBottomOf="@id/edt_usuario">
-
-            <LinearLayout
-                android:id="@+id/ll_contenedor_principal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <!-- Imagen actual seleccionada -->
-                <ImageView
-                    android:id="@+id/img_foto_perfil"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/circle_background"
-                    android:padding="4dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_perfil" />
-
-                <!-- Botón para seleccionar -->
-                <Button
-                    android:id="@+id/btn_seleccionar_foto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="12dp"
-                    android:text="Seleccionar imagen" />
-
-                <!-- Opciones de imágenes -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_fotos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:orientation="horizontal"
-                    android:visibility="gone" />
-            </LinearLayout>
-        </ScrollView>
-
-        <!-- BOTÓN CAMBIAR CONTRASEÑA -->
-        <Button
-            android:id="@+id/btn_cambiar_contraseña"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <!-- Imagen actual seleccionada -->
+        <ImageView
+            android:id="@+id/img_foto_perfil"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:text="@string/cambiar_contraseña"
+            android:padding="4dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_perfil"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sv_image" />
+            app:layout_constraintTop_toBottomOf="@id/edt_usuario"
+            tools:ignore="MissingConstraints" />
+
 
         <!-- Personalización de la cuenta -->
         <TextView
@@ -255,7 +220,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_cambiar_contraseña" />
+            app:layout_constraintTop_toBottomOf="@id/img_foto_perfil" />
 
         <!-- Nivel Educativo -->
         <TextView
@@ -272,16 +237,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_personalizar_cuenta" />
 
-        <EditText
-            android:id="@+id/edt_nivel_educativo"
+        <Spinner
+            android:id="@+id/spn_nivel_educativo"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/backgroundtext"
-            android:hint="@string/nivel_educativo_hint"
-            android:inputType="text"
+            android:gravity="center"
+            android:prompt="@string/nivel_educativo_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_nivel_educativo" />
@@ -299,184 +264,22 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edt_nivel_educativo" />
+            app:layout_constraintTop_toBottomOf="@id/spn_nivel_educativo" />
 
-        <EditText
-            android:id="@+id/edt_institucion_educativa"
+        <Spinner
+            android:id="@+id/spn_institucion_educativa"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/backgroundtext"
-            android:hint="@string/institucion_educativa_hint"
-            android:inputType="text"
+            android:gravity="center"
+            android:prompt="@string/institucion_educativa_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_institucion_educativa" />
 
-        <!-- Carrera -->
-        <TextView
-            android:id="@+id/txt_carrera"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:text="@string/carrera_label"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edt_institucion_educativa" />
-
-        <EditText
-            android:id="@+id/edt_carrera"
-            android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/backgroundtext"
-            android:hint="@string/carrera_hint"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_carrera" />
-
-        <!-- Materias de interés -->
-        <TextView
-            android:id="@+id/txt_materia"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:text="@string/materias_interes_label"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edt_carrera" />
-
-        <EditText
-            android:id="@+id/edt_materia"
-            android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/backgroundtext"
-            android:hint="@string/materias_interes_hint"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_materia" />
-
-        <!-- CheckBoxes -->
-        <CheckBox
-            android:id="@+id/chk_apuntes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/apuntes_opcion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edt_materia" />
-
-        <CheckBox
-            android:id="@+id/chk_examenes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/examenes_opcion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chk_apuntes" />
-
-        <CheckBox
-            android:id="@+id/chk_resumenes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/resumenes_opcion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chk_examenes" />
-
-        <CheckBox
-            android:id="@+id/chk_presentaciones"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/presentaciones_opcion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chk_resumenes" />
-
-        <!-- Notificaciones -->
-        <TextView
-            android:id="@+id/txt_notificaciones"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:text="@string/notificaciones_titulo"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chk_presentaciones" />
-
-        <!-- Descripción de notificaciones -->
-        <TextView
-            android:id="@+id/txt_descripcion"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:gravity="center"
-            android:text="@string/notificaciones_descripcion"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_notificaciones" />
-
-        <!-- CheckBox: Documentos -->
-        <CheckBox
-            android:id="@+id/chk_documentos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/notificaciones_documentos"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_descripcion" />
-
-        <!-- CheckBox: Seguidores -->
-        <CheckBox
-            android:id="@+id/chk_seguidor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/notificaciones_seguidores"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chk_documentos" />
-
-        <!-- CheckBox: Semanales -->
-        <CheckBox
-            android:id="@+id/chk_semanales"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/notificaciones_semanales"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chk_seguidor" />
 
         <!-- Botones -->
         <Button
@@ -489,12 +292,12 @@
             android:background="@drawable/backgroundbutton2"
             android:text="@string/cancelar_boton"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/btn_editar_perfil"
+            app:layout_constraintEnd_toStartOf="@id/btn_actualizar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chk_semanales" />
+            app:layout_constraintTop_toBottomOf="@id/spn_institucion_educativa" />
 
         <Button
-            android:id="@+id/btn_editar_perfil"
+            android:id="@+id/btn_actualizar"
             android:layout_width="0dp"
             android:layout_height="69dp"
             android:layout_marginStart="8dp"
@@ -513,6 +316,6 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_editar_perfil" />
+            app:layout_constraintTop_toBottomOf="@id/btn_actualizar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

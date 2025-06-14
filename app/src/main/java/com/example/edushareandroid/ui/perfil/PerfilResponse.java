@@ -1,4 +1,4 @@
-package com.example.edushareandroid.model.base_de_datos;
+package com.example.edushareandroid.ui.perfil;
 
 
 public class PerfilResponse {

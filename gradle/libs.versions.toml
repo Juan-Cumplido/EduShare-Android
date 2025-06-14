@@ -27,4 +27,5 @@ support-annotations = { group = "com.android.support", name = "support-annotatio
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+navigation-safe-args = { id = "androidx.navigation.safeargs", version = "2.9.0" }
 

@@ -1,135 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:fillViewport="true">
 
-    <!-- Imagen de perfil -->
-    <ImageView
-        android:id="@+id/img_perfil"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:src="@drawable/ic_perfil"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/circle_background"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <!-- Información Personal -->
-    <TextView
-        android:id="@+id/txt_informacion_personal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/informacion_personal"
-        android:textStyle="bold"
-        android:textColor="#000"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/img_perfil"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp" />
-
-    <TextView
-        android:id="@+id/txt_nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nombre"
-        android:textColor="#000"
-        app:layout_constraintTop_toBottomOf="@id/txt_informacion_personal"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
-
-    <TextView
-        android:id="@+id/txt_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/usuario"
-        android:textColor="#000"
-        app:layout_constraintTop_toBottomOf="@id/txt_nombre"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="4dp" />
-
-    <TextView
-        android:id="@+id/txt_nivel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nivel_educativo"
-        android:textColor="#000"
-        app:layout_constraintTop_toBottomOf="@id/txt_usuario"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="4dp" />
-
-    <TextView
-        android:id="@+id/txt_carrera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/carrera"
-        android:textColor="#000"
-        app:layout_constraintTop_toBottomOf="@id/txt_nivel"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="4dp" />
-
-    <!-- Publicaciones -->
-    <TextView
-        android:id="@+id/txt_publicaciones"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/publicaciones"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/txt_carrera"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp" />
-
-    <!-- Botones -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_publicaciones"
-        android:layout_width="377dp"
-        android:layout_height="312dp"
-        android:layout_marginTop="8dp"
-        android:clipToPadding="false"
-        android:paddingBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_seguir"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_publicaciones"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btn_dejar_seguir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:backgroundTint="#000000"
-        android:text="@string/dejar_de_seguir"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_publicaciones"
-        app:layout_constraintVertical_bias="0.777" />
-
-    <Button
-        android:id="@+id/btn_seguir"
-        android:layout_width="119dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="44dp"
-        android:backgroundTint="#D1A06E"
-        android:text="@string/seguir"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.768"
-        app:layout_constraintStart_toEndOf="@+id/btn_dejar_seguir" />
-
-    <View
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="68dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_publicaciones" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Sección superior: Foto de perfil y datos básicos -->
+        <ImageView
+            android:id="@+id/img_perfil"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_perfil"
+            android:contentDescription="@string/foto_de_perfil"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circle_background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Nombre completo -->
+        <TextView
+            android:id="@+id/txt_nombre_completo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@id/img_perfil"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            tools:text="Juan Pérez García"/>
+
+        <!-- Nombre de usuario -->
+        <TextView
+            android:id="@+id/txt_nombre_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#757575"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/txt_nombre_completo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="@string/correo_gmail_com"/>
+
+        <!-- Estadísticas (Seguidores/Seguidos) -->
+        <LinearLayout
+            android:id="@+id/layout_stats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/txt_nombre_usuario"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/txt_num_seguidores"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    tools:text="1.2K"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/seguidores"
+                    android:textSize="12sp"
+                    android:textColor="#757575"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="#E0E0E0"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/txt_num_seguidos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    tools:text="456"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/siguiendo"
+                    android:textSize="12sp"
+                    android:textColor="#757575"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EEEEEE"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_stats"/>
+
+        <!-- Información académica -->
+        <TextView
+            android:id="@+id/txt_seccion_academica"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/informacion_academica"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/divider1"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/layout_info_academica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/txt_seccion_academica">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/institucion_educativa_label"
+                    android:textColor="#757575"/>
+
+                <TextView
+                    android:id="@+id/txt_institucion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Universidad Nacional Autónoma de México"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nivel_educativo"
+                    android:textColor="#757575"/>
+
+                <TextView
+                    android:id="@+id/txt_nivel_educativo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Licenciatura"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EEEEEE"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_info_academica"/>
+
+
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EEEEEE"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/divider2"/>
+
+        <!-- Publicaciones -->
+        <TextView
+            android:id="@+id/txt_publicaciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/publicaciones"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/divider3"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Botones de acción -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_publicaciones"
+            android:layout_width="369dp"
+            android:layout_height="278dp"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:paddingBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@id/txt_publicaciones"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="3dp" />
+
+        <LinearLayout
+            android:id="@+id/layout_botones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/rv_publicaciones"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <Button
+                android:id="@+id/btn_seguir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#D1A06E"
+                android:text="@string/seguir"
+                android:textColor="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/btn_dejar_seguir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#F5F5F5"
+                android:text="@string/dejar_de_seguir"
+                android:textColor="#000000"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_botones" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

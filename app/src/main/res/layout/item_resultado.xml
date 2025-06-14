@@ -4,79 +4,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:paddingVertical="12dp"
+    android:paddingHorizontal="16dp"
+    android:background="?attr/selectableItemBackground">
 
     <!-- Imagen de portada -->
-
-    <!-- Botón de acción -->
     <ImageView
         android:id="@+id/img_portada"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_archivo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageButton
-        android:id="@+id/btn_ver_mas"
-        android:layout_width="57dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/ic_irarchivo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Contenedor de texto (Título, Subtítulo, Detalles) -->
-
-    <TextView
-        android:id="@+id/txt_recuperar_contraseña"
+    <!-- Contenedor de texto -->
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/titulo_del_documento"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/btn_ver_mas"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/img_portada"
+        app:layout_constraintEnd_toStartOf="@id/btn_opciones"
         app:layout_constraintStart_toEndOf="@id/img_portada"
-        app:layout_constraintTop_toTopOf="@id/img_portada" />
+        app:layout_constraintTop_toTopOf="@id/img_portada">
 
-    <TextView
-        android:id="@+id/txt_subtitulo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/descripcion_o_subtitulo"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/txt_recuperar_contraseña"
-        app:layout_constraintStart_toStartOf="@id/txt_recuperar_contraseña"
-        app:layout_constraintTop_toBottomOf="@id/txt_recuperar_contraseña" />
+        <TextView
+            android:id="@+id/txt_titulo_documento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/titulo_del_documento"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@android:color/black" />
 
-    <TextView
-        android:id="@+id/txt_detalles"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/_3k_vistas_556_p_ginas_2h_ago"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@id/txt_recuperar_contraseña"
-        app:layout_constraintStart_toStartOf="@id/txt_recuperar_contraseña"
-        app:layout_constraintTop_toBottomOf="@id/txt_subtitulo" />
+        <TextView
+            android:id="@+id/txt_subtitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/descripcion_o_subtitulo"
+            android:textSize="14sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@android:color/darker_gray" />
 
+        <TextView
+            android:id="@+id/txt_detalles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/_3k_vistas_556_p_ginas_2h_ago"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/txt_estado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/estado"
+            android:textSize="12sp"
+            android:textColor="@android:color/holo_blue_dark" />
+    </LinearLayout>
+
+    <!-- Botón de opciones -->
     <ImageButton
         android:id="@+id/btn_opciones"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/ic_more_vert"
-        android:visibility="visible"
+        android:background="@drawable/ic_baseline_delete_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_ver_mas"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Botón de acción principal -->
+    <ImageButton
+        android:id="@+id/btn_ver_mas"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/ic_irarchivo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

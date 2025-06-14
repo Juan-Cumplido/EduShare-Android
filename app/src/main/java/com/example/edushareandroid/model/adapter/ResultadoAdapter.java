@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.edushareandroid.R;
-import com.example.edushareandroid.model.bd.Documento;
+import com.example.edushareandroid.model.base_de_datos.Documento;
 
 import java.util.List;
 
@@ -106,7 +106,7 @@ public class ResultadoAdapter extends RecyclerView.Adapter<ResultadoAdapter.View
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imagen = itemView.findViewById(R.id.img_portada);
-            titulo = itemView.findViewById(R.id.txt_recuperar_contraseña);
+            titulo = itemView.findViewById(R.id.txt_titulo_documento);
             subtitulo = itemView.findViewById(R.id.txt_subtitulo);
             detalles = itemView.findViewById(R.id.txt_detalles);
             boton = itemView.findViewById(R.id.btn_ver_mas);

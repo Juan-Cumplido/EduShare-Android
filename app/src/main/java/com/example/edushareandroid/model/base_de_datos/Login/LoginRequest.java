@@ -1,4 +1,4 @@
-package com.example.edushareandroid.model.base_de_datos;
+package com.example.edushareandroid.model.base_de_datos.Login;
 
 public class LoginRequest {
     private String identifier; // puede ser correo o nombre de usuario

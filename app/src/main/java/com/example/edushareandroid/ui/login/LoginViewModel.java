@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.edushareandroid.model.base_de_datos.LoginRequest;
-import com.example.edushareandroid.model.base_de_datos.LoginResponse;
+import com.example.edushareandroid.model.base_de_datos.Login.LoginRequest;
+import com.example.edushareandroid.model.base_de_datos.Login.LoginResponse;
 import com.example.edushareandroid.utils.SesionUsuario;
 
 public class LoginViewModel extends ViewModel {
@@ -51,6 +51,10 @@ public class LoginViewModel extends ViewModel {
         if (!response.isError()) {
             SesionUsuario.guardarEstadoLogueado(context, true);
             SesionUsuario.guardarToken(context, response.getToken());
+
+            if (response.getDatos() != null) {
+                SesionUsuario.guardarDatosUsuario(context, response.getDatos());
+            }
         }
     }
 }
