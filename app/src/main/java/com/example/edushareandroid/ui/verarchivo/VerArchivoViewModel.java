@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.edushareandroid.model.base_de_datos.comentarios.Comentario;
 import com.example.edushareandroid.model.base_de_datos.comentarios.RespuestaBase;
+import com.example.edushareandroid.network.api.ApiResponse;
 
 import java.util.List;
 
@@ -35,4 +36,25 @@ public class VerArchivoViewModel extends ViewModel {
         return repository.eliminarComentario(context, idComentario);
     }
 
+    // ====== NUEVOS MÉTODOS ======
+
+    public LiveData<ApiResponse> darLike(Context context, int idPublicacion) {
+        return repository.darLike(idPublicacion, context);
+    }
+
+    public LiveData<ApiResponse> quitarLike(Context context, int idPublicacion) {
+        return repository.quitarLike(idPublicacion, context);
+    }
+
+    public LiveData<ApiResponse> verificarLike(Context context, int idPublicacion) {
+        return repository.verificarLike(idPublicacion, context);
+    }
+
+    public LiveData<ApiResponse> registrarVisualizacion(int idPublicacion) {
+        return repository.registrarVisualizacion(idPublicacion);
+    }
+
+    public LiveData<ApiResponse> registrarDescarga(Context context, int idPublicacion) {
+        return repository.registrarDescarga(idPublicacion, context);
+    }
 }

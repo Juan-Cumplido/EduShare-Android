@@ -48,26 +48,42 @@ public class VerArchivoFragment extends Fragment {
     private FragmentVerarchivoBinding binding;
     private final List<Comentario> comentarios = Collections.synchronizedList(new ArrayList<>());
     private ComentarioAdapter adapter;
-    private boolean liked = false;
-    private int likeCount = 0;
     private boolean estaLogueado;
     private FileServiceClient fileServiceClient;
     private VerArchivoViewModel viewModel;
     private File archivoTemporalPdf = null;
     private static final int REQUEST_CODE_CREATE_DOCUMENT = 1001;
 
+    // Variables para el manejo de likes
+    private boolean liked = false;
+    private int likeCount = 0;
+    private DocumentoResponse documento;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentVerarchivoBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(this).get(VerArchivoViewModel.class);
         estaLogueado = SesionUsuario.isUsuarioLogueado(requireContext());
+        documento = VerArchivoFragmentArgs.fromBundle(getArguments()).getDocumento();
+
+        if (documento == null) {
+            Toast.makeText(getContext(), "Error: Documento no disponible", Toast.LENGTH_SHORT).show();
+            return binding.getRoot();
+        }
 
         inicializarUI();
         configurarDocumento();
         configurarComentarios();
         configurarListeners();
 
-        actualizarLikeUI();
+        // Registrar visualización al entrar al fragment
+        registrarVisualizacion();
+
+        // Verificar si ya le dio like (solo si está logueado)
+        if (estaLogueado) {
+            verificarEstadoLike();
+        }
+
         return binding.getRoot();
     }
 
@@ -78,47 +94,36 @@ public class VerArchivoFragment extends Fragment {
     }
 
     private void configurarComentarios() {
-        DocumentoResponse documento = VerArchivoFragmentArgs.fromBundle(getArguments()).getDocumento();
         UsuarioData usuario = SesionUsuario.obtenerDatosUsuario(requireContext());
         int idUsuarioLogueado = usuario != null ? usuario.getIdUsuario() : -1;
-        Log.d("ComentarioAdapter", "ID logueado: " + idUsuarioLogueado);
-        if (documento == null) return;
-        int idPublicacion = documento.getIdPublicacion();
+
         FileServiceClient fileServiceClient = new FileServiceClient();
-        adapter = new ComentarioAdapter(requireContext(), new ArrayList<>(),idUsuarioLogueado, posicion -> {
+        adapter = new ComentarioAdapter(requireContext(), new ArrayList<>(), idUsuarioLogueado, posicion -> {
             Comentario comentario = adapter.getComentarios().get(posicion);
-            viewModel.eliminarComentario(requireContext(), comentario.getIdComentario())
-                    .observe(getViewLifecycleOwner(), respuesta -> {
-                        if (!respuesta.isError()) {
-                            Toast.makeText(getContext(), "Comentario eliminado", Toast.LENGTH_SHORT).show();
-                            viewModel.cargarComentarios(idPublicacion);
-                        } else {
-                            Toast.makeText(getContext(), "Error al eliminar comentario", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            eliminarComentario(comentario.getIdComentario());
         }, fileServiceClient);
-        binding.rvComentarios.setAdapter(adapter);
 
         binding.rvComentarios.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvComentarios.setAdapter(adapter);
 
+        // Observar comentarios
         viewModel.getComentarios().observe(getViewLifecycleOwner(), nuevosComentarios -> {
             if (nuevosComentarios != null) {
                 comentarios.clear();
                 comentarios.addAll(nuevosComentarios);
                 adapter.setComentarios(new ArrayList<>(comentarios));
-                binding.rvComentarios.scrollToPosition(comentarios.size() - 1); // scroll al final
+                if (!comentarios.isEmpty()) {
+                    binding.rvComentarios.scrollToPosition(comentarios.size() - 1);
+                }
             }
         });
 
-
-        viewModel.cargarComentarios(idPublicacion);
+        // Cargar comentarios iniciales
+        viewModel.cargarComentarios(documento.getIdPublicacion());
     }
 
     private void configurarListeners() {
-        DocumentoResponse documento = VerArchivoFragmentArgs.fromBundle(getArguments()).getDocumento();
-        if (documento == null) return;
-
+        // Botón abrir documento
         binding.btnAbrirDocumento.setOnClickListener(v -> {
             if (archivoTemporalPdf != null && archivoTemporalPdf.exists()) {
                 abrirArchivoLocal(archivoTemporalPdf);
@@ -127,14 +132,22 @@ public class VerArchivoFragment extends Fragment {
             }
         });
 
+        // Botón descargar documento
         binding.btnDescargarDocumento.setOnClickListener(v -> {
+            if (!estaLogueado) {
+                Toast.makeText(getContext(), "Inicia sesión para descargar", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             if (archivoTemporalPdf != null && archivoTemporalPdf.exists()) {
+                registrarDescarga();
                 crearSelectorParaGuardarArchivo(archivoTemporalPdf.getName());
             } else {
                 Toast.makeText(getContext(), "Documento aún no está disponible para descargar", Toast.LENGTH_SHORT).show();
             }
         });
 
+        // Botón enviar comentario
         binding.btnEnviarComentario.setOnClickListener(v -> {
             if (!estaLogueado) {
                 Toast.makeText(getContext(), "Inicia sesión para comentar", Toast.LENGTH_SHORT).show();
@@ -147,62 +160,127 @@ public class VerArchivoFragment extends Fragment {
                 return;
             }
 
-            binding.edtNuevoComentario.setText("");
-
-            viewModel.crearComentario(requireContext(), texto, documento.getIdPublicacion())
-                    .observe(getViewLifecycleOwner(), respuesta -> {
-                        if (respuesta == null || !respuesta.isSuccess()) {
-                            Toast.makeText(getContext(), "Error al publicar comentario", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Recargar comentarios
-                            viewModel.cargarComentarios(documento.getIdPublicacion());
-                        }
-                    });
+            crearComentario(texto);
         });
 
+        // Botón like
         binding.btnLike.setOnClickListener(v -> {
-            if (estaLogueado) {
-                toggleLike();
-            } else {
+            if (!estaLogueado) {
                 Toast.makeText(getContext(), "Inicia sesión para dar like", Toast.LENGTH_SHORT).show();
+                return;
             }
+            toggleLike();
         });
     }
 
-    private void cargarComentarios(int idPublicacion) {
-        viewModel.getComentarios().observe(getViewLifecycleOwner(), nuevosComentarios -> {
-            if (nuevosComentarios != null) {
-                comentarios.clear();
-                comentarios.addAll(nuevosComentarios);
-                adapter.setComentarios(new ArrayList<>(comentarios));
-            }
-        });
+    // ====== MÉTODOS PARA INTERACCIONES ======
 
-        viewModel.cargarComentarios(idPublicacion);
+    private void registrarVisualizacion() {
+        viewModel.registrarVisualizacion(documento.getIdPublicacion())
+                .observe(getViewLifecycleOwner(), response -> {
+                    if (response != null && !response.isError()){
+                        Log.d("VerArchivo", "Visualización registrada correctamente");
+                    } else {
+                        Log.e("VerArchivo", "Error al registrar visualización");
+                    }
+                });
     }
-    private void configurarBotonLike(DocumentoResponse documento) {
-        boolean isLiked = false; // Deberías obtener este valor de tu backend o base de datos local
-        binding.btnLike.setImageResource(isLiked ? R.drawable.ic_like_filled : R.drawable.ic_like_outline);
-        if (isLiked) {
-            binding.btnLike.setColorFilter(ContextCompat.getColor(requireContext(), R.color.rojo));
-        }
+
+    private void registrarDescarga() {
+        viewModel.registrarDescarga(requireContext(), documento.getIdPublicacion())
+                .observe(getViewLifecycleOwner(), response -> {
+                    if (response != null && !response.isError()){
+                        documento.setNumeroDescargas(documento.getNumeroDescargas() + 1);
+                        binding.txtDescargas.setText(formatNumber(documento.getNumeroDescargas()) + " descargas");
+                    } else {
+                        Log.e("VerArchivo", "Error al registrar descarga");
+                    }
+                });
+    }
+
+    private void verificarEstadoLike() {
+        viewModel.verificarLike(requireContext(), documento.getIdPublicacion())
+                .observe(getViewLifecycleOwner(), response -> {
+                    if (response != null && !response.isError()) {
+                        String mensaje = response.getMensaje();
+                        if (mensaje != null && mensaje.toLowerCase().contains("ya dio like")) {
+                            liked = true;
+                        } else {
+                            liked = false;
+                        }
+                    } else {
+                        liked = false;
+                    }
+                    likeCount = documento.getNumeroLiker();
+                    actualizarLikeUI();
+                });
     }
 
     private void toggleLike() {
-        liked = !liked;
-        likeCount += liked ? 1 : -1;
-        actualizarLikeUI();
+        if (liked) {
+            viewModel.quitarLike(requireContext(), documento.getIdPublicacion())
+                    .observe(getViewLifecycleOwner(), response -> {
+                        if (response != null && !response.isError()){
+                            liked = false;
+                            likeCount = Math.max(0, likeCount - 1);
+                            actualizarLikeUI();
+                            Toast.makeText(getContext(), "Like removido", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Error al quitar like", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            // Dar like
+            viewModel.darLike(requireContext(), documento.getIdPublicacion())
+                    .observe(getViewLifecycleOwner(), response -> {
+                        if (response != null && !response.isError()){
+                            liked = true;
+                            likeCount++;
+                            actualizarLikeUI();
+                            Toast.makeText(getContext(), "¡Te gusta esta publicación!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Error al dar like", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
 
     private void actualizarLikeUI() {
-        binding.txtContadorMeGusta.setText(String.valueOf(likeCount));
+        binding.txtContadorMeGusta.setText(formatNumber(likeCount));
         int drawableRes = liked ? R.drawable.ic_like_filled : R.drawable.ic_like_outline;
         binding.btnLike.setBackground(ContextCompat.getDrawable(requireContext(), drawableRes));
     }
-    private void configurarDocumento() {
-        DocumentoResponse documento = VerArchivoFragmentArgs.fromBundle(getArguments()).getDocumento();
-        if (documento == null) return;
 
+    private void crearComentario(String texto) {
+        binding.edtNuevoComentario.setText("");
+
+        viewModel.crearComentario(requireContext(), texto, documento.getIdPublicacion())
+                .observe(getViewLifecycleOwner(), respuesta -> {
+                    if (respuesta != null && respuesta.isSuccess()) {
+                        Toast.makeText(getContext(), "Comentario publicado", Toast.LENGTH_SHORT).show();
+                        // Recargar comentarios
+                        viewModel.cargarComentarios(documento.getIdPublicacion());
+                    } else {
+                        Toast.makeText(getContext(), "Error al publicar comentario", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void eliminarComentario(int idComentario) {
+        viewModel.eliminarComentario(requireContext(), idComentario)
+                .observe(getViewLifecycleOwner(), respuesta -> {
+                    if (respuesta != null && !respuesta.isError()) {
+                        Toast.makeText(getContext(), "Comentario eliminado", Toast.LENGTH_SHORT).show();
+                        viewModel.cargarComentarios(documento.getIdPublicacion());
+                    } else {
+                        Toast.makeText(getContext(), "Error al eliminar comentario", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    // ====== MÉTODOS DE CONFIGURACIÓN DE DOCUMENTO ======
+
+    private void configurarDocumento() {
         binding.txtTituloDocumento.setText(documento.getTitulo());
         binding.txtSubtitulo.setText(documento.getResuContenido());
         binding.txtAutor.setText(String.format("Publicado por: %s", documento.getNombreCompleto()));
@@ -212,14 +290,19 @@ public class VerArchivoFragment extends Fragment {
         binding.txtFecha.setText(formatTimeAgo(documento.getFecha()));
         binding.txtNivelEducativo.setText(documento.getNivelEducativo());
         binding.txtEstado.setText(documento.getEstado());
+
         setEstadoColor(documento.getEstado());
         descargarYMostrarImagen(documento.getRuta());
         descargarDocumentoTemporal(documento.getRuta());
 
+        // Mostrar advertencia si es necesario
         if (documento.getNumeroVisualizaciones() > 100 && !estaLogueado) {
             binding.txtAdvertencia.setVisibility(View.VISIBLE);
         }
     }
+
+    // ====== MÉTODOS AUXILIARES ======
+
     private String formatNumber(int number) {
         if (number < 1000) return String.valueOf(number);
         if (number < 1000000) return String.format(Locale.getDefault(), "%.1fK", number / 1000.0);
@@ -246,6 +329,25 @@ public class VerArchivoFragment extends Fragment {
             return fecha;
         }
     }
+
+    @SuppressLint("ResourceAsColor")
+    private void setEstadoColor(String estado) {
+        switch (estado.toLowerCase()) {
+            case "publicado":
+                binding.txtEstado.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue_light));
+                break;
+            case "pendiente":
+                binding.txtEstado.setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_200));
+                break;
+            case "rechazado":
+                binding.txtEstado.setTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200));
+                break;
+            default:
+                binding.txtEstado.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+        }
+    }
+
+    // ====== MÉTODOS PARA MANEJO DE ARCHIVOS ======
 
     private void descargarDocumentoTemporal(String rutaRemota) {
         fileServiceClient = new FileServiceClient();
@@ -279,22 +381,12 @@ public class VerArchivoFragment extends Fragment {
         });
     }
 
-    @SuppressLint("ResourceAsColor")
-    private void setEstadoColor(String estado) {
-        switch (estado.toLowerCase()) {
-            case "publicado": binding.txtEstado.setTextColor(R.color.blue_light); break;
-            case "pendiente": binding.txtEstado.setTextColor(R.color.purple_200); break;
-            case "rechazado": binding.txtEstado.setTextColor(R.color.teal_200); break;
-            default: binding.txtEstado.setTextColor(R.color.white);
-        }
-    }
-
-
     private void descargarYMostrarImagen(String coverImagePath) {
         if (coverImagePath == null || coverImagePath.isEmpty()) {
             binding.imgDocumento.setImageResource(R.drawable.ic_archivo);
             return;
         }
+
         fileServiceClient = new FileServiceClient();
         fileServiceClient.downloadCover(coverImagePath, new FileServiceClient.DownloadCallback() {
             @Override

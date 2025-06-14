@@ -13,6 +13,7 @@ import com.example.edushareandroid.model.base_de_datos.comentarios.Comentario;
 import com.example.edushareandroid.model.base_de_datos.comentarios.CrearComentarioRequest;
 import com.example.edushareandroid.model.base_de_datos.comentarios.RespuestaBase;
 import com.example.edushareandroid.model.base_de_datos.comentarios.RespuestaConDatos;
+import com.example.edushareandroid.network.api.ApiResponse;
 import com.example.edushareandroid.network.api.ApiService;
 import com.example.edushareandroid.network.api.RetrofitClient;
 import com.example.edushareandroid.utils.SesionUsuario;
@@ -46,7 +47,7 @@ public class VerArchivoRepository {
         }
 
         CrearComentarioRequest request = new CrearComentarioRequest(contenido, idPublicacion);
-        String token = "Bearer " + SesionUsuario.obtenerToken(context); // ✅ Ahora correctamente
+        String token = "Bearer " + SesionUsuario.obtenerToken(context);
         apiService.crearComentario(request, token).enqueue(new Callback<RespuestaBase>() {
             @Override
             public void onResponse(Call<RespuestaBase> call, Response<RespuestaBase> response) {
@@ -142,4 +143,128 @@ public class VerArchivoRepository {
 
         return liveData;
     }
+    public LiveData<ApiResponse> darLike(int idPublicacion, Context context) {
+        MutableLiveData<ApiResponse> liveData = new MutableLiveData<>();
+        String token = "Bearer " + SesionUsuario.obtenerToken(context);
+
+        apiService.darLike(idPublicacion, token).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    liveData.postValue(response.body());
+                } else {
+                    ApiResponse error = new ApiResponse(true, response.code(), "Error al dar like");
+                    liveData.postValue(error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                ApiResponse error = new ApiResponse(true, 0, "Error de red al dar like");
+                liveData.postValue(error);
+            }
+        });
+
+        return liveData;
+    }
+
+    public LiveData<ApiResponse> quitarLike(int idPublicacion, Context context) {
+        MutableLiveData<ApiResponse> liveData = new MutableLiveData<>();
+        String token = "Bearer " + SesionUsuario.obtenerToken(context);
+
+        apiService.quitarLike(idPublicacion, token).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    liveData.postValue(response.body());
+                } else {
+                    ApiResponse error = new ApiResponse(true, response.code(), "Error al quitar like");
+                    liveData.postValue(error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                ApiResponse error = new ApiResponse(true, 0, "Error de red al quitar like");
+                liveData.postValue(error);
+            }
+        });
+
+        return liveData;
+    }
+
+    public LiveData<ApiResponse> verificarLike(int idPublicacion, Context context) {
+        MutableLiveData<ApiResponse> liveData = new MutableLiveData<>();
+        String token = "Bearer " + SesionUsuario.obtenerToken(context);
+
+        apiService.verificarLike(idPublicacion, token).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    liveData.postValue(response.body());
+                } else {
+                    ApiResponse error = new ApiResponse(true, response.code(), "Error al verificar like");
+                    liveData.postValue(error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                ApiResponse error = new ApiResponse(true, 0, "Error de red al verificar like");
+                liveData.postValue(error);
+            }
+        });
+
+        return liveData;
+    }
+
+    public LiveData<ApiResponse> registrarVisualizacion(int idPublicacion) {
+        MutableLiveData<ApiResponse> liveData = new MutableLiveData<>();
+
+        apiService.registrarVisualizacion(idPublicacion).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    liveData.postValue(response.body());
+                } else {
+                    ApiResponse error = new ApiResponse(true, response.code(), "Error al registrar visualización");
+                    liveData.postValue(error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                ApiResponse error = new ApiResponse(true, 0, "Error de red al registrar visualización");
+                liveData.postValue(error);
+            }
+        });
+
+        return liveData;
+    }
+
+    public LiveData<ApiResponse> registrarDescarga(int idPublicacion, Context context) {
+        MutableLiveData<ApiResponse> liveData = new MutableLiveData<>();
+        String token = "Bearer " + SesionUsuario.obtenerToken(context);
+
+        apiService.registrarDescarga(idPublicacion, token).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    liveData.postValue(response.body());
+                } else {
+                    ApiResponse error = new ApiResponse(true, response.code(), "Error al registrar descarga");
+                    liveData.postValue(error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                ApiResponse error = new ApiResponse(true, 0, "Error de red al registrar descarga");
+                liveData.postValue(error);
+            }
+        });
+
+        return liveData;
+    }
+
 }

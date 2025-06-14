@@ -1,17 +1,33 @@
 package com.example.edushareandroid.network.api;
 
 public class ApiResponse {
-    public boolean isError() {
-        return error;
-    }
-    public void setError(boolean error) {
-        this.error = error;
-    }
+    // Campos
+    private boolean error;
+    private int estado;
+    private String mensaje;
+    private String errorDetalle;
 
+    // Constructores
     public ApiResponse(boolean error, String mensaje) {
         this.error = error;
         this.mensaje = mensaje;
     }
+
+    public ApiResponse(boolean error, int estado, String mensaje) {
+        this.error = error;
+        this.estado = estado;
+        this.mensaje = mensaje;
+    }
+
+    // Getters y Setters
+    public boolean isError() {
+        return error;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
+    }
+
     public int getEstado() {
         return estado;
     }
@@ -27,6 +43,7 @@ public class ApiResponse {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+
     public String getErrorDetalle() {
         return errorDetalle;
     }
@@ -35,6 +52,7 @@ public class ApiResponse {
         this.errorDetalle = errorDetalle;
     }
 
+    // Método toString
     @Override
     public String toString() {
         return "ApiResponse{" +
@@ -44,11 +62,4 @@ public class ApiResponse {
                 ", errorDetalle='" + errorDetalle + '\'' +
                 '}';
     }
-
-    private boolean error;
-    private int estado;
-    private String mensaje;
-    private String errorDetalle;
-
-
 }

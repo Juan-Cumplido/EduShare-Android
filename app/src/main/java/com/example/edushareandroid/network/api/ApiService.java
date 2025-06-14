@@ -110,4 +110,29 @@ public interface ApiService {
 
     @GET("/edushare/comentario/publicacion/{idPublicacion}")
     Call<RespuestaConDatos<List<Comentario>>> obtenerComentarios(@Path("idPublicacion") int idPublicacion);
+
+    //Endpoint para la implemenracion de like, visaulizacion y descargas
+    // Obtener todas las publicaciones
+    @GET("/edushare/publicaciones")
+    Call<PublicacionesResponse> obtenerPublicaciones();
+
+    // Verificar like
+    @GET("/edushare/publicaciones/{id}/like")
+    Call<ApiResponse> verificarLike(@Path("id") int idPublicacion, @Header("Authorization") String token);
+
+    // Dar like
+    @POST("/edushare/publicaciones/{id}/like")
+    Call<ApiResponse> darLike(@Path("id") int idPublicacion, @Header("Authorization") String token);
+
+    // Quitar like
+    @DELETE("/edushare/publicaciones/{id}/like")
+    Call<ApiResponse> quitarLike(@Path("id") int idPublicacion, @Header("Authorization") String token);
+
+    // Registrar visualización
+    @POST("/edushare/publicaciones/{id}/vista")
+    Call<ApiResponse> registrarVisualizacion(@Path("id") int idPublicacion);
+
+    // Registrar descarga
+    @POST("/edushare/publicaciones/{id}/descarga")
+    Call<ApiResponse> registrarDescarga(@Path("id") int idPublicacion, @Header("Authorization") String token);
 }
