@@ -1,24 +1,27 @@
 package com.example.edushareandroid.ui.login;
 
+import android.app.Application;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.edushareandroid.model.base_de_datos.Login.LoginRequest;
 import com.example.edushareandroid.model.base_de_datos.Login.LoginResponse;
 import com.example.edushareandroid.utils.SesionUsuario;
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends AndroidViewModel {
 
     private final LoginRepository loginRepository;
     private final MutableLiveData<LoginResponse> loginResult = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
-    public LoginViewModel() {
-        loginRepository = new LoginRepository();
+    public LoginViewModel(@NonNull Application application) {
+        super(application);
+        loginRepository = new LoginRepository(application.getApplicationContext());
     }
 
     public LiveData<LoginResponse> getLoginResult() {
@@ -47,6 +50,7 @@ public class LoginViewModel extends ViewModel {
             }
         });
     }
+
     public void manejarRespuestaLogin(LoginResponse response, Context context) {
         if (!response.isError()) {
             SesionUsuario.guardarEstadoLogueado(context, true);

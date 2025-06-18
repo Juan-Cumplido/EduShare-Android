@@ -1,8 +1,11 @@
 package com.example.edushareandroid.ui.perfil;
 
+import android.app.Application;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -13,7 +16,7 @@ import com.example.edushareandroid.utils.ImageUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PerfilViewModel extends ViewModel {
+public class PerfilViewModel extends AndroidViewModel {
     private final PerfilRepository perfilRepository;
 
     // LiveData existentes
@@ -28,8 +31,9 @@ public class PerfilViewModel extends ViewModel {
     private final MutableLiveData<Boolean> mostrandoDialogoLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> cargandoEliminacionLiveData = new MutableLiveData<>();
 
-    public PerfilViewModel() {
-        perfilRepository = new PerfilRepository();
+    public PerfilViewModel(@NonNull Application application) {
+        super(application);
+        this.perfilRepository = new PerfilRepository(application.getApplicationContext());
     }
 
     // Getters existentes
@@ -135,7 +139,6 @@ public class PerfilViewModel extends ViewModel {
         });
     }
 
-    // Métodos para manejar la eliminación
     public void solicitarEliminarPublicacion(int idPublicacion, String tituloPublicacion) {
         // Mostrar el diálogo de confirmación
         mostrandoDialogoLiveData.setValue(true);

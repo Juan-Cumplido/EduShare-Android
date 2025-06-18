@@ -29,10 +29,13 @@ public class VerArchivoRepository {
     private static final String TAG = "VerArchivoRepository";
 
     private ApiService apiService;
+    private final Context context;
 
-    public VerArchivoRepository() {
-        this.apiService = RetrofitClient.getApiService();
+    public VerArchivoRepository(Context context) {
+        this.apiService = RetrofitClient.getApiService(context);
+        this.context = context.getApplicationContext(); // Usar ApplicationContext para evitar fugas de memoria
     }
+
 
     public LiveData<RespuestaBase> crearComentario(Context context, String contenido, int idPublicacion) {
         MutableLiveData<RespuestaBase> liveData = new MutableLiveData<>();

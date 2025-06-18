@@ -1,5 +1,6 @@
 package com.example.edushareandroid.ui.editarperfil;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
@@ -21,8 +22,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EditarPerfilRepository {
-    private final ApiService apiService = RetrofitClient.getApiService();
+    private final ApiService apiService;
 
+    public EditarPerfilRepository(Context context){
+        this.apiService = RetrofitClient.getApiService(context);
+    }
     public void obtenerInstituciones(String nivelEducativo, InstitucionesCallback callback) {
         apiService.obtenerInstituciones(nivelEducativo).enqueue(new Callback<InstitucionesResponse>() {
             @Override

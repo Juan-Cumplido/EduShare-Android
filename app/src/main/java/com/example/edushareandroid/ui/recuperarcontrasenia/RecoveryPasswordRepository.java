@@ -1,5 +1,6 @@
 package com.example.edushareandroid.ui.recuperarcontrasenia;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -20,8 +21,8 @@ import retrofit2.Response;
 public class RecoveryPasswordRepository {
     private final ApiService apiService;
 
-    public RecoveryPasswordRepository() {
-        this.apiService = RetrofitClient.getApiService();
+    public RecoveryPasswordRepository(Context context) {
+        this.apiService = RetrofitClient.getApiService(context);
     }
 
     public LiveData<ApiResponse> recuperarContrasena(RecoveryRequest request) {
@@ -51,7 +52,6 @@ public class RecoveryPasswordRepository {
                             apiResponse.setEstado(estado);
                             apiResponse.setMensaje(mensaje);
 
-                            // Manejo detallado por código
                             switch (estado) {
                                 case 400:
                                     apiResponse.setErrorDetalle("Correo no válido o faltante");
@@ -95,7 +95,6 @@ public class RecoveryPasswordRepository {
         return data;
     }
 
-
     public LiveData<ApiResponse> cambiarContrasena(CambiarContraseniaRequest request) {
         MutableLiveData<ApiResponse> data = new MutableLiveData<>();
 
@@ -115,16 +114,14 @@ public class RecoveryPasswordRepository {
                             int estado = jsonError.optInt("estado", response.code());
                             String mensaje = jsonError.optString("mensaje", "Error al cambiar contraseña");
 
-                            // Si el mensaje es un objeto (como errores por campo), lo convertimos a String
                             if (jsonError.has("mensaje") && jsonError.get("mensaje") instanceof JSONObject) {
                                 JSONObject mensajeObj = jsonError.getJSONObject("mensaje");
-                                mensaje = mensajeObj.toString(); // puedes formatear mejor si quieres
+                                mensaje = mensajeObj.toString();
                             }
 
                             apiResponse.setEstado(estado);
                             apiResponse.setMensaje(mensaje);
 
-                            // Puedes usar un switch para mensajes por código si lo deseas:
                             switch (estado) {
                                 case 400:
                                     apiResponse.setErrorDetalle("Solicitud inválida");
@@ -171,5 +168,4 @@ public class RecoveryPasswordRepository {
 
         return data;
     }
-
 }

@@ -1,81 +1,80 @@
 package com.example.edushareandroid.ui.crearcuenta;
 
-import android.util.Log;
+import android.content.Context;
 
+import com.example.edushareandroid.model.base_de_datos.Institucion;
+import com.example.edushareandroid.model.base_de_datos.InstitucionesResponse;
 import com.example.edushareandroid.model.base_de_datos.UsuarioRegistro;
 import com.example.edushareandroid.network.api.ApiResponse;
 import com.example.edushareandroid.network.api.ApiService;
 import com.example.edushareandroid.network.api.RetrofitClient;
 
-import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UsuarioRepository {
+    private final ApiService apiService;
+
+    public UsuarioRepository(Context context) {
+        this.apiService = RetrofitClient.getApiService(context);
+    }
+
+    public void registrarUsuario(UsuarioRegistro usuario, RegistroCallback callback) {
+        apiService.registrarUsuario(usuario).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful() && response.body() != null && !response.body().isError()) {
+                    callback.onSuccess();
+                } else {
+                    String mensaje = parseError(response.code());
+                    callback.onError(mensaje);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                callback.onError("No se pudo conectar con el servidor. Revisa tu conexión a internet.");
+            }
+        });
+    }
+
+    public void cargarInstituciones(String nivelEducativo, InstitucionesCallback callback) {
+        apiService.obtenerInstituciones(nivelEducativo).enqueue(new Callback<InstitucionesResponse>() {
+            @Override
+            public void onResponse(Call<InstitucionesResponse> call, Response<InstitucionesResponse> response) {
+                if (response.isSuccessful() && response.body() != null && response.body().getDatos() != null) {
+                    callback.onSuccess(response.body().getDatos());
+                } else {
+                    callback.onError(parseError(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<InstitucionesResponse> call, Throwable t) {
+                callback.onError("Error de red: " + t.getMessage());
+            }
+        });
+    }
+
+    private String parseError(int code) {
+        switch (code) {
+            case 400: return "Hay errores en los campos enviados.";
+            case 409: return "Correo o nombre de usuario ya registrado.";
+            case 500: return "Error del servidor. Inténtalo más tarde.";
+            default: return "Ocurrió un error. Código: " + code;
+        }
+    }
 
     public interface RegistroCallback {
         void onSuccess();
         void onError(String mensaje);
     }
 
-    private final ApiService apiService = RetrofitClient.getApiService();
-
-    public void registrarUsuario(UsuarioRegistro usuario, RegistroCallback callback) {
-        apiService.registrarUsuario(usuario).enqueue(new Callback<ApiResponse>() {
-            @Override
-            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                if (response.isSuccessful()) {
-                    ApiResponse respuesta = response.body();
-                    if (respuesta != null) {
-                        Log.d("Registro", "Éxito: " + respuesta.getMensaje());
-                    } else {
-                        Log.d("Registro", "Éxito sin cuerpo de respuesta");
-                    }
-                    callback.onSuccess();
-                } else {
-                    Log.e("Registro", "Error HTTP: " + response.code());
-                    String mensajeError;
-
-                    // Manejo específico de códigos HTTP
-                    switch (response.code()) {
-                        case 400:
-                            mensajeError = "Datos inválidos. Revisa los campos ingresados.";
-                            break;
-                        case 409:
-                            mensajeError = "El correo o nombre de usuario ya está en uso.";
-                            break;
-                        case 500:
-                            mensajeError = "Error interno del servidor. Intenta más tarde.";
-                            break;
-                        default:
-                            mensajeError = "Error desconocido. Código: " + response.code();
-                            break;
-                    }
-
-                    // Intentar leer el cuerpo del error si está disponible
-                    if (response.errorBody() != null) {
-                        try {
-                            String errorBody = response.errorBody().string();
-                            Log.e("Registro", "Cuerpo de error: " + errorBody);
-                            mensajeError += "\n" + errorBody;
-                        } catch (IOException e) {
-                            Log.e("Registro", "Error al leer el cuerpo de error", e);
-                        }
-                    }
-
-                    callback.onError(mensajeError);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ApiResponse> call, Throwable t) {
-                Log.e("Registro", "Fallo de red: " + t.getMessage(), t);
-                callback.onError("Fallo de red: " + t.getMessage());
-            }
-        });
+    public interface InstitucionesCallback {
+        void onSuccess(List<Institucion> instituciones);
+        void onError(String mensaje);
     }
-
-
 }

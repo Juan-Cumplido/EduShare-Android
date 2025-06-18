@@ -77,7 +77,6 @@ public class PublicacionFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this).get(PublicacionViewModel.class);
-        viewModel.setToken(SesionUsuario.obtenerToken(requireContext()));
 
         // Referencias de UI
         inputContenido = view.findViewById(R.id.input_contenido);

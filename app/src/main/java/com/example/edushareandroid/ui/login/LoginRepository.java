@@ -1,5 +1,6 @@
 package com.example.edushareandroid.ui.login;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -18,8 +19,8 @@ public class LoginRepository {
 
     private final ApiService apiService;
 
-    public LoginRepository() {
-        apiService = RetrofitClient.getApiService();
+    public LoginRepository(Context context) {
+        this.apiService = RetrofitClient.getApiService(context);
     }
 
     public LiveData<LoginResponse> login(LoginRequest request) {

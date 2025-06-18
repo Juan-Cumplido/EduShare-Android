@@ -1,5 +1,6 @@
 package com.example.edushareandroid.ui.perfil;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -20,8 +21,8 @@ import retrofit2.Response;
 public class PerfilRepository {
     private final ApiService usuarioApi;
 
-    public PerfilRepository() {
-        usuarioApi = RetrofitClient.getApiService();
+    public PerfilRepository(Context context) {
+        usuarioApi = RetrofitClient.getApiService(context);
     }
 
     public LiveData<UsuarioPerfil> obtenerPerfil(String token) {
@@ -74,7 +75,6 @@ public class PerfilRepository {
         return publicacionesLiveData;
     }
 
-    // NUEVO MÉTODO PARA ELIMINAR PUBLICACIÓN
     public LiveData<ResultadoEliminacion> eliminarPublicacion(int idPublicacion, String token) {
         MutableLiveData<ResultadoEliminacion> resultadoLiveData = new MutableLiveData<>();
 

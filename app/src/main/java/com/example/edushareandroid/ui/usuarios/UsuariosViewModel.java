@@ -1,5 +1,10 @@
 package com.example.edushareandroid.ui.usuarios;
 
+import android.app.Application;
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -13,9 +18,8 @@ import com.example.edushareandroid.network.api.RetrofitClient;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuariosViewModel extends ViewModel {
+public class UsuariosViewModel extends AndroidViewModel {
     private final UsuarioRepository usuarioRepository;
-
     private final MutableLiveData<UsuarioPerfil> perfilUsuario = new MutableLiveData<>();
     private final MutableLiveData<List<UsuarioPerfilRecuperado>> perfilesLiveData = new MutableLiveData<>();
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
@@ -25,10 +29,18 @@ public class UsuariosViewModel extends ViewModel {
     private final MutableLiveData<ApiResponse> respuestaDejarSeguimiento = new MutableLiveData<>();
     private final MutableLiveData<Boolean> estaSiguiendo = new MutableLiveData<>();
 
-    public UsuariosViewModel() {
-        ApiService apiService = RetrofitClient.getApiService();
-        usuarioRepository = new UsuarioRepository(apiService);
+    public UsuariosViewModel(@NonNull Application application) {
+        super(application);
+        // Obtén contexto del Application
+        Context appContext = application.getApplicationContext();
+
+        // Obtén el ApiService usando el contexto si tu método lo requiere
+        ApiService apiService = RetrofitClient.getApiService(appContext);
+
+        // Crea el repositorio con contexto y apiService
+        usuarioRepository = new UsuarioRepository(appContext, apiService);
     }
+
 
     // --------------------- Perfiles ---------------------
 

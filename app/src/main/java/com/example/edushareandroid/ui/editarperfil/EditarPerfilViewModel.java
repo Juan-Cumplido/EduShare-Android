@@ -1,8 +1,11 @@
 package com.example.edushareandroid.ui.editarperfil;
 
+import android.app.Application;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -10,23 +13,27 @@ import androidx.lifecycle.ViewModel;
 import com.example.edushareandroid.model.base_de_datos.ActualizarPerfil;
 import com.example.edushareandroid.model.base_de_datos.AvatarRequest;
 import com.example.edushareandroid.model.base_de_datos.Institucion;
+import com.example.edushareandroid.network.api.RetrofitClient;
 import com.example.edushareandroid.ui.perfil.UsuarioPerfil;
 import com.example.edushareandroid.network.grpc.FileServiceClient;
 import com.example.edushareandroid.utils.ImageUtil;
 
 import java.util.List;
 
-public class EditarPerfilViewModel extends ViewModel {
-
+public class EditarPerfilViewModel extends AndroidViewModel {
+    private final EditarPerfilRepository repository;
     private final MutableLiveData<List<Institucion>> instituciones = new MutableLiveData<>();
     private final MutableLiveData<Boolean> resultadoActualizacion = new MutableLiveData<>();
     private final MutableLiveData<String> error = new MutableLiveData<>();
     private final MutableLiveData<UsuarioPerfil> perfilLiveData = new MutableLiveData<>();
     private final MutableLiveData<Bitmap> imagenPerfilLiveData = new MutableLiveData<>();
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
-    private final EditarPerfilRepository repository = new EditarPerfilRepository();
     private final MutableLiveData<Boolean> resultadoActualizacionAvatar = new MutableLiveData<>();
 
+    public EditarPerfilViewModel(@NonNull Application application) {
+        super(application);
+        this.repository = new EditarPerfilRepository(application.getApplicationContext());
+    }
     public LiveData<Boolean> getResultadoActualizacionAvatar() {
         return resultadoActualizacionAvatar;
     }

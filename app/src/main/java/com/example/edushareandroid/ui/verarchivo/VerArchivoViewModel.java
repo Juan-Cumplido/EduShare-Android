@@ -1,7 +1,10 @@
 package com.example.edushareandroid.ui.verarchivo;
 
+import android.app.Application;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,12 +15,15 @@ import com.example.edushareandroid.network.api.ApiResponse;
 
 import java.util.List;
 
-public class VerArchivoViewModel extends ViewModel {
+public class VerArchivoViewModel extends AndroidViewModel {
     private final VerArchivoRepository repository;
     private final MutableLiveData<List<Comentario>> comentarios = new MutableLiveData<>();
+    private final Context context;
 
-    public VerArchivoViewModel() {
-        this.repository = new VerArchivoRepository();
+    public VerArchivoViewModel(@NonNull Application application) {
+        super(application);
+        this.context = application.getApplicationContext();
+        this.repository = new VerArchivoRepository(context);
     }
 
     public LiveData<List<Comentario>> getComentarios() {

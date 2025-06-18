@@ -106,6 +106,8 @@ public class PerfilFragment extends Fragment {
         binding.txtPublicaciones.setVisibility(View.GONE);
         binding.txtInformacionPersonal.setVisibility(View.GONE);
         binding.btnSubirPublicacion.setVisibility(View.GONE);
+        binding.txtPerfil.setVisibility(View.GONE);
+        binding.imgPerfil.setVisibility(View.GONE);
     }
 
     @SuppressLint("SetTextI18n")
@@ -134,7 +136,6 @@ public class PerfilFragment extends Fragment {
         perfilViewModel.cargarPerfil(token);
         perfilViewModel.cargarPublicacionesUsuario(token);
 
-        // Configurar listeners de botones
         configurarListeners();
     }
 
@@ -154,10 +155,21 @@ public class PerfilFragment extends Fragment {
                 Toast.makeText(requireContext(), "Perfil no disponible", Toast.LENGTH_SHORT).show();
             }
         });
+        binding.btnCerrarSesion.setOnClickListener(v -> {
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Cerrar sesión")
+                    .setMessage("¿Estás seguro de que quieres cerrar sesión?")
+                    .setPositiveButton("Sí", (dialog, which) -> {
+                        SesionUsuario.cerrarSesion(requireContext());
+                        NavDirections action = PerfilFragmentDirections.actionNavigationPerfilToNavigationLogin();
+                        Navigation.findNavController(v).navigate(action);
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        });
     }
 
     private void observarViewModel() {
-        // Observar perfil
         perfilViewModel.getPerfilLiveData().observe(getViewLifecycleOwner(), perfil -> {
             if (perfil != null) {
                 perfilActual = perfil;
@@ -173,7 +185,6 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-        // Observar imagen de perfil
         perfilViewModel.getImagenPerfilLiveData().observe(getViewLifecycleOwner(), bitmap -> {
             if (bitmap != null) {
                 binding.imgPerfil.setImageBitmap(bitmap);

@@ -63,6 +63,12 @@ public interface ApiService {
     @GET("/edushare/publicaciones/me")
     Call<PublicacionesResponse> obtenerPublicacionesPropias(@Header("Authorization") String token);
 
+    @GET("/edushare/publicaciones")
+    Call<PublicacionesResponse> obtenerPublicaciones();
+
+    @GET("/edushare/publicaciones/{idPublicacion}")
+    Call<PublicacionResponse> obtenerPublicacionPorId(@Path("idPublicacion") int idPublicacion);
+
     @DELETE("/edushare/publicaciones/{idPublicacion}")
     Call<ApiResponse> eliminarPublicacion(@Path("idPublicacion") int idPublicacion, @Header("Authorization") String token);
 
@@ -113,8 +119,6 @@ public interface ApiService {
 
     //Endpoint para la implemenracion de like, visaulizacion y descargas
     // Obtener todas las publicaciones
-    @GET("/edushare/publicaciones")
-    Call<PublicacionesResponse> obtenerPublicaciones();
 
     // Verificar like
     @GET("/edushare/publicaciones/{id}/like")

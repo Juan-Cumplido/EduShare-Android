@@ -1,5 +1,7 @@
 package com.example.edushareandroid.ui.usuarios;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -23,8 +25,9 @@ import retrofit2.Response;
 public class UsuarioRepository {
 
     private final ApiService apiService;
-
-    public UsuarioRepository(ApiService apiService) {
+    private final Context context;
+    public UsuarioRepository(Context context, ApiService apiService) {
+        this.context = context.getApplicationContext(); // para evitar fugas
         this.apiService = apiService;
     }
 

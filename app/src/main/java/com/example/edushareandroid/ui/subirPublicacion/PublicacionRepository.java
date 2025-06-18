@@ -1,5 +1,7 @@
 package com.example.edushareandroid.ui.subirPublicacion;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -12,6 +14,7 @@ import com.example.edushareandroid.model.base_de_datos.PublicacionRequest;
 import com.example.edushareandroid.model.base_de_datos.PublicacionResponse;
 import com.example.edushareandroid.model.base_de_datos.Rama;
 import com.example.edushareandroid.network.api.ApiService;
+import com.example.edushareandroid.network.api.RetrofitClient;
 import com.example.edushareandroid.utils.Resource;
 
 import java.util.List;
@@ -24,11 +27,15 @@ public class PublicacionRepository {
 
     private final ApiService apiService;
     private final String token;
+    private final Context context;
 
-    public PublicacionRepository(ApiService apiService, String token) {
-        this.apiService = apiService;
-        this.token = "Bearer " + token; // si el token ya trae "Bearer ", quita esto
+
+    public PublicacionRepository(Context context, String token) {
+        this.context = context.getApplicationContext();
+        this.token = "Bearer " + token;
+        this.apiService = RetrofitClient.getApiService(context);
     }
+
 
     public LiveData<List<Categoria>> obtenerCategorias() {
         MutableLiveData<List<Categoria>> data = new MutableLiveData<>();
@@ -134,7 +141,6 @@ public class PublicacionRepository {
                     PublicacionResponse res = response.body();
 
                     if (!res.isError()) {
-                        // 🔥 Verifica que el estado sea 200 o 201
                         if (res.getEstado() == 200 || res.getEstado() == 201) {
                             resultado.setValue(Resource.success(res.getId(), res.getEstado()));
                         } else {
