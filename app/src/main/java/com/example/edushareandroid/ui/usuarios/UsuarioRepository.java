@@ -1,11 +1,16 @@
 package com.example.edushareandroid.ui.usuarios;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.edushareandroid.model.base_de_datos.DejarSeguirRequest;
+import com.example.edushareandroid.model.base_de_datos.PublicacionesResponse;
+import com.example.edushareandroid.ui.perfil.DocumentoResponse;
 import com.example.edushareandroid.ui.perfil.PerfilResponse;
 import com.example.edushareandroid.model.base_de_datos.PerfilResponseList;
 import com.example.edushareandroid.model.base_de_datos.SeguimientoRequest;
@@ -143,5 +148,63 @@ public class UsuarioRepository {
                 });
 
         return resultado;
+    }
+    // Método para obtener publicaciones por ID de usuario
+    public LiveData<PublicacionesResult> obtenerPublicacionesPorUsuario(int idUsuario) {
+        MutableLiveData<PublicacionesResult> resultado = new MutableLiveData<>();
+
+        apiService.obtenerPublicacionesPorUsuario(idUsuario)
+                .enqueue(new Callback<PublicacionesResponse>() {
+                    @Override
+                    public void onResponse(Call<PublicacionesResponse> call, Response<PublicacionesResponse> response) {
+                        if (response.isSuccessful() && response.body() != null && !response.body().isError()) {
+                            List<DocumentoResponse> publicaciones = response.body().getDatos();
+                            resultado.setValue(new PublicacionesResult(
+                                    true,
+                                    "Se encontraron " + publicaciones.size() + " publicaciones",
+                                    publicaciones
+                            ));
+                            Log.d(TAG, "Publicaciones obtenidas: " + publicaciones.size());
+                        } else {
+                            String errorMsg = "Error al obtener publicaciones: " + response.code();
+                            resultado.setValue(new PublicacionesResult(false, errorMsg, new ArrayList<>()));
+                            Log.e(TAG, errorMsg);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PublicacionesResponse> call, Throwable t) {
+                        String errorMsg = "Error de conexión: " + t.getMessage();
+                        resultado.setValue(new PublicacionesResult(false, errorMsg, new ArrayList<>()));
+                        Log.e(TAG, errorMsg, t);
+                    }
+                });
+
+        return resultado;
+    }
+
+    // Clase para encapsular el resultado de las publicaciones
+    public static class PublicacionesResult {
+        private final boolean success;
+        private final String message;
+        private final List<DocumentoResponse> publicaciones;
+
+        public PublicacionesResult(boolean success, String message, List<DocumentoResponse> publicaciones) {
+            this.success = success;
+            this.message = message;
+            this.publicaciones = publicaciones != null ? publicaciones : new ArrayList<>();
+        }
+
+        public boolean isSuccess() {
+            return success;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public List<DocumentoResponse> getPublicaciones() {
+            return publicaciones;
+        }
     }
 }

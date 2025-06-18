@@ -83,7 +83,7 @@ public class UsuariosFragment extends Fragment {
 
             @Override
             public void onVerMasClick(UsuarioPerfilRecuperado usuario) {
-                showMoreOptions(usuario);
+                navigateToUserProfile(usuario);
             }
         };
     }

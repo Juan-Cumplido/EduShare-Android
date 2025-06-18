@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.edushareandroid.ui.perfil.DocumentoResponse;
 import com.example.edushareandroid.ui.perfil.UsuarioPerfil;
 import com.example.edushareandroid.model.base_de_datos.UsuarioPerfilRecuperado;
 import com.example.edushareandroid.network.api.ApiResponse;
@@ -24,6 +25,8 @@ public class UsuariosViewModel extends AndroidViewModel {
     private final MutableLiveData<List<UsuarioPerfilRecuperado>> perfilesLiveData = new MutableLiveData<>();
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
     private final MutableLiveData<UsuarioPerfilRecuperado> perfilSeleccionado = new MutableLiveData<>();
+    private final MutableLiveData<List<DocumentoResponse>> publicacionesPorUsuario = new MutableLiveData<>();
+    private final MutableLiveData<String> mensajePublicaciones = new MutableLiveData<>();
 
     private final MutableLiveData<ApiResponse> respuestaSeguimiento = new MutableLiveData<>();
     private final MutableLiveData<ApiResponse> respuestaDejarSeguimiento = new MutableLiveData<>();
@@ -39,6 +42,14 @@ public class UsuariosViewModel extends AndroidViewModel {
 
         // Crea el repositorio con contexto y apiService
         usuarioRepository = new UsuarioRepository(appContext, apiService);
+    }
+
+    public LiveData<List<DocumentoResponse>> getPublicacionesPorUsuario() {
+        return publicacionesPorUsuario;
+    }
+
+    public LiveData<String> getMensajePublicaciones() {
+        return mensajePublicaciones;
     }
 
 
@@ -75,6 +86,19 @@ public class UsuariosViewModel extends AndroidViewModel {
             perfilUsuario.postValue(perfil);
         });
     }
+
+    public void cargarPublicacionesPorUsuario(int idUsuario) {
+        usuarioRepository.obtenerPublicacionesPorUsuario(idUsuario).observeForever(resultado -> {
+            if (resultado != null && resultado.isSuccess()) {
+                publicacionesPorUsuario.postValue(resultado.getPublicaciones());
+                mensajePublicaciones.postValue(resultado.getMessage());
+            } else {
+                publicacionesPorUsuario.postValue(new ArrayList<>());
+                mensajePublicaciones.postValue(resultado != null ? resultado.getMessage() : "Error desconocido");
+            }
+        });
+    }
+
 
     // --------------------- Seguimiento ---------------------
 

@@ -33,7 +33,20 @@ public class SesionUsuario {
     }
 
     public static void cerrarSesion(Context context) {
-        guardarEstadoLogueado(context, false);
+        SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        // Limpiar todos los datos de la sesión principal
+        editor.remove(KEY_TOKEN);
+        editor.remove(KEY_LOGUEADO);
+        editor.remove("idUsuarioRegistrado");
+        editor.remove("nombre");
+        editor.remove("fotoPerfil");
+        editor.apply();
+
+        // Limpiar también los datos de la preferencia "sesion"
+        SharedPreferences prefsSecundarias = context.getSharedPreferences("sesion", Context.MODE_PRIVATE);
+        prefsSecundarias.edit().remove("nombre_usuario").apply();
     }
 
     public static void guardarDatosUsuario(Context context, UsuarioData usuario) {

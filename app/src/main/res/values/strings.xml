@@ -164,4 +164,5 @@
     <string name="selecciona_categoria">Selecciona categoría</string>
     <string name="selecciona_rama">Selecciona rama</string>
     <string name="selecciona_materia">Selecciona materia</string>
+    <string name="error_materia">Error</string>
 </resources>

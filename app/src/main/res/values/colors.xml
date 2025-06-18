@@ -13,4 +13,6 @@
     <color name="cafe">#2E1F14</color>
     <color name="fondo">#b5a68a</color>
     <color name="rojo">#FF0000</color>
+    <color name="gray_hint">#808080</color>
+
 </resources>

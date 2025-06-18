@@ -20,6 +20,7 @@ import com.example.edushareandroid.ui.perfil.DocumentoResponse;
 import com.example.edushareandroid.utils.ImageUtil;
 import com.example.edushareandroid.utils.SesionUsuario;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -63,7 +64,10 @@ public class PublicacionesAdapter extends RecyclerView.Adapter<PublicacionesAdap
     }
 
     public void actualizarLista(List<DocumentoResponse> nuevaLista) {
-        this.listaPublicaciones = nuevaLista;
+        listaPublicaciones.clear(); // Limpia los datos anteriores
+        if (nuevaLista != null) {
+            listaPublicaciones.addAll(nuevaLista); // Agrega la nueva lista
+        }
         notifyDataSetChanged();
     }
 
