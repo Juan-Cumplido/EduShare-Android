@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.edushareandroid.databinding.FragmentPerfilBinding;
 import com.example.edushareandroid.network.grpc.FileServiceClient;
+import com.example.edushareandroid.ui.publicaciones.PublicacionesAdapter;
+import com.example.edushareandroid.ui.publicaciones.PublicacionesViewModel;
 import com.example.edushareandroid.utils.SesionUsuario;
 
 import java.util.ArrayList;
@@ -31,22 +33,25 @@ public class PerfilFragment extends Fragment {
 
     private FragmentPerfilBinding binding;
     private PerfilViewModel perfilViewModel;
+    private PublicacionesViewModel publicacionesViewModel;
     private UsuarioPerfil perfilActual;
-    private DocumentoAdapter adapter;
+    private PublicacionesAdapter adapter;
     private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        Log.d("PerfilFragment", "onCreateView()");
         binding = FragmentPerfilBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        // Inicializar ViewModels
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
+        publicacionesViewModel = new ViewModelProvider(this).get(PublicacionesViewModel.class);
 
+        // Configurar el adapter con el listener
         FileServiceClient fileServiceClient = new FileServiceClient();
-
-        // Configurar el listener del adapter
-        DocumentoAdapter.OnItemClickListener listener = new DocumentoAdapter.OnItemClickListener() {
+        PublicacionesAdapter.OnItemClickListener listener = new PublicacionesAdapter.OnItemClickListener() {
             @Override
             public void onVerMasClick(DocumentoResponse documento) {
                 PerfilFragmentDirections.ActionNavigationPerfilToNavigationVerArchivo action =
@@ -56,20 +61,19 @@ public class PerfilFragment extends Fragment {
 
             @Override
             public void onOpcionesClick(DocumentoResponse documento) {
-                // Método existente - puedes mantenerlo para otras opciones
                 mostrarDialogoConfirmacionEliminacion(documento);
             }
 
             @Override
             public void onEliminarClick(DocumentoResponse documento) {
-                //mostrarDialogoConfirmacionEliminacion(documento);
+                mostrarDialogoConfirmacionEliminacion(documento);
             }
         };
 
-        // Configurar RecyclerView
+        // Configurar RecyclerView con el nuevo adapter
         RecyclerView recyclerView = binding.rvPublicaciones;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new DocumentoAdapter(new ArrayList<>(), fileServiceClient, listener);
+        adapter = new PublicacionesAdapter(new ArrayList<>(), fileServiceClient, listener, requireContext());
         recyclerView.setAdapter(adapter);
 
         // Configurar observadores
@@ -133,8 +137,9 @@ public class PerfilFragment extends Fragment {
             return;
         }
 
+        // Cargar perfil y publicaciones
         perfilViewModel.cargarPerfil(token);
-        perfilViewModel.cargarPublicacionesUsuario(token);
+        publicacionesViewModel.cargarPublicacionesPropias(token);
 
         configurarListeners();
     }
@@ -155,6 +160,7 @@ public class PerfilFragment extends Fragment {
                 Toast.makeText(requireContext(), "Perfil no disponible", Toast.LENGTH_SHORT).show();
             }
         });
+
         binding.btnCerrarSesion.setOnClickListener(v -> {
             new AlertDialog.Builder(requireContext())
                     .setTitle("Cerrar sesión")
@@ -170,6 +176,7 @@ public class PerfilFragment extends Fragment {
     }
 
     private void observarViewModel() {
+        // Observar cambios en el perfil
         perfilViewModel.getPerfilLiveData().observe(getViewLifecycleOwner(), perfil -> {
             if (perfil != null) {
                 perfilActual = perfil;
@@ -191,25 +198,32 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-        // Observar publicaciones
-        perfilViewModel.getPublicaciones().observe(getViewLifecycleOwner(), publicaciones -> {
-            Log.d("PerfilFragment", "Obtenidas publicaciones en Fragment: " + (publicaciones != null ? publicaciones.size() : "null"));
+        // Observar publicaciones propias
+        publicacionesViewModel.getPublicacionesLiveData().observe(getViewLifecycleOwner(), publicaciones -> {
+            Log.d("PerfilFragment", "Publicaciones obtenidas: " + (publicaciones != null ? publicaciones.size() : 0));
 
             if (publicaciones != null && !publicaciones.isEmpty()) {
                 binding.rvPublicaciones.setVisibility(View.VISIBLE);
                 binding.txtSinPublicaciones.setVisibility(View.GONE);
-
-                try {
-                    Log.d("PerfilFragment", "Actualizando adapter con publicaciones...");
-                    adapter.actualizarLista(publicaciones);
-                    Log.d("PerfilFragment", "Adapter actualizado correctamente.");
-                } catch (Exception e) {
-                    Log.e("PerfilFragment", "Error al actualizar el adapter: " + e.getMessage(), e);
-                }
-
+                adapter.actualizarLista(publicaciones);
             } else {
                 binding.txtSinPublicaciones.setVisibility(View.VISIBLE);
                 binding.rvPublicaciones.setVisibility(View.GONE);
+                binding.txtSinPublicaciones.setText("Aún no has subido publicaciones");
+            }
+        });
+
+        // Observar mensajes
+        publicacionesViewModel.getMensajeLiveData().observe(getViewLifecycleOwner(), mensaje -> {
+            if (mensaje != null && !mensaje.isEmpty()) {
+                Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Observar estado de carga
+        publicacionesViewModel.getCargandoLiveData().observe(getViewLifecycleOwner(), cargando -> {
+            if (cargando != null) {
+                //binding.progressBar.setVisibility(cargando ? View.VISIBLE : View.GONE);
             }
         });
 
@@ -225,13 +239,7 @@ public class PerfilFragment extends Fragment {
     }
 
     private void observarEliminacion() {
-        // Observar diálogo de confirmación
-        perfilViewModel.getMostrandoDialogoLiveData().observe(getViewLifecycleOwner(), mostrandoDialogo -> {
-            // Este observer se mantiene para compatibilidad, pero el diálogo se maneja directamente
-        });
-
-        // Observar carga de eliminación
-        perfilViewModel.getCargandoEliminacionLiveData().observe(getViewLifecycleOwner(), cargando -> {
+        publicacionesViewModel.getCargandoEliminacionLiveData().observe(getViewLifecycleOwner(), cargando -> {
             if (cargando != null) {
                 if (cargando) {
                     mostrarProgressDialog("Eliminando publicación...");
@@ -241,19 +249,22 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-        // Observar resultado de eliminación
-        perfilViewModel.getEliminacionExitosaLiveData().observe(getViewLifecycleOwner(), exitosa -> {
+        publicacionesViewModel.getEliminacionExitosaLiveData().observe(getViewLifecycleOwner(), exitosa -> {
             if (exitosa != null) {
-                String mensaje = perfilViewModel.getMensajeEliminacionLiveData().getValue();
+                String mensaje = publicacionesViewModel.getMensajeEliminacionLiveData().getValue();
                 if (mensaje != null) {
+                    Toast.makeText(getContext(), mensaje,
+                            exitosa ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG).show();
+
+                    // Recargar publicaciones después de eliminar
                     if (exitosa) {
-                        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getContext(), "Error: " + mensaje, Toast.LENGTH_LONG).show();
+                        String token = obtenerToken(requireContext());
+                        if (token != null) {
+                            publicacionesViewModel.cargarPublicacionesPropias(token);
+                        }
                     }
                 }
-                // Limpiar mensajes después de mostrarlos
-                perfilViewModel.limpiarMensajesEliminacion();
+                publicacionesViewModel.limpiarMensajesEliminacion();
             }
         });
     }
@@ -265,15 +276,14 @@ public class PerfilFragment extends Fragment {
                 .setPositiveButton("Eliminar", (dialog, which) -> {
                     String token = obtenerToken(requireContext());
                     if (token != null && !token.trim().isEmpty()) {
-                        perfilViewModel.confirmarEliminacionPublicacion(documento.getIdPublicacion(), token);
+                        publicacionesViewModel.confirmarEliminacionPublicacion(
+                                documento.getIdPublicacion(), token);
                     } else {
-                        Toast.makeText(requireContext(), "Error: Token no válido", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(),
+                                "Error: Token no válido", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setNegativeButton("Cancelar", (dialog, which) -> {
-                    perfilViewModel.cancelarEliminacion();
-                })
-                .setCancelable(false)
+                .setNegativeButton("Cancelar", null)
                 .show();
     }
 

@@ -150,7 +150,6 @@
     <string name="contenido">Contenido</string>
     <string name="descripcion_contenido">Escribe un resumen rápido: ¿De qué se trata? ¿Dónde se originó? ¿Quién podría encontrarlo útil?</string>
     <string name="categoria">Categoría</string>
-    <string name="selecciona_categoria">Selecciona una categoría</string>
     <string name="rama">Rama</string>
     <string name="subir_archivo_pdf">Subir archivo PDF</string>
     <string name="haz_clic_o_arrastra_para_subir">Haz clic o arrastra aquí para subir tu PDF</string>
@@ -161,4 +160,8 @@
     <string name="vista_previa_del_documento">Vista previa del documento</string>
     <string name="estado">Estado</string>
     <string name="comentario">Comentario</string>
+    <string name="no_hay_resultados">No se encontraron publicaciones</string>
+    <string name="selecciona_categoria">Selecciona categoría</string>
+    <string name="selecciona_rama">Selecciona rama</string>
+    <string name="selecciona_materia">Selecciona materia</string>
 </resources>

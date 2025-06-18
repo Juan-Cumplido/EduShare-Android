@@ -69,6 +69,18 @@ public interface ApiService {
     @GET("/edushare/publicaciones/{idPublicacion}")
     Call<PublicacionResponse> obtenerPublicacionPorId(@Path("idPublicacion") int idPublicacion);
 
+    @GET("/edushare/publicaciones/categoria/{categoriaId}")
+    Call<PublicacionesResponse> obtenerPublicacionesPorCategoria(@Path("categoriaId") int categoriaId);
+
+    @GET("/edushare/publicaciones/rama/{ramaId}")
+    Call<PublicacionesResponse> obtenerPublicacionesPorRama(@Path("ramaId") int ramaId);
+
+    @GET("/edushare/publicaciones/nivel/{nivelEducativo}")
+    Call<PublicacionesResponse> obtenerPorNivelEducativo(@Path("nivelEducativo") String nivelEducativo);
+
+    @GET("/edushare/publicaciones/usuario/{idUsuario}")
+    Call<PublicacionesResponse> obtenerPublicacionesPorUsuario(@Path("idUsuario") int idUsuario);
+
     @DELETE("/edushare/publicaciones/{idPublicacion}")
     Call<ApiResponse> eliminarPublicacion(@Path("idPublicacion") int idPublicacion, @Header("Authorization") String token);
 

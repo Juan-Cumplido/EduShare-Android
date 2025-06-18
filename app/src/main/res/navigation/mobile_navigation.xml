@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_verArchivo"
             app:destination="@id/navigation_verArchivo" />
+        <argument
+            android:name="documento"
+            app:argType="com.example.edushareandroid.ui.perfil.DocumentoResponse"/>
     </fragment>
 
     <fragment
