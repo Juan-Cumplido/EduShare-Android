@@ -1,4 +1,4 @@
-package com.example.edushareandroid.model.base_de_datos.comentarios;
+package com.example.edushareandroid.ui.verarchivo.comentarios;
 
 
 import com.google.gson.annotations.SerializedName;

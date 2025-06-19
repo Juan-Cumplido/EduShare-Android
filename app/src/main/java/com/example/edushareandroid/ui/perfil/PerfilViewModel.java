@@ -19,13 +19,11 @@ import java.util.List;
 public class PerfilViewModel extends AndroidViewModel {
     private final PerfilRepository perfilRepository;
 
-    // LiveData existentes
     private final MutableLiveData<UsuarioPerfil> perfilLiveData = new MutableLiveData<>();
     private final MutableLiveData<Bitmap> imagenPerfilLiveData = new MutableLiveData<>();
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
     private final MutableLiveData<List<DocumentoResponse>> publicacionesLiveData = new MutableLiveData<>(); // Corregido el error de sintaxis
 
-    // LiveData para manejar la eliminación
     private final MutableLiveData<String> mensajeEliminacionLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> eliminacionExitosaLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> mostrandoDialogoLiveData = new MutableLiveData<>();
@@ -36,7 +34,6 @@ public class PerfilViewModel extends AndroidViewModel {
         this.perfilRepository = new PerfilRepository(application.getApplicationContext());
     }
 
-    // Getters existentes
     public LiveData<Bitmap> getImagenPerfilLiveData() {
         return imagenPerfilLiveData;
     }
@@ -61,7 +58,6 @@ public class PerfilViewModel extends AndroidViewModel {
         return errorLiveData;
     }
 
-    // Getters para la eliminación
     public LiveData<String> getMensajeEliminacionLiveData() {
         return mensajeEliminacionLiveData;
     }
@@ -78,7 +74,6 @@ public class PerfilViewModel extends AndroidViewModel {
         return cargandoEliminacionLiveData;
     }
 
-    // Métodos existentes
     public void cargarPerfil(String token) {
         Log.d("PerfilVM", "Cargando perfil...");
         perfilRepository.obtenerPerfil(token).observeForever(perfil -> {
@@ -140,7 +135,6 @@ public class PerfilViewModel extends AndroidViewModel {
     }
 
     public void solicitarEliminarPublicacion(int idPublicacion, String tituloPublicacion) {
-        // Mostrar el diálogo de confirmación
         mostrandoDialogoLiveData.setValue(true);
         Log.d("PerfilVM", "Solicitando eliminación de publicación: " + tituloPublicacion + " (ID: " + idPublicacion + ")");
     }
@@ -148,7 +142,6 @@ public class PerfilViewModel extends AndroidViewModel {
     public void confirmarEliminacionPublicacion(int idPublicacion, String token) {
         Log.d("PerfilVM", "Confirmando eliminación de publicación con ID: " + idPublicacion);
 
-        // Mostrar indicador de carga
         cargandoEliminacionLiveData.setValue(true);
         mostrandoDialogoLiveData.setValue(false);
 
@@ -157,22 +150,18 @@ public class PerfilViewModel extends AndroidViewModel {
 
             if (resultado != null) {
                 if (resultado.isExitoso()) {
-                    // Eliminación exitosa
                     Log.d("PerfilVM", "Publicación eliminada exitosamente");
                     mensajeEliminacionLiveData.setValue(resultado.getMensaje());
                     eliminacionExitosaLiveData.setValue(true);
 
-                    // Remover la publicación de la lista local
                     eliminarPublicacionDeLista(idPublicacion);
 
                 } else {
-                    // Error en la eliminación
                     Log.e("PerfilVM", "Error al eliminar publicación: " + resultado.getMensaje());
                     mensajeEliminacionLiveData.setValue(resultado.getMensaje());
                     eliminacionExitosaLiveData.setValue(false);
                 }
             } else {
-                // Error inesperado
                 Log.e("PerfilVM", "Resultado de eliminación es null");
                 mensajeEliminacionLiveData.setValue("Error inesperado al eliminar la publicación");
                 eliminacionExitosaLiveData.setValue(false);
@@ -195,7 +184,6 @@ public class PerfilViewModel extends AndroidViewModel {
 
             Log.d("PerfilVM", "Publicación con ID " + idPublicacion + " removida de la lista local");
 
-            // Si ya no hay publicaciones, mostrar mensaje apropiado
             if (publicacionesActualizadas.isEmpty()) {
                 errorLiveData.setValue("Aún no has subido publicaciones");
             }

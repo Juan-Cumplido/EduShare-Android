@@ -1,11 +1,11 @@
-package com.example.edushareandroid.model.base_de_datos.Login;
+package com.example.edushareandroid.ui.login;
 
 public class LoginResponse {
     private boolean error;
     private int estado;
     private String mensaje;
     private String token;
-    private UsuarioData datos; // datos del usuario logueado
+    private UsuarioData datos;
 
     public boolean isError() {
         return error;

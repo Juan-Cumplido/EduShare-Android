@@ -1,4 +1,4 @@
-package com.example.edushareandroid.model.adapter;
+package com.example.edushareandroid.model.base_de_datos;
 
 
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.edushareandroid.R;
-import com.example.edushareandroid.model.bd.Notificacion;
+import com.example.edushareandroid.ui.notifications.Notificacion;
 
 import java.util.List;
 

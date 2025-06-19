@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.example.edushareandroid.model.base_de_datos.Institucion;
 import com.example.edushareandroid.model.base_de_datos.InstitucionesResponse;
-import com.example.edushareandroid.model.base_de_datos.UsuarioRegistro;
 import com.example.edushareandroid.network.api.ApiResponse;
 import com.example.edushareandroid.network.api.ApiService;
 import com.example.edushareandroid.network.api.RetrofitClient;

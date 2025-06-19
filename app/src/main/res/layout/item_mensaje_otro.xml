@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/backgroundmesagge_other"
+        android:maxWidth="70dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <!-- Nombre del usuario -->
+        <TextView
+            android:id="@+id/txt_autor_mensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Nombre Usuario"
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
+
+        <!-- Contenido del mensaje -->
+        <TextView
+            android:id="@+id/txt_contenido_mensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:ellipsize="end"
+            android:lineSpacingExtra="4dp"
+            android:maxLines="10"
+            android:text="Hola, soy yo"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <!-- Fecha del mensaje -->
+        <TextView
+            android:id="@+id/txt_fecha_mensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="2dp"
+            android:text="12:10"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+</FrameLayout>

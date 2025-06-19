@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.edushareandroid.model.base_de_datos.PublicacionesResponse;
+import com.example.edushareandroid.ui.publicaciones.PublicacionesResponse;
 import com.example.edushareandroid.network.api.ApiResponse;
 import com.example.edushareandroid.network.api.RetrofitClient;
 import com.example.edushareandroid.network.api.ApiService;

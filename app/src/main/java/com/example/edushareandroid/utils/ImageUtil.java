@@ -33,13 +33,11 @@ public class ImageUtil {
         String extension = mime.getExtensionFromMimeType(mimeType);
 
         if (extension == null) {
-            extension = "jpg"; // Por defecto, si no se detecta
+            extension = "jpg";
         }
         return extension;
     }
 
-
-    // Convertir array de bytes binarios a Bitmap
     public static Bitmap binaryToBitmap(byte[] binaryData) {
         return BitmapFactory.decodeByteArray(binaryData, 0, binaryData.length);
     }

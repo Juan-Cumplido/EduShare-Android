@@ -23,10 +23,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.edushareandroid.R;
 import com.example.edushareandroid.databinding.FragmentVerarchivoBinding;
-import com.example.edushareandroid.model.base_de_datos.Login.UsuarioData;
-import com.example.edushareandroid.model.base_de_datos.comentarios.Comentario;
+import com.example.edushareandroid.ui.login.UsuarioData;
+import com.example.edushareandroid.ui.verarchivo.comentarios.Comentario;
 import com.example.edushareandroid.network.grpc.FileServiceClient;
+import com.example.edushareandroid.network.websocket.WebSocketManager;
 import com.example.edushareandroid.ui.perfil.DocumentoResponse;
+import com.example.edushareandroid.ui.verarchivo.comentarios.ComentarioAdapter;
 import com.example.edushareandroid.utils.ImageUtil;
 import com.example.edushareandroid.utils.SesionUsuario;
 import com.github.mikephil.charting.charts.BarChart;
@@ -46,7 +48,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 public class VerArchivoFragment extends Fragment {
     private FragmentVerarchivoBinding binding;
@@ -58,7 +59,6 @@ public class VerArchivoFragment extends Fragment {
     private File archivoTemporalPdf = null;
     private static final int REQUEST_CODE_CREATE_DOCUMENT = 1001;
     private BarChart barChart;
-    // Variables para el manejo de likes
     private boolean liked = false;
     private int likeCount = 0;
     private DocumentoResponse documento;
@@ -229,6 +229,7 @@ public class VerArchivoFragment extends Fragment {
                             likeCount++;
                             actualizarLikeUI();
                             Toast.makeText(getContext(), "¡Te gusta esta publicación!", Toast.LENGTH_SHORT).show();
+                            notificarLike();
                         } else {
                             Toast.makeText(getContext(), "Error al dar like", Toast.LENGTH_SHORT).show();
                         }
@@ -242,6 +243,17 @@ public class VerArchivoFragment extends Fragment {
         binding.btnLike.setBackground(ContextCompat.getDrawable(requireContext(), drawableRes));
     }
 
+    private void notificarLike() {
+        String nombreUsuario = SesionUsuario.obtenerNombreUsuario(requireContext());
+        String usuarioDestinoId = String.valueOf(documento.getIdUsuarioRegistrado());
+        String titulo = "¡Te han dado un like!";
+        String mensaje = nombreUsuario + " ha dado like a tu publicación 🎉";
+        String tipo = "Acción de like";
+        String fecha = obtenerFechaActual();
+
+        WebSocketManager.getInstance().enviarNotificacionAccion(titulo, mensaje, tipo, fecha, usuarioDestinoId);
+    }
+
     private void crearComentario(String texto) {
         binding.edtNuevoComentario.setText("");
 
@@ -250,10 +262,22 @@ public class VerArchivoFragment extends Fragment {
                     if (respuesta != null && respuesta.isSuccess()) {
                         Toast.makeText(getContext(), "Comentario publicado", Toast.LENGTH_SHORT).show();
                         viewModel.cargarComentarios(documento.getIdPublicacion());
+                        notificarComentario();
                     } else {
                         Toast.makeText(getContext(), "Error al publicar comentario", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void notificarComentario() {
+        String nombreUsuario = SesionUsuario.obtenerNombreUsuario(requireContext());
+        String usuarioDestinoId = String.valueOf(documento.getIdUsuarioRegistrado());
+        String titulo = "¡Nuevo comentario!";
+        String mensaje = nombreUsuario + " ha comentado en tu publicación 📝";
+        String tipo = "Acción de comentario";
+        String fecha = obtenerFechaActual();
+
+        WebSocketManager.getInstance().enviarNotificacionAccion(titulo, mensaje, tipo, fecha, usuarioDestinoId);
     }
 
     private void eliminarComentario(int idComentario) {
@@ -266,6 +290,11 @@ public class VerArchivoFragment extends Fragment {
                         Toast.makeText(getContext(), "Error al eliminar comentario", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private String obtenerFechaActual() {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        return formato.format(new Date());
     }
 
     private void configurarDocumento() {
@@ -308,7 +337,6 @@ public class VerArchivoFragment extends Fragment {
         barChart.animateY(1000);
         barChart.getLegend().setEnabled(true);
     }
-
 
     private String formatTimeAgo(String fecha) {
         try {

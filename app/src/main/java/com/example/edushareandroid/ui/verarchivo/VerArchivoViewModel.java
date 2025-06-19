@@ -7,10 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.edushareandroid.model.base_de_datos.comentarios.Comentario;
-import com.example.edushareandroid.model.base_de_datos.comentarios.RespuestaBase;
+import com.example.edushareandroid.ui.verarchivo.comentarios.Comentario;
+import com.example.edushareandroid.ui.verarchivo.comentarios.RespuestaBase;
 import com.example.edushareandroid.network.api.ApiResponse;
 
 import java.util.List;

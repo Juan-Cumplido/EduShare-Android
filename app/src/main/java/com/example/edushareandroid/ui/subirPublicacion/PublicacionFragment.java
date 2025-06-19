@@ -58,10 +58,10 @@ public class PublicacionFragment extends Fragment {
     private static final int REQUEST_CODE_PICK_PDF = 1001;
     private Uri pdfUriSeleccionado;
     private FileServiceClient fileServiceClient;
-    private String filePath; // Ruta del archivo PDF
-    private String coverImagePath; // Ruta de la imagen de portada
-    private ImageView imgPreview; // Para mostrar la portada
-    private TextView txtFileName; // Para mostrar el nombre del archivo
+    private String filePath;
+    private String coverImagePath;
+    private ImageView imgPreview;
+    private TextView txtFileName;
     private LinearLayout uploadSuccessLayout;
     private EditText inputContenido;
 
@@ -78,7 +78,6 @@ public class PublicacionFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(PublicacionViewModel.class);
 
-        // Referencias de UI
         inputContenido = view.findViewById(R.id.input_contenido);
         spnCategoria = view.findViewById(R.id.spn_categoria);
         spnRama = view.findViewById(R.id.spn_rama);
@@ -90,7 +89,6 @@ public class PublicacionFragment extends Fragment {
         Button btnSubir = view.findViewById(R.id.btn_subir);
         CardView cardUpload = view.findViewById(R.id.card_upload);
 
-        // Inicializar lógica
         uploadSuccessLayout.setVisibility(View.GONE);
         configurarSpinners();
         observarViewModel();
@@ -101,7 +99,6 @@ public class PublicacionFragment extends Fragment {
         cardUpload.setOnClickListener(v -> abrirExploradorArchivos());
 
         btnSubir.setOnClickListener(v -> {
-            // Validaciones previas
             if (filePath == null || coverImagePath == null) {
                 Toast.makeText(requireContext(), "Primero sube un archivo PDF", Toast.LENGTH_SHORT).show();
                 return;
@@ -118,7 +115,6 @@ public class PublicacionFragment extends Fragment {
                 return;
             }
 
-            // Crear documento
             String nombreArchivo = obtenerNombreArchivo(pdfUriSeleccionado);
             DocumentoRequest documentoRequest = new DocumentoRequest();
             documentoRequest.setTitulo(nombreArchivo);
@@ -167,22 +163,18 @@ public class PublicacionFragment extends Fragment {
     }
 
     private void configurarSpinners() {
-        // Categorías
         categoriaAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, new ArrayList<>());
         categoriaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnCategoria.setAdapter(categoriaAdapter);
 
-        // Ramas
         ramaAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, new ArrayList<>());
         ramaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnRama.setAdapter(ramaAdapter);
 
-        // Materias
         materiaAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, new ArrayList<>());
         materiaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnMateria.setAdapter(materiaAdapter);
 
-        // Nivel educativo desde recursos
         ArrayAdapter<CharSequence> nivelEducativoAdapter = ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.niveles_educativos,
@@ -191,7 +183,6 @@ public class PublicacionFragment extends Fragment {
         nivelEducativoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnNivelEducativo.setAdapter(nivelEducativoAdapter);
 
-        // Escucha para ramas -> cargar materias
         spnRama.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

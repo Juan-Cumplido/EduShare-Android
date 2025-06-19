@@ -5,11 +5,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.edushareandroid.model.base_de_datos.Login.UsuarioData;
+import com.example.edushareandroid.ui.login.UsuarioData;
 
 public class SesionUsuario {
     private static final String PREF_NAME = "sesion_usuario";
-
     private static final String KEY_TOKEN = "token_jwt";
     private static final String KEY_LOGUEADO = "usuario_logueado";
 
@@ -17,6 +16,7 @@ public class SesionUsuario {
         SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(KEY_LOGUEADO, false);
     }
+
     public static void guardarToken(Context context, String token) {
         SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         prefs.edit().putString(KEY_TOKEN, token).apply();
@@ -36,7 +36,6 @@ public class SesionUsuario {
         SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
-        // Limpiar todos los datos de la sesión principal
         editor.remove(KEY_TOKEN);
         editor.remove(KEY_LOGUEADO);
         editor.remove("idUsuarioRegistrado");
@@ -44,7 +43,6 @@ public class SesionUsuario {
         editor.remove("fotoPerfil");
         editor.apply();
 
-        // Limpiar también los datos de la preferencia "sesion"
         SharedPreferences prefsSecundarias = context.getSharedPreferences("sesion", Context.MODE_PRIVATE);
         prefsSecundarias.edit().remove("nombre_usuario").apply();
     }
@@ -55,6 +53,7 @@ public class SesionUsuario {
         prefs.edit()
                 .putInt("idUsuarioRegistrado", usuario.getIdUsuario())
                 .putString("nombre", usuario.getNombre())
+                .putString("nombreUsuario", usuario.getNombreUsuario())
                 .putString("fotoPerfil", usuario.getFotoPerfil())
                 .apply();
     }
@@ -67,6 +66,7 @@ public class SesionUsuario {
         usuario.setFotoPerfil(prefs.getString("fotoPerfil", ""));
         return usuario;
     }
+
     public static void guardarNombreUsuario(Context context, String nombreUsuario) {
         SharedPreferences prefs = context.getSharedPreferences("sesion", Context.MODE_PRIVATE);
         prefs.edit().putString("nombre_usuario", nombreUsuario).apply();

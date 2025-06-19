@@ -32,7 +32,7 @@ public class DocumentoAdapter extends RecyclerView.Adapter<DocumentoAdapter.Docu
     public interface OnItemClickListener {
         void onVerMasClick(DocumentoResponse documento);
         void onOpcionesClick(DocumentoResponse documento);
-        void onEliminarClick(DocumentoResponse documento); // Método agregado para eliminación directa
+        void onEliminarClick(DocumentoResponse documento);
     }
 
     private final OnItemClickListener listener;
@@ -110,7 +110,6 @@ public class DocumentoAdapter extends RecyclerView.Adapter<DocumentoAdapter.Docu
             txtFecha.setText(documento.getFecha().substring(0, 10));
             txtEstado.setText(documento.getEstado());
 
-            // Configurar click listener para "Ver más"
             btnVerMas.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.onVerMasClick(documento);
@@ -143,30 +142,25 @@ public class DocumentoAdapter extends RecyclerView.Adapter<DocumentoAdapter.Docu
         void loadCoverImage(String ruta) {
             cancelPendingOperations();
             currentImagePath = ruta;
-            imgPortada.setImageResource(R.drawable.ic_archivo); // Imagen por defecto
+            imgPortada.setImageResource(R.drawable.ic_archivo);
 
             if (ruta == null || ruta.isEmpty()) return;
 
-            // Verificar si la imagen está en caché
             Bitmap cachedBitmap = memoryCache.get(ruta);
             if (cachedBitmap != null) {
                 imgPortada.setImageBitmap(cachedBitmap);
                 return;
             }
 
-            // Descargar imagen si no está en caché
             fileServiceClient.downloadCover(ruta, new FileServiceClient.DownloadCallback() {
                 @Override
                 public void onSuccess(byte[] imageData, String filename) {
-                    // Verificar que aún sea la imagen correcta para este ViewHolder
                     if (!ruta.equals(currentImagePath)) return;
                     processImageAsync(ruta, imageData);
                 }
 
                 @Override
                 public void onError(Exception e) {
-                    // En caso de error, mantener la imagen por defecto
-                    // Opcional: puedes mostrar un ícono de error específico
                     if (ruta.equals(currentImagePath)) {
                         imgPortada.post(() -> {
                             if (ruta.equals(currentImagePath)) {
@@ -181,17 +175,13 @@ public class DocumentoAdapter extends RecyclerView.Adapter<DocumentoAdapter.Docu
         private void processImageAsync(String path, byte[] imageData) {
             imageProcessingFuture = imageProcessingExecutor.submit(() -> {
                 try {
-                    // Convertir bytes a bitmap
                     Bitmap original = ImageUtil.binaryToBitmap(imageData);
                     if (original == null) return;
 
-                    // Redimensionar para optimizar memoria
                     Bitmap resized = Bitmap.createScaledBitmap(original, 400, 300, true);
 
-                    // Agregar a caché
                     memoryCache.put(path, resized);
 
-                    // Actualizar UI en el hilo principal
                     if (path.equals(currentImagePath)) {
                         imgPortada.post(() -> {
                             if (path.equals(currentImagePath)) {
@@ -204,8 +194,6 @@ public class DocumentoAdapter extends RecyclerView.Adapter<DocumentoAdapter.Docu
                         original.recycle();
                     }
                 } catch (Exception e) {
-                    // En caso de error en el procesamiento, ignorar silenciosamente
-                    // La imagen por defecto ya está configurada
                 }
             });
         }

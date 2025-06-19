@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.edushareandroid.MainActivity;
 import com.example.edushareandroid.R;
 import com.example.edushareandroid.model.base_de_datos.Institucion;
-import com.example.edushareandroid.model.base_de_datos.UsuarioRegistro;
 import com.example.edushareandroid.utils.HashUtil;
 import com.example.edushareandroid.utils.ValidationUtil;
 

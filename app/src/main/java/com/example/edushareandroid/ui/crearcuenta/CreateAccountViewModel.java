@@ -9,7 +9,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.edushareandroid.model.base_de_datos.Institucion;
-import com.example.edushareandroid.model.base_de_datos.UsuarioRegistro;
 
 import java.util.List;
 

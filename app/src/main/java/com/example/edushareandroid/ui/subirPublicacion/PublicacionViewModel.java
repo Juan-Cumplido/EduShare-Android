@@ -26,7 +26,6 @@ public class PublicacionViewModel extends AndroidViewModel {
     private final MutableLiveData<List<Rama>> ramas = new MutableLiveData<>();
     private final MutableLiveData<List<Materia>> materias = new MutableLiveData<>();
 
-    // Constructor recibe Application y token directamente
     public PublicacionViewModel(@NonNull Application application) {
         super(application);
         String token = SesionUsuario.obtenerToken(application.getApplicationContext());

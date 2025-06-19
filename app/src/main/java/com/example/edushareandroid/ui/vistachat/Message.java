@@ -1,4 +1,4 @@
-package com.example.edushareandroid.model.bd;
+package com.example.edushareandroid.ui.vistachat;
 
 public class Message {
     private String id;

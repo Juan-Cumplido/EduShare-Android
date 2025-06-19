@@ -22,23 +22,19 @@ public class PublicacionesViewModel extends AndroidViewModel {
     private final PublicacionesRepository publicacionesRepository;
     private final AtomicReference<UUID> currentRequestId = new AtomicReference<>();
 
-    // LiveData para el estado de las publicaciones
     private final MutableLiveData<List<DocumentoResponse>> publicacionesLiveData = new MutableLiveData<>();
     private final MutableLiveData<String> mensajeLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> cargandoLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> errorLiveData = new MutableLiveData<>();
 
-    // LiveData para el estado de eliminación
     private final MutableLiveData<String> mensajeEliminacionLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> eliminacionExitosaLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> cargandoEliminacionLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> mostrandoDialogoLiveData = new MutableLiveData<>();
     private int publicacionAEliminarId = -1;
 
-    // Estado actual
     private PublicacionesRepository.ParametrosConsulta parametrosActuales;
 
-    // Observer para gestionar observadores activos
     private Observer<PublicacionesRepository.ResultadoPublicaciones> currentObserver;
 
     public PublicacionesViewModel(@NonNull Application application) {
@@ -58,7 +54,6 @@ public class PublicacionesViewModel extends AndroidViewModel {
         eliminacionExitosaLiveData.setValue(null);
     }
 
-    // Getters para LiveData
     public LiveData<List<DocumentoResponse>> getPublicacionesLiveData() {
         return publicacionesLiveData;
     }
@@ -91,13 +86,9 @@ public class PublicacionesViewModel extends AndroidViewModel {
         return mostrandoDialogoLiveData;
     }
 
-    /**
-     * Método para limpiar completamente el estado antes de una nueva consulta
-     */
     public void limpiarEstadoParaNuevaConsulta() {
         Log.d(TAG, "Limpiando estado para nueva consulta");
 
-        // Cancelar observador anterior si existe
         if (currentObserver != null) {
             try {
                 LiveData<PublicacionesRepository.ResultadoPublicaciones> previousLiveData =
@@ -111,7 +102,6 @@ public class PublicacionesViewModel extends AndroidViewModel {
             currentObserver = null;
         }
 
-        // Limpiar estado actual
         currentRequestId.set(null);
         publicacionesLiveData.setValue(new ArrayList<>());
         mensajeLiveData.setValue(null);
@@ -120,9 +110,6 @@ public class PublicacionesViewModel extends AndroidViewModel {
         parametrosActuales = null;
     }
 
-    /**
-     * Método principal para cargar publicaciones con protección contra duplicados
-     */
     public void cargarPublicaciones(PublicacionesRepository.ParametrosConsulta parametros) {
         if (parametros == null) {
             Log.e(TAG, "Parámetros de consulta no pueden ser null");
@@ -131,14 +118,11 @@ public class PublicacionesViewModel extends AndroidViewModel {
             return;
         }
 
-        // Limpiar estado anterior ANTES de hacer la nueva consulta
         limpiarEstadoParaNuevaConsulta();
 
-        // Generar nuevo ID para esta solicitud
         UUID newRequestId = UUID.randomUUID();
         currentRequestId.set(newRequestId);
 
-        // Establecer nuevos parámetros y estado
         this.parametrosActuales = parametros;
         cargandoLiveData.setValue(true);
         errorLiveData.setValue(false);
@@ -146,9 +130,7 @@ public class PublicacionesViewModel extends AndroidViewModel {
 
         Log.d(TAG, "Cargando publicaciones de tipo: " + parametros.getTipo() + " [RequestID: " + newRequestId + "]");
 
-        // Crear nuevo observer
         currentObserver = resultado -> {
-            // Verificar si esta respuesta corresponde a la solicitud más reciente
             if (!newRequestId.equals(currentRequestId.get())) {
                 Log.d(TAG, "Ignorando respuesta obsoleta para request: " + newRequestId);
                 return;
@@ -160,7 +142,6 @@ public class PublicacionesViewModel extends AndroidViewModel {
                 if (resultado.isExitoso()) {
                     List<DocumentoResponse> publicaciones = resultado.getPublicaciones();
 
-                    // Asegurarse de que la lista no sea null
                     if (publicaciones != null) {
                         publicacionesLiveData.setValue(new ArrayList<>(publicaciones));
                     } else {
@@ -191,13 +172,9 @@ public class PublicacionesViewModel extends AndroidViewModel {
             }
         };
 
-        // Observar con el nuevo observer
         publicacionesRepository.obtenerPublicaciones(parametros).observeForever(currentObserver);
     }
 
-    /**
-     * Recargar las publicaciones con los mismos parámetros
-     */
     public void recargarPublicaciones() {
         if (parametrosActuales != null) {
             cargarPublicaciones(parametrosActuales);
@@ -206,9 +183,6 @@ public class PublicacionesViewModel extends AndroidViewModel {
         }
     }
 
-    /**
-     * Métodos de conveniencia para tipos específicos de publicaciones
-     */
     public void cargarPublicacionesPropias(String token) {
         PublicacionesRepository.ParametrosConsulta parametros =
                 new PublicacionesRepository.ParametrosConsulta(PublicacionesRepository.TipoPublicacion.PROPIAS)
@@ -243,9 +217,6 @@ public class PublicacionesViewModel extends AndroidViewModel {
         cargarPublicaciones(parametros);
     }
 
-    /**
-     * Gestión de eliminación de publicaciones
-     */
     public void solicitarEliminarPublicacion(int idPublicacion, String tituloPublicacion) {
         this.publicacionAEliminarId = idPublicacion;
         mostrandoDialogoLiveData.setValue(true);
@@ -289,9 +260,6 @@ public class PublicacionesViewModel extends AndroidViewModel {
         Log.d(TAG, "Eliminación cancelada por el usuario");
     }
 
-    /**
-     * Filtrar publicaciones localmente
-     */
     public void filtrarPublicaciones(String filtro) {
         List<DocumentoResponse> publicacionesActuales = publicacionesLiveData.getValue();
         if (publicacionesActuales == null || publicacionesActuales.isEmpty()) {
@@ -325,25 +293,16 @@ public class PublicacionesViewModel extends AndroidViewModel {
         Log.d(TAG, "Filtradas " + publicacionesFiltradas.size() + " publicaciones de " + publicacionesActuales.size());
     }
 
-    /**
-     * Verificar si el usuario actual puede eliminar una publicación
-     */
     public boolean puedeEliminarPublicacion(DocumentoResponse publicacion, int idUsuarioActual) {
         return publicacion.getIdUsuarioRegistrado() == idUsuarioActual;
     }
 
-    /**
-     * Limpiar mensajes de eliminación
-     */
     public void limpiarMensajesEliminacion() {
         mensajeEliminacionLiveData.setValue(null);
         eliminacionExitosaLiveData.setValue(null);
         cargandoEliminacionLiveData.setValue(false);
     }
 
-    /**
-     * Obtener mensaje apropiado cuando no hay publicaciones
-     */
     private String obtenerMensajeVacio(PublicacionesRepository.TipoPublicacion tipo) {
         switch (tipo) {
             case PROPIAS:
@@ -361,9 +320,6 @@ public class PublicacionesViewModel extends AndroidViewModel {
         }
     }
 
-    /**
-     * Eliminar publicación de la lista local
-     */
     private void eliminarPublicacionDeLista(int idPublicacion) {
         List<DocumentoResponse> publicacionesActuales = publicacionesLiveData.getValue();
         if (publicacionesActuales != null) {
@@ -380,9 +336,6 @@ public class PublicacionesViewModel extends AndroidViewModel {
         }
     }
 
-    /**
-     * Obtener estadísticas de las publicaciones actuales
-     */
     public EstadisticasPublicaciones getEstadisticas() {
         List<DocumentoResponse> publicaciones = publicacionesLiveData.getValue();
         if (publicaciones == null || publicaciones.isEmpty()) {
@@ -407,9 +360,6 @@ public class PublicacionesViewModel extends AndroidViewModel {
         );
     }
 
-    /**
-     * Clase para encapsular estadísticas de publicaciones
-     */
     public static class EstadisticasPublicaciones {
         private final int totalPublicaciones;
         private final int totalLikes;
@@ -434,7 +384,6 @@ public class PublicacionesViewModel extends AndroidViewModel {
     protected void onCleared() {
         super.onCleared();
 
-        // Limpiar observadores activos
         if (currentObserver != null && parametrosActuales != null) {
             try {
                 LiveData<PublicacionesRepository.ResultadoPublicaciones> liveData =
@@ -452,13 +401,9 @@ public class PublicacionesViewModel extends AndroidViewModel {
         Log.d(TAG, "ViewModel destruido y limpiado");
     }
 
-    /**
-     * Método público para limpiar estado completo - úsalo desde los fragmentos
-     */
     public void limpiarEstadoCompleto() {
         Log.d(TAG, "Limpiando estado completo del ViewModel");
 
-        // Limpiar observadores
         if (currentObserver != null && parametrosActuales != null) {
             try {
                 LiveData<PublicacionesRepository.ResultadoPublicaciones> liveData =
@@ -474,7 +419,6 @@ public class PublicacionesViewModel extends AndroidViewModel {
         currentRequestId.set(null);
         currentObserver = null;
 
-        // Reinicializar todo el estado
         inicializarEstado();
 
         parametrosActuales = null;

@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.edushareandroid.model.base_de_datos.CatalogoResponse;
 import com.example.edushareandroid.model.base_de_datos.Categoria;
 import com.example.edushareandroid.model.base_de_datos.Materia;
-import com.example.edushareandroid.model.base_de_datos.PublicacionesResponse;
+import com.example.edushareandroid.ui.publicaciones.PublicacionesResponse;
 import com.example.edushareandroid.model.base_de_datos.Rama;
 import com.example.edushareandroid.network.api.ApiService;
 import com.example.edushareandroid.network.api.RetrofitClient;

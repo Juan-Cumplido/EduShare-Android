@@ -3,16 +3,11 @@ package com.example.edushareandroid.ui.editarperfil;
 import android.content.Context;
 import android.util.Log;
 
-import androidx.lifecycle.MutableLiveData;
-
-import com.example.edushareandroid.model.base_de_datos.ActualizarPerfil;
-import com.example.edushareandroid.model.base_de_datos.AvatarRequest;
 import com.example.edushareandroid.model.base_de_datos.InstitucionesResponse;
 import com.example.edushareandroid.model.base_de_datos.Institucion;
 import com.example.edushareandroid.network.api.ApiResponse;
 import com.example.edushareandroid.network.api.ApiService;
 import com.example.edushareandroid.network.api.RetrofitClient;
-import com.example.edushareandroid.network.grpc.FileServiceClient;
 
 import java.io.IOException;
 import java.util.List;

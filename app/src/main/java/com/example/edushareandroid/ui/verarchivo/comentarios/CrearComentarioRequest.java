@@ -1,4 +1,4 @@
-package com.example.edushareandroid.model.base_de_datos.comentarios;
+package com.example.edushareandroid.ui.verarchivo.comentarios;
 
 public class CrearComentarioRequest {
     private String contenido;

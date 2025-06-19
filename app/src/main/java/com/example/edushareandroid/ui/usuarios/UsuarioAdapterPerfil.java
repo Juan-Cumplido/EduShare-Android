@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.edushareandroid.R;
-import com.example.edushareandroid.model.base_de_datos.UsuarioPerfilRecuperado;
 import com.example.edushareandroid.network.grpc.FileServiceClient;
 import com.example.edushareandroid.utils.ImageUtil;
 
@@ -28,9 +27,7 @@ public class UsuarioAdapterPerfil extends RecyclerView.Adapter<UsuarioAdapterPer
     private final OnItemClickListener listener;
     private final FileServiceClient fileServiceClient;
 
-    // Cache de memoria para imágenes
     private final LruCache<String, Bitmap> memoryCache;
-    // Thread pool para procesamiento de imágenes
     private final ExecutorService imageProcessingExecutor;
 
     public interface OnItemClickListener {
@@ -46,7 +43,6 @@ public class UsuarioAdapterPerfil extends RecyclerView.Adapter<UsuarioAdapterPer
         this.listener = listener;
         this.fileServiceClient = fileServiceClient;
 
-        // Configurar cache de memoria (1/8 de la memoria disponible)
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
         final int cacheSize = maxMemory / 8;
         memoryCache = new LruCache<String, Bitmap>(cacheSize) {
@@ -56,7 +52,6 @@ public class UsuarioAdapterPerfil extends RecyclerView.Adapter<UsuarioAdapterPer
             }
         };
 
-        // Thread pool con 2 hilos para procesamiento de imágenes
         imageProcessingExecutor = Executors.newFixedThreadPool(2);
     }
 
@@ -128,7 +123,6 @@ public class UsuarioAdapterPerfil extends RecyclerView.Adapter<UsuarioAdapterPer
             tvPublicaciones.setText(String.format("%d Publicaciones", usuario.getNumeroPublicaciones()));
             tvSeguidores.setText(String.format("%d Seguidores", usuario.getNumeroSeguidores()));
 
-            // Configurar listeners
             itemView.setOnClickListener(v -> listener.onItemClick(usuario));
             btnVerMas.setOnClickListener(v -> listener.onVerMasClick(usuario));
         }
@@ -180,7 +174,6 @@ public class UsuarioAdapterPerfil extends RecyclerView.Adapter<UsuarioAdapterPer
                         });
                     }
                 } catch (Exception e) {
-                    // Manejar error de procesamiento
                 }
             });
         }

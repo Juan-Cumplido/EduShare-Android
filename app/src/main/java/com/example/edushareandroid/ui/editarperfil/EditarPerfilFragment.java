@@ -21,8 +21,6 @@ import androidx.navigation.Navigation;
 
 import com.example.edushareandroid.R;
 import com.example.edushareandroid.databinding.FragmentEditarperfilBinding;
-import com.example.edushareandroid.model.base_de_datos.ActualizarPerfil;
-import com.example.edushareandroid.model.base_de_datos.AvatarRequest;
 import com.example.edushareandroid.model.base_de_datos.Institucion;
 import com.example.edushareandroid.ui.perfil.UsuarioPerfil;
 import com.example.edushareandroid.network.grpc.FileServiceClient;

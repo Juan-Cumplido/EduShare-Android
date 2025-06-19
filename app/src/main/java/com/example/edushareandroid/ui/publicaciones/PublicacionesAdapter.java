@@ -36,7 +36,9 @@ public class PublicacionesAdapter extends RecyclerView.Adapter<PublicacionesAdap
 
     public interface OnItemClickListener {
         void onVerMasClick(DocumentoResponse publicacion);
+
         void onOpcionesClick(DocumentoResponse publicacion);
+
         void onEliminarClick(DocumentoResponse publicacion);
     }
 
@@ -45,12 +47,11 @@ public class PublicacionesAdapter extends RecyclerView.Adapter<PublicacionesAdap
     public PublicacionesAdapter(List<DocumentoResponse> listaPublicaciones,
                                 FileServiceClient fileServiceClient,
                                 OnItemClickListener listener,
-                                Context context) { // Modificar constructor
+                                Context context) {
         this.listaPublicaciones = listaPublicaciones;
         this.fileServiceClient = fileServiceClient;
         this.listener = listener;
         this.context = context;
-        // Configurar caché de imágenes
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
         final int cacheSize = maxMemory / 8;
         memoryCache = new LruCache<String, Bitmap>(cacheSize) {
@@ -64,9 +65,9 @@ public class PublicacionesAdapter extends RecyclerView.Adapter<PublicacionesAdap
     }
 
     public void actualizarLista(List<DocumentoResponse> nuevaLista) {
-        listaPublicaciones.clear(); // Limpia los datos anteriores
+        listaPublicaciones.clear();
         if (nuevaLista != null) {
-            listaPublicaciones.addAll(nuevaLista); // Agrega la nueva lista
+            listaPublicaciones.addAll(nuevaLista);
         }
         notifyDataSetChanged();
     }
@@ -129,22 +130,17 @@ public class PublicacionesAdapter extends RecyclerView.Adapter<PublicacionesAdap
         }
 
         void bind(DocumentoResponse publicacion) {
-            // Configurar datos básicos
             txtTitulo.setText(publicacion.getTitulo());
             txtResumen.setText(publicacion.getResuContenido());
             txtFecha.setText(publicacion.getFecha().substring(0, 10));
             txtEstado.setText(publicacion.getEstado());
 
-            // Obtener ID del usuario actual desde SesionUsuario
             int idUsuarioActual = SesionUsuario.obtenerDatosUsuario(context).getIdUsuario();
 
-            // Determinar si la publicación pertenece al usuario actual
             boolean esMiPublicacion = publicacion.getIdUsuarioRegistrado() == idUsuarioActual;
 
-            // Mostrar u ocultar el botón de opciones según corresponda
             btnOpciones.setVisibility(esMiPublicacion ? View.VISIBLE : View.GONE);
 
-            // Configurar listeners
             btnVerMas.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.onVerMasClick(publicacion);
@@ -154,10 +150,9 @@ public class PublicacionesAdapter extends RecyclerView.Adapter<PublicacionesAdap
             if (esMiPublicacion) {
                 btnOpciones.setOnClickListener(v -> mostrarMenuOpciones(v, publicacion));
             } else {
-                btnOpciones.setOnClickListener(null); // Eliminar listener si no es mi publicación
+                btnOpciones.setOnClickListener(null);
             }
 
-            // Cargar imagen de portada
             loadCoverImage(publicacion.getRuta());
         }
 
@@ -185,7 +180,6 @@ public class PublicacionesAdapter extends RecyclerView.Adapter<PublicacionesAdap
 
             popupMenu.show();
 
-            // Notificar al listener sobre el clic en opciones
             if (listener != null) {
                 listener.onOpcionesClick(publicacion);
             }
@@ -194,18 +188,16 @@ public class PublicacionesAdapter extends RecyclerView.Adapter<PublicacionesAdap
         void loadCoverImage(String ruta) {
             cancelPendingOperations();
             currentImagePath = ruta;
-            imgPortada.setImageResource(R.drawable.ic_archivo); // Imagen por defecto
+            imgPortada.setImageResource(R.drawable.ic_archivo);
 
             if (ruta == null || ruta.isEmpty()) return;
 
-            // Verificar caché
             Bitmap cachedBitmap = memoryCache.get(ruta);
             if (cachedBitmap != null) {
                 imgPortada.setImageBitmap(cachedBitmap);
                 return;
             }
 
-            // Descargar imagen si no está en caché
             fileServiceClient.downloadCover(ruta, new FileServiceClient.DownloadCallback() {
                 @Override
                 public void onSuccess(byte[] imageData, String filename) {
@@ -247,7 +239,6 @@ public class PublicacionesAdapter extends RecyclerView.Adapter<PublicacionesAdap
                         original.recycle();
                     }
                 } catch (Exception e) {
-                    // Error silencioso, mantener imagen por defecto
                 }
             });
         }

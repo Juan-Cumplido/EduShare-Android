@@ -14,5 +14,7 @@
     <color name="fondo">#b5a68a</color>
     <color name="rojo">#FF0000</color>
     <color name="gray_hint">#808080</color>
+    <color name="mio">#907761</color>
+    <color name="otro">#553d2a</color>
 
 </resources>

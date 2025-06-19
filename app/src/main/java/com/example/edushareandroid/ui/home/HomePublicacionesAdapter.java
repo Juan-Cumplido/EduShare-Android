@@ -26,10 +26,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-/**
- * Adapter específico para las publicaciones del HomeFragment
- * Mantiene la misma funcionalidad que PublicacionesAdapter pero optimizado para Home
- */
 public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicacionesAdapter.HomePublicacionViewHolder> {
 
     private List<DocumentoResponse> listaPublicaciones;
@@ -39,15 +35,16 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
     private final Context context;
     private final OnHomeItemClickListener listener;
 
-    /**
-     * Interface específica para eventos del HomeFragment
-     */
     public interface OnHomeItemClickListener {
         void onVerMasClick(DocumentoResponse publicacion);
+
         void onOpcionesClick(DocumentoResponse publicacion);
+
         void onEliminarClick(DocumentoResponse publicacion);
-        void onCompartirClick(DocumentoResponse publicacion); // Funcionalidad adicional para Home
-        void onFavoritoClick(DocumentoResponse publicacion); // Funcionalidad adicional para Home
+
+        void onCompartirClick(DocumentoResponse publicacion);
+
+        void onFavoritoClick(DocumentoResponse publicacion);
     }
 
     public HomePublicacionesAdapter(List<DocumentoResponse> listaPublicaciones,
@@ -59,9 +56,8 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
         this.listener = listener;
         this.context = context;
 
-        // Configurar caché de imágenes optimizado para Home
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-        final int cacheSize = maxMemory / 6; // Un poco más de caché para Home
+        final int cacheSize = maxMemory / 6;
         memoryCache = new LruCache<String, Bitmap>(cacheSize) {
             @Override
             protected int sizeOf(String key, Bitmap bitmap) {
@@ -69,13 +65,9 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
             }
         };
 
-        // Pool de hilos optimizado para Home (puede manejar más imágenes simultáneas)
         imageProcessingExecutor = Executors.newFixedThreadPool(3);
     }
 
-    /**
-     * Actualiza la lista de publicaciones y notifica los cambios
-     */
     public void actualizarLista(List<DocumentoResponse> nuevaLista) {
         listaPublicaciones.clear();
         if (nuevaLista != null) {
@@ -84,9 +76,6 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
         notifyDataSetChanged();
     }
 
-    /**
-     * Agrega nuevas publicaciones a la lista existente (útil para paginación)
-     */
     public void agregarPublicaciones(List<DocumentoResponse> nuevasPublicaciones) {
         if (nuevasPublicaciones != null && !nuevasPublicaciones.isEmpty()) {
             int posicionInicial = listaPublicaciones.size();
@@ -95,9 +84,6 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
         }
     }
 
-    /**
-     * Elimina una publicación específica de la lista
-     */
     public void eliminarPublicacion(DocumentoResponse publicacion) {
         int posicion = listaPublicaciones.indexOf(publicacion);
         if (posicion != -1) {
@@ -106,9 +92,6 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
         }
     }
 
-    /**
-     * Obtiene una publicación por posición
-     */
     public DocumentoResponse getPublicacion(int posicion) {
         if (posicion >= 0 && posicion < listaPublicaciones.size()) {
             return listaPublicaciones.get(posicion);
@@ -116,9 +99,6 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
         return null;
     }
 
-    /**
-     * Verifica si hay publicaciones cargadas
-     */
     public boolean hayPublicaciones() {
         return !listaPublicaciones.isEmpty();
     }
@@ -148,9 +128,6 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
         return listaPublicaciones.size();
     }
 
-    /**
-     * Limpia recursos cuando el adapter ya no se necesita
-     */
     public void cleanup() {
         if (imageProcessingExecutor != null && !imageProcessingExecutor.isShutdown()) {
             imageProcessingExecutor.shutdown();
@@ -160,18 +137,12 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
         }
     }
 
-    /**
-     * Limpia la caché de imágenes
-     */
     public void limpiarCache() {
         if (memoryCache != null) {
             memoryCache.evictAll();
         }
     }
 
-    /**
-     * ViewHolder específico para publicaciones del Home
-     */
     class HomePublicacionViewHolder extends RecyclerView.ViewHolder {
         private final TextView txtTitulo;
         private final TextView txtResumen;
@@ -191,54 +162,45 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
             txtResumen = itemView.findViewById(R.id.txt_subtitulo);
             txtFecha = itemView.findViewById(R.id.txt_detalles);
             txtEstado = itemView.findViewById(R.id.txt_estado);
-            txtAutor = itemView.findViewById(R.id.txt_autor); // Asumiendo que existe este campo
+            txtAutor = itemView.findViewById(R.id.txt_autor);
             imgPortada = itemView.findViewById(R.id.img_portada);
             btnVerMas = itemView.findViewById(R.id.btn_ver_mas);
             btnOpciones = itemView.findViewById(R.id.btn_opciones);
         }
 
         void bind(DocumentoResponse publicacion) {
-            // Configurar datos básicos
             txtTitulo.setText(publicacion.getTitulo());
             txtResumen.setText(publicacion.getResuContenido());
             txtFecha.setText(formatearFecha(publicacion.getFecha()));
             txtEstado.setText(publicacion.getEstado());
 
-            // Mostrar autor (útil en el feed de Home)
             if (txtAutor != null) {
                 txtAutor.setText(publicacion.getNombreCompleto());
             }
 
-            // Obtener ID del usuario actual
             int idUsuarioActual = SesionUsuario.obtenerDatosUsuario(context).getIdUsuario();
             boolean esMiPublicacion = publicacion.getIdUsuarioRegistrado() == idUsuarioActual;
 
-            // Configurar visibilidad del botón de opciones
             btnOpciones.setVisibility(esMiPublicacion ? View.GONE : View.GONE);
 
-            // Configurar listeners
             configurarListeners(publicacion, esMiPublicacion);
 
-            // Cargar imagen de portada
             loadCoverImage(publicacion.getRuta());
         }
 
         private void configurarListeners(DocumentoResponse publicacion, boolean esMiPublicacion) {
-            // Listener para ver más
             btnVerMas.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.onVerMasClick(publicacion);
                 }
             });
 
-            // Listener para opciones (solo si es mi publicación)
             if (esMiPublicacion) {
                 btnOpciones.setOnClickListener(v -> mostrarMenuOpciones(v, publicacion));
             } else {
                 btnOpciones.setOnClickListener(null);
             }
 
-            // Listener para clic en el elemento completo (opcional)
             itemView.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.onVerMasClick(publicacion);
@@ -248,7 +210,6 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
 
         private String formatearFecha(String fecha) {
             if (fecha != null && fecha.length() >= 10) {
-                // Formatear fecha para mostrar solo la fecha sin hora
                 return fecha.substring(0, 10);
             }
             return fecha != null ? fecha : "";
@@ -257,7 +218,6 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
         private void mostrarMenuOpciones(View view, DocumentoResponse publicacion) {
             PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
 
-            // Agregar opciones específicas para Home
             popupMenu.getMenu().add(0, 1, 0, "Compartir");
             popupMenu.getMenu().add(0, 2, 0, "Editar");
             popupMenu.getMenu().add(0, 3, 0, "Eliminar");
@@ -266,13 +226,13 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
                 if (listener == null) return false;
 
                 switch (item.getItemId()) {
-                    case 1: // Compartir
+                    case 1:
                         listener.onCompartirClick(publicacion);
                         return true;
-                    case 2: // Editar (redirigir a opciones)
+                    case 2:
                         listener.onOpcionesClick(publicacion);
                         return true;
-                    case 3: // Eliminar
+                    case 3:
                         listener.onEliminarClick(publicacion);
                         return true;
                     default:
@@ -286,18 +246,16 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
         void loadCoverImage(String ruta) {
             cancelPendingOperations();
             currentImagePath = ruta;
-            imgPortada.setImageResource(R.drawable.ic_archivo); // Imagen por defecto
+            imgPortada.setImageResource(R.drawable.ic_archivo);
 
             if (ruta == null || ruta.isEmpty()) return;
 
-            // Verificar caché
             Bitmap cachedBitmap = memoryCache.get(ruta);
             if (cachedBitmap != null && !cachedBitmap.isRecycled()) {
                 imgPortada.setImageBitmap(cachedBitmap);
                 return;
             }
 
-            // Descargar imagen si no está en caché
             fileServiceClient.downloadCover(ruta, new FileServiceClient.DownloadCallback() {
                 @Override
                 public void onSuccess(byte[] imageData, String filename) {
@@ -324,10 +282,8 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
                     Bitmap original = ImageUtil.binaryToBitmap(imageData);
                     if (original == null) return;
 
-                    // Redimensionar para optimizar memoria (tamaño específico para Home)
                     Bitmap resized = Bitmap.createScaledBitmap(original, 400, 300, true);
 
-                    // Verificar que el bitmap no esté corrupto antes de guardarlo en caché
                     if (!resized.isRecycled()) {
                         memoryCache.put(path, resized);
 
@@ -340,12 +296,10 @@ public class HomePublicacionesAdapter extends RecyclerView.Adapter<HomePublicaci
                         }
                     }
 
-                    // Limpiar bitmap original si es diferente
                     if (original != resized && !original.isRecycled()) {
                         original.recycle();
                     }
                 } catch (Exception e) {
-                    // Error silencioso, mantener imagen por defecto
                     if (path.equals(currentImagePath)) {
                         imgPortada.post(() -> {
                             if (path.equals(currentImagePath)) {

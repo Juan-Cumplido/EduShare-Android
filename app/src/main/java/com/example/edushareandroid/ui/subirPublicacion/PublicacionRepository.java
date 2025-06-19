@@ -107,7 +107,6 @@ public class PublicacionRepository {
                 if (response.isSuccessful() && response.body() != null) {
                     DocumentoSubidoResponse res = response.body();
                     if (!res.isError()) {
-                        // Verifica que el estado sea 200 o 201
                         if (res.getEstado() == 200 || res.getEstado() == 201) {
                             resultado.setValue(Resource.success(res.getId(), res.getEstado()));
                         } else {

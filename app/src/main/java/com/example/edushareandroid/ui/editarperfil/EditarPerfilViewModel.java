@@ -8,12 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.edushareandroid.model.base_de_datos.ActualizarPerfil;
-import com.example.edushareandroid.model.base_de_datos.AvatarRequest;
 import com.example.edushareandroid.model.base_de_datos.Institucion;
-import com.example.edushareandroid.network.api.RetrofitClient;
 import com.example.edushareandroid.ui.perfil.UsuarioPerfil;
 import com.example.edushareandroid.network.grpc.FileServiceClient;
 import com.example.edushareandroid.utils.ImageUtil;

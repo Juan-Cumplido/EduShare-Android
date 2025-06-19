@@ -6,12 +6,10 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.edushareandroid.model.base_de_datos.PublicacionesResponse;
 import com.example.edushareandroid.network.api.ApiResponse;
 import com.example.edushareandroid.network.api.ApiService;
 import com.example.edushareandroid.network.api.RetrofitClient;
 import com.example.edushareandroid.ui.perfil.DocumentoResponse;
-import com.example.edushareandroid.ui.perfil.PerfilResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,21 +26,15 @@ public class PublicacionesRepository {
         this.apiService = RetrofitClient.getApiService(context);
     }
 
-    /**
-     * Enum para definir los tipos de publicaciones que se pueden obtener
-     */
     public enum TipoPublicacion {
-        PROPIAS,           // Publicaciones del usuario logueado
-        TODAS,             // Todas las publicaciones públicas
-        DE_USUARIO,        // Publicaciones de un usuario específico
-        POR_CATEGORIA,     // Publicaciones filtradas por categoría
+        PROPIAS,
+        TODAS,
+        DE_USUARIO,
+        POR_CATEGORIA,
         POR_RAMA,
         POR_NIVEL_EDUCATIVO,
     }
 
-    /**
-     * Clase para encapsular parámetros de consulta
-     */
     public static class ParametrosConsulta {
         private final TipoPublicacion tipo;
         private String token;
@@ -80,7 +72,6 @@ public class PublicacionesRepository {
             return this;
         }
 
-        // Getters
         public TipoPublicacion getTipo() {
             return tipo;
         }
@@ -106,9 +97,6 @@ public class PublicacionesRepository {
         }
     }
 
-    /**
-     * Método principal para obtener publicaciones según el tipo
-     */
     public LiveData<ResultadoPublicaciones> obtenerPublicaciones(ParametrosConsulta parametros) {
         MutableLiveData<ResultadoPublicaciones> resultado = new MutableLiveData<>();
 
@@ -137,9 +125,6 @@ public class PublicacionesRepository {
         return resultado;
     }
 
-    /**
-     * Obtener publicaciones propias del usuario logueado
-     */
     private void obtenerPublicacionesPropias(String token, MutableLiveData<ResultadoPublicaciones> resultado) {
         if (token == null || token.trim().isEmpty()) {
             resultado.setValue(new ResultadoPublicaciones(false, "Token no válido", new ArrayList<>()));
@@ -161,9 +146,6 @@ public class PublicacionesRepository {
                 });
     }
 
-    /**
-     * Obtener todas las publicaciones públicas
-     */
     private void obtenerTodasLasPublicaciones(MutableLiveData<ResultadoPublicaciones> resultado) {
         apiService.obtenerPublicaciones()
                 .enqueue(new Callback<PublicacionesResponse>() {
@@ -180,9 +162,6 @@ public class PublicacionesRepository {
                 });
     }
 
-    /**
-     * Obtener publicaciones de un usuario específico
-     */
     private void obtenerPublicacionesDeUsuario(Integer idUsuario, MutableLiveData<ResultadoPublicaciones> resultado) {
         if (idUsuario == null) {
             resultado.setValue(new ResultadoPublicaciones(false, "ID de usuario no válido", new ArrayList<>()));
@@ -205,9 +184,6 @@ public class PublicacionesRepository {
         obtenerTodasLasPublicaciones(resultado);
     }
 
-    /**
-     * Obtener publicaciones por categoría
-     */
     private void obtenerPublicacionesPorCategoria(Integer idCategoria, MutableLiveData<ResultadoPublicaciones> resultado) {
         if (idCategoria == null) {
             resultado.setValue(new ResultadoPublicaciones(false, "ID de categoría no válido", new ArrayList<>()));
@@ -253,10 +229,6 @@ public class PublicacionesRepository {
         obtenerTodasLasPublicaciones(resultado);
     }
 
-
-    /**
-     * Método para procesar la respuesta de la API
-     */
     private void procesarRespuestaPublicaciones(Response<PublicacionesResponse> response,
                                                 MutableLiveData<ResultadoPublicaciones> resultado,
                                                 String tipoConsulta) {
@@ -275,9 +247,6 @@ public class PublicacionesRepository {
         }
     }
 
-    /**
-     * Eliminar una publicación
-     */
     public LiveData<ResultadoEliminacion> eliminarPublicacion(int idPublicacion, String token) {
         MutableLiveData<ResultadoEliminacion> resultado = new MutableLiveData<>();
 
@@ -317,9 +286,6 @@ public class PublicacionesRepository {
         return resultado;
     }
 
-    /**
-     * Clase para encapsular el resultado de las consultas de publicaciones
-     */
     public static class ResultadoPublicaciones {
         private final boolean exitoso;
         private final String mensaje;
@@ -352,9 +318,6 @@ public class PublicacionesRepository {
         }
     }
 
-    /**
-     * Clase para encapsular el resultado de la eliminación
-     */
     public static class ResultadoEliminacion {
         private final boolean exitoso;
         private final String mensaje;

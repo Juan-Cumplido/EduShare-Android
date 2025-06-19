@@ -1,4 +1,4 @@
-package com.example.edushareandroid.model.base_de_datos.Login;
+package com.example.edushareandroid.ui.login;
 
 public class UsuarioData {
     private int idUsuario;

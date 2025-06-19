@@ -1,4 +1,4 @@
-package com.example.edushareandroid.ui.verarchivo;
+package com.example.edushareandroid.ui.verarchivo.comentarios;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.edushareandroid.R;
-import com.example.edushareandroid.model.base_de_datos.comentarios.Comentario;
 import com.example.edushareandroid.network.grpc.FileServiceClient;
 import com.example.edushareandroid.utils.ImageUtil;
 import com.example.edushareandroid.utils.SesionUsuario;

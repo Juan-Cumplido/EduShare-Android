@@ -1,7 +1,7 @@
 package com.example.edushareandroid.utils;
 
 public class Resource<T> {
-    public enum Status { SUCCESS, ERROR, LOADING }
+    public enum Status {SUCCESS, ERROR, LOADING}
 
     public Status getStatus() {
         return status;

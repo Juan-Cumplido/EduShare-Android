@@ -19,18 +19,15 @@ import java.util.List;
 public class HomeViewModel extends AndroidViewModel {
     private final HomeRepository repository;
 
-    // LiveData para catálogos
     private final MutableLiveData<List<Categoria>> categorias = new MutableLiveData<>();
     private final MutableLiveData<List<Rama>> ramas = new MutableLiveData<>();
     private final MutableLiveData<List<Materia>> materias = new MutableLiveData<>();
 
-    // LiveData para publicaciones
     private final MutableLiveData<List<DocumentoResponse>> publicaciones = new MutableLiveData<>();
     private final MutableLiveData<Boolean> cargandoPublicaciones = new MutableLiveData<>(false);
     private final MutableLiveData<String> mensajeError = new MutableLiveData<>();
     private final MutableLiveData<String> mensajeExito = new MutableLiveData<>();
 
-    // Estados de filtros actuales
     private final MutableLiveData<Integer> categoriaSeleccionada = new MutableLiveData<>();
     private final MutableLiveData<Integer> ramaSeleccionada = new MutableLiveData<>();
     private final MutableLiveData<Boolean> filtrosActivos = new MutableLiveData<>(false);
@@ -40,11 +37,8 @@ public class HomeViewModel extends AndroidViewModel {
         String token = SesionUsuario.obtenerToken(application.getApplicationContext());
         repository = new HomeRepository(application.getApplicationContext(), token);
 
-        // Cargar publicaciones iniciales
         cargarTodasLasPublicaciones();
     }
-
-    // =========================== GETTERS PARA CATÁLOGOS ===========================
 
     public LiveData<List<Categoria>> getCategorias() {
         return categorias;
@@ -57,8 +51,6 @@ public class HomeViewModel extends AndroidViewModel {
     public LiveData<List<Materia>> getMaterias() {
         return materias;
     }
-
-    // =========================== GETTERS PARA PUBLICACIONES ===========================
 
     public LiveData<List<DocumentoResponse>> getPublicaciones() {
         return publicaciones;
@@ -88,14 +80,11 @@ public class HomeViewModel extends AndroidViewModel {
         return filtrosActivos;
     }
 
-    // =========================== MÉTODOS PARA CATÁLOGOS ===========================
-
     public void cargarCategorias() {
         repository.obtenerCategorias().observeForever(new Observer<List<Categoria>>() {
             @Override
             public void onChanged(List<Categoria> resultado) {
                 categorias.setValue(resultado);
-                // Remover el observer para evitar memory leaks
                 repository.obtenerCategorias().removeObserver(this);
             }
         });
@@ -106,7 +95,6 @@ public class HomeViewModel extends AndroidViewModel {
             @Override
             public void onChanged(List<Rama> resultado) {
                 ramas.setValue(resultado);
-                // Remover el observer para evitar memory leaks
                 repository.obtenerRamas().removeObserver(this);
             }
         });
@@ -123,11 +111,6 @@ public class HomeViewModel extends AndroidViewModel {
         });
     }
 
-    // =========================== MÉTODOS PARA PUBLICACIONES ===========================
-
-    /**
-     * Cargar todas las publicaciones (feed principal)
-     */
     public void cargarTodasLasPublicaciones() {
         cargandoPublicaciones.setValue(true);
         limpiarMensajes();
@@ -146,15 +129,11 @@ public class HomeViewModel extends AndroidViewModel {
                     mensajeError.setValue(resultado.getMensaje());
                 }
 
-                // Remover el observer para evitar memory leaks
                 repository.obtenerTodasLasPublicaciones().removeObserver(this);
             }
         });
     }
 
-    /**
-     * Filtrar publicaciones por categoría
-     */
     public void filtrarPorCategoria(Integer idCategoria) {
         if (idCategoria == null) {
             limpiarFiltroCategoria();
@@ -178,15 +157,11 @@ public class HomeViewModel extends AndroidViewModel {
                     mensajeError.setValue(resultado.getMensaje());
                 }
 
-                // Remover el observer para evitar memory leaks
                 repository.obtenerPublicacionesPorCategoria(idCategoria).removeObserver(this);
             }
         });
     }
 
-    /**
-     * Filtrar publicaciones por rama educativa
-     */
     public void filtrarPorRama(Integer idRama) {
         if (idRama == null) {
             limpiarFiltroRama();
@@ -210,15 +185,11 @@ public class HomeViewModel extends AndroidViewModel {
                     mensajeError.setValue(resultado.getMensaje());
                 }
 
-                // Remover el observer para evitar memory leaks
                 repository.obtenerPublicacionesPorRama(idRama).removeObserver(this);
             }
         });
     }
 
-    /**
-     * Aplicar filtros combinados
-     */
     public void aplicarFiltros(Integer idCategoria, Integer idRama) {
         cargandoPublicaciones.setValue(true);
         limpiarMensajes();
@@ -239,15 +210,11 @@ public class HomeViewModel extends AndroidViewModel {
                     mensajeError.setValue(resultado.getMensaje());
                 }
 
-                // Remover el observer para evitar memory leaks
                 repository.obtenerPublicacionesConFiltros(idCategoria, idRama).removeObserver(this);
             }
         });
     }
 
-    /**
-     * Limpiar todos los filtros y cargar todas las publicaciones
-     */
     public void limpiarFiltros() {
         categoriaSeleccionada.setValue(null);
         ramaSeleccionada.setValue(null);
@@ -255,9 +222,6 @@ public class HomeViewModel extends AndroidViewModel {
         cargarTodasLasPublicaciones();
     }
 
-    /**
-     * Refrescar publicaciones (mantiene filtros actuales)
-     */
     public void refrescarPublicaciones() {
         Integer categoria = categoriaSeleccionada.getValue();
         Integer rama = ramaSeleccionada.getValue();
@@ -268,8 +232,6 @@ public class HomeViewModel extends AndroidViewModel {
             cargarTodasLasPublicaciones();
         }
     }
-
-    // =========================== MÉTODOS AUXILIARES ===========================
 
     private void limpiarFiltroCategoria() {
         categoriaSeleccionada.setValue(null);
@@ -301,9 +263,6 @@ public class HomeViewModel extends AndroidViewModel {
         mensajeExito.setValue(null);
     }
 
-    /**
-     * Obtener información sobre los filtros activos (para mostrar en UI)
-     */
     public String obtenerTextoFiltrosActivos() {
         Integer categoria = categoriaSeleccionada.getValue();
         Integer rama = ramaSeleccionada.getValue();
@@ -326,17 +285,11 @@ public class HomeViewModel extends AndroidViewModel {
         return texto.toString();
     }
 
-    /**
-     * Verificar si hay publicaciones cargadas
-     */
     public boolean hayPublicaciones() {
         List<DocumentoResponse> pubs = publicaciones.getValue();
         return pubs != null && !pubs.isEmpty();
     }
 
-    /**
-     * Obtener cantidad de publicaciones cargadas
-     */
     public int getCantidadPublicaciones() {
         List<DocumentoResponse> pubs = publicaciones.getValue();
         return pubs != null ? pubs.size() : 0;

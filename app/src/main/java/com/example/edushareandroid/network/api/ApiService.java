@@ -1,31 +1,31 @@
 package com.example.edushareandroid.network.api;
 
-import com.example.edushareandroid.model.base_de_datos.ActualizarPerfil;
-import com.example.edushareandroid.model.base_de_datos.AvatarRequest;
+import com.example.edushareandroid.ui.editarperfil.ActualizarPerfil;
+import com.example.edushareandroid.ui.editarperfil.AvatarRequest;
 import com.example.edushareandroid.model.base_de_datos.CambiarContraseniaRequest;
 import com.example.edushareandroid.model.base_de_datos.CatalogoResponse;
 import com.example.edushareandroid.model.base_de_datos.Categoria;
-import com.example.edushareandroid.model.base_de_datos.comentarios.Comentario;
-import com.example.edushareandroid.model.base_de_datos.comentarios.CrearComentarioRequest;
-import com.example.edushareandroid.model.base_de_datos.DejarSeguirRequest;
+import com.example.edushareandroid.ui.verarchivo.comentarios.Comentario;
+import com.example.edushareandroid.ui.verarchivo.comentarios.CrearComentarioRequest;
+import com.example.edushareandroid.ui.usuarios.DejarSeguirRequest;
 import com.example.edushareandroid.model.base_de_datos.DocumentoRequest;
 import com.example.edushareandroid.model.base_de_datos.DocumentoSubidoResponse;
 import com.example.edushareandroid.model.base_de_datos.InstitucionesResponse;
-import com.example.edushareandroid.model.base_de_datos.Login.LoginRequest;
-import com.example.edushareandroid.model.base_de_datos.Login.LoginResponse;
+import com.example.edushareandroid.ui.login.LoginRequest;
+import com.example.edushareandroid.ui.login.LoginResponse;
 import com.example.edushareandroid.model.base_de_datos.Materia;
-import com.example.edushareandroid.model.base_de_datos.comentarios.RespuestaBase;
-import com.example.edushareandroid.model.base_de_datos.comentarios.RespuestaConDatos;
+import com.example.edushareandroid.ui.verarchivo.comentarios.RespuestaBase;
+import com.example.edushareandroid.ui.verarchivo.comentarios.RespuestaConDatos;
 import com.example.edushareandroid.ui.perfil.PerfilResponse;
-import com.example.edushareandroid.model.base_de_datos.PerfilResponseList;
+import com.example.edushareandroid.ui.usuarios.PerfilResponseList;
 import com.example.edushareandroid.model.base_de_datos.PublicacionRequest;
 import com.example.edushareandroid.model.base_de_datos.PublicacionResponse;
-import com.example.edushareandroid.model.base_de_datos.PublicacionesResponse;
+import com.example.edushareandroid.ui.publicaciones.PublicacionesResponse;
 import com.example.edushareandroid.model.base_de_datos.Rama;
 import com.example.edushareandroid.model.base_de_datos.RecoveryRequest;
-import com.example.edushareandroid.model.base_de_datos.SeguimientoRequest;
-import com.example.edushareandroid.model.base_de_datos.UsuarioRegistro;
-import com.example.edushareandroid.model.base_de_datos.VerificacionSeguimientoResponse;
+import com.example.edushareandroid.ui.usuarios.SeguimientoRequest;
+import com.example.edushareandroid.ui.crearcuenta.UsuarioRegistro;
+import com.example.edushareandroid.ui.usuarios.VerificacionSeguimientoResponse;
 
 import java.util.List;
 

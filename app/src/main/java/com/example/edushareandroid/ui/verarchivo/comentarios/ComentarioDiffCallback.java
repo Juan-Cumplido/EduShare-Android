@@ -1,8 +1,6 @@
-package com.example.edushareandroid.ui.verarchivo;
+package com.example.edushareandroid.ui.verarchivo.comentarios;
 
 import androidx.recyclerview.widget.DiffUtil;
-
-import com.example.edushareandroid.model.base_de_datos.comentarios.Comentario;
 
 import java.util.List;
 

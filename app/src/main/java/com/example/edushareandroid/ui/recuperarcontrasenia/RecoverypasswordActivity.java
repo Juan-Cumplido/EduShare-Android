@@ -28,7 +28,6 @@ public class RecoverypasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recoverypassword);
 
-        // Inicializar vistas
         editTextEmail = findViewById(R.id.edt_correo_electronico);
         editTextCodigo = findViewById(R.id.edt_codigo_verificacion);
         editTextNuevaContraseña = findViewById(R.id.edt_nueva_contraseña);
@@ -40,13 +39,10 @@ public class RecoverypasswordActivity extends AppCompatActivity {
         btnAceptarVerificacion = findViewById(R.id.btn_aceptar_verificacion);
         btnVolverCodigo = findViewById(R.id.btn_volver_codigo);
 
-        // ViewModel
         viewModel = new ViewModelProvider(this).get(RecoveryPasswordViewModel.class);
 
-        // Observadores
         setupObservers();
 
-        // Solicitar código
         btnRecuperar.setOnClickListener(v -> {
             String correo = editTextEmail.getText().toString().trim();
             if (correo.isEmpty() || !correo.contains("@")) {
@@ -57,7 +53,6 @@ public class RecoverypasswordActivity extends AppCompatActivity {
             viewModel.recuperarContrasena(correo);
         });
 
-        // Validar código y cambiar contraseña
         btnAceptarVerificacion.setOnClickListener(v -> {
             String codigo = editTextCodigo.getText().toString().trim();
             String nueva = editTextNuevaContraseña.getText().toString().trim();

@@ -14,11 +14,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.edushareandroid.MainActivity;
 import com.example.edushareandroid.R;
-import com.example.edushareandroid.model.base_de_datos.Login.UsuarioData;
 import com.example.edushareandroid.ui.crearcuenta.CreateAccountActivity;
 import com.example.edushareandroid.ui.recuperarcontrasenia.RecoverypasswordActivity;
 import com.example.edushareandroid.utils.HashUtil;
 import com.example.edushareandroid.network.websocket.WebSocketManager;
+import com.example.edushareandroid.utils.SesionUsuario;
 
 import org.json.JSONObject;
 
@@ -60,39 +60,36 @@ public class LoginActivity extends AppCompatActivity {
 
                 Toast.makeText(this, "¡Inicio de sesión exitoso!", Toast.LENGTH_SHORT).show();
 
-                // ✅ Obtener datos del usuario
                 UsuarioData usuario = response.getDatos();
                 int idUsuario = usuario.getIdUsuario();
+                String nombreUsuario = usuario.getNombre();
 
-                // ✅ Guardar ID de usuario para acceso global
                 getSharedPreferences("sesion", MODE_PRIVATE)
                         .edit()
                         .putString("usuario_id", String.valueOf(idUsuario))
                         .apply();
 
-                // ✅ Conectar a WebSocket
+                SesionUsuario.guardarNombreUsuario(this, nombreUsuario);
+
                 WebSocketManager.getInstance().connect(new WebSocketManager.WebSocketCallback() {
                     @Override
                     public void onMessageReceived(String action, JSONObject data) {
                         Log.d("WebSocket", "Acción: " + action + " - Datos: " + data.toString());
-
-                        // Aquí puedes implementar lógica de UI si necesitas reaccionar a eventos
-                        // Por ejemplo, si `action.equals("notificacion")`, mostrar una notificación local
                     }
 
                     @Override
                     public void onConnectionOpened() {
-                        Log.d("WebSocket", "✅ Conexión WebSocket establecida.");
+                        Log.d("WebSocket", "Conexión WebSocket establecida.");
                     }
 
                     @Override
                     public void onConnectionClosed() {
-                        Log.d("WebSocket", "⚠️ Conexión WebSocket cerrada.");
+                        Log.d("WebSocket", " Conexión WebSocket cerrada.");
                     }
 
                     @Override
                     public void onError(String error) {
-                        Log.e("WebSocket", "❌ Error en WebSocket: " + error);
+                        Log.e("WebSocket", "Error en WebSocket: " + error);
                     }
                 }, String.valueOf(idUsuario));
 
@@ -102,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, response.getMensaje(), Toast.LENGTH_LONG).show();
             }
         });
+
 
         loginViewModel.getErrorMessage().observe(this, mensaje -> {
             if (mensaje != null) {

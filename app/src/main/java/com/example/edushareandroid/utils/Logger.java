@@ -5,7 +5,7 @@ import android.util.Log;
 
 public class Logger {
     private static final String TAG = "EduShare";
-    private static final boolean DEBUG = true; // Cambiar a false en producción
+    private static final boolean DEBUG = true;
 
     public static void d(String message) {
         if (DEBUG) Log.d(TAG, message);

@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.edushareandroid.R;
 import com.example.edushareandroid.databinding.FragmentUsuariosBinding;
-import com.example.edushareandroid.model.base_de_datos.UsuarioPerfilRecuperado;
 import com.example.edushareandroid.network.grpc.FileServiceClient;
 import com.example.edushareandroid.utils.SesionUsuario;
 

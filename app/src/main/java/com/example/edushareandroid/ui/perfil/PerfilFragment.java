@@ -17,6 +17,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.edushareandroid.R;
 import com.example.edushareandroid.databinding.FragmentPerfilBinding;
 import com.example.edushareandroid.network.grpc.FileServiceClient;
 import com.example.edushareandroid.ui.publicaciones.PublicacionesAdapter;
@@ -154,7 +155,7 @@ public class PerfilFragment extends Fragment {
     private void showNoPublicationsMessage() {
         binding.txtSinPublicaciones.setVisibility(View.VISIBLE);
         binding.rvPublicaciones.setVisibility(View.GONE);
-        binding.txtSinPublicaciones.setText("Aún no has subido publicaciones");
+        binding.txtSinPublicaciones.setText(R.string.a_n_no_has_subido_publicaciones);
     }
 
     private void observeDeletionStatus() {

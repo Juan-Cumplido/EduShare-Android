@@ -8,8 +8,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.edushareandroid.model.base_de_datos.Login.LoginRequest;
-import com.example.edushareandroid.model.base_de_datos.Login.LoginResponse;
 import com.example.edushareandroid.utils.SesionUsuario;
 
 public class LoginViewModel extends AndroidViewModel {

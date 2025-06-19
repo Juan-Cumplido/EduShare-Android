@@ -1,18 +1,15 @@
 package com.example.edushareandroid.ui.verarchivo;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-import static com.example.edushareandroid.utils.SesionUsuario.obtenerToken;
-
 import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.edushareandroid.model.base_de_datos.comentarios.Comentario;
-import com.example.edushareandroid.model.base_de_datos.comentarios.CrearComentarioRequest;
-import com.example.edushareandroid.model.base_de_datos.comentarios.RespuestaBase;
-import com.example.edushareandroid.model.base_de_datos.comentarios.RespuestaConDatos;
+import com.example.edushareandroid.ui.verarchivo.comentarios.Comentario;
+import com.example.edushareandroid.ui.verarchivo.comentarios.CrearComentarioRequest;
+import com.example.edushareandroid.ui.verarchivo.comentarios.RespuestaBase;
+import com.example.edushareandroid.ui.verarchivo.comentarios.RespuestaConDatos;
 import com.example.edushareandroid.network.api.ApiResponse;
 import com.example.edushareandroid.network.api.ApiService;
 import com.example.edushareandroid.network.api.RetrofitClient;

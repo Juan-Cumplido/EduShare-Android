@@ -7,11 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.edushareandroid.ui.perfil.DocumentoResponse;
 import com.example.edushareandroid.ui.perfil.UsuarioPerfil;
-import com.example.edushareandroid.model.base_de_datos.UsuarioPerfilRecuperado;
 import com.example.edushareandroid.network.api.ApiResponse;
 import com.example.edushareandroid.network.api.ApiService;
 import com.example.edushareandroid.network.api.RetrofitClient;
@@ -34,13 +32,9 @@ public class UsuariosViewModel extends AndroidViewModel {
 
     public UsuariosViewModel(@NonNull Application application) {
         super(application);
-        // Obtén contexto del Application
         Context appContext = application.getApplicationContext();
 
-        // Obtén el ApiService usando el contexto si tu método lo requiere
         ApiService apiService = RetrofitClient.getApiService(appContext);
-
-        // Crea el repositorio con contexto y apiService
         usuarioRepository = new UsuarioRepository(appContext, apiService);
     }
 
@@ -52,8 +46,6 @@ public class UsuariosViewModel extends AndroidViewModel {
         return mensajePublicaciones;
     }
 
-
-    // --------------------- Perfiles ---------------------
 
     public LiveData<List<UsuarioPerfilRecuperado>> getPerfiles() {
         return perfilesLiveData;
@@ -74,8 +66,6 @@ public class UsuariosViewModel extends AndroidViewModel {
             }
         });
     }
-
-    // --------------------- Perfil por ID ---------------------
 
     public LiveData<UsuarioPerfil> getPerfilUsuario() {
         return perfilUsuario;
@@ -99,8 +89,6 @@ public class UsuariosViewModel extends AndroidViewModel {
         });
     }
 
-
-    // --------------------- Seguimiento ---------------------
 
     public LiveData<ApiResponse> getRespuestaSeguimiento() {
         return respuestaSeguimiento;

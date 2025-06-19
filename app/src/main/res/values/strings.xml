@@ -165,4 +165,10 @@
     <string name="selecciona_rama">Selecciona rama</string>
     <string name="selecciona_materia">Selecciona materia</string>
     <string name="error_materia">Error</string>
+    <string name="sesion_caducada">Sesión caducada</string>
+    <string name="caduco_la_sesion">Tu sesión ha caducado. Inicia sesión nuevamente. Mientras tanto, puedes seguir explorando los documentos.</string>
+    <string name="entendido">Entendido</string>
+    <string name="sesion_expirada">SESION_EXPIRADA</string>
+    <string name="a_n_no_has_subido_publicaciones">Aún no has subido publicaciones</string>
+    <string name="guardar_chat">Guardar Chat</string>
 </resources>

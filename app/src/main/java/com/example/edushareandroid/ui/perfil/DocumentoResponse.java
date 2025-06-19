@@ -20,6 +20,7 @@ public class DocumentoResponse implements Parcelable {
     private String titulo;
     private String ruta;
     private String nombreCompleto;
+
     protected DocumentoResponse(Parcel in) {
         idPublicacion = in.readInt();
         idCategoria = in.readInt();

@@ -11,8 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.edushareandroid.databinding.FragmentNotificationsBinding;
-import com.example.edushareandroid.model.adapter.NotificacionAdapter;
-import com.example.edushareandroid.model.bd.Notificacion;
+import com.example.edushareandroid.model.base_de_datos.NotificacionAdapter;
 import com.example.edushareandroid.utils.SesionUsuario;
 
 import java.util.ArrayList;
@@ -36,7 +35,6 @@ public class NotificationsFragment extends Fragment {
             binding.rvNotificaciones.setVisibility(View.VISIBLE);
             binding.txtNotificaciones.setVisibility(View.GONE);
 
-            // Simular datos
             List<Notificacion> lista = obtenerNotificacionesEjemplo();
             NotificacionAdapter adapter = new NotificacionAdapter(lista);
             binding.rvNotificaciones.setLayoutManager(new LinearLayoutManager(requireContext()));

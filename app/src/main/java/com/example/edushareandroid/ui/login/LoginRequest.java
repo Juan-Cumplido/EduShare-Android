@@ -1,20 +1,17 @@
-package com.example.edushareandroid.model.base_de_datos.Login;
+package com.example.edushareandroid.ui.login;
 
 public class LoginRequest {
-    private String identifier; // puede ser correo o nombre de usuario
-    private String contrasenia; // en formato SHA-256
+    private String identifier;
+    private String contrasenia;
 
-    // Constructor vacío
     public LoginRequest() {
     }
 
-    // Constructor con parámetros
     public LoginRequest(String identifier, String contrasenia) {
         this.identifier = identifier;
         this.contrasenia = contrasenia;
     }
 
-    // Getters y setters
     public String getIdentifier() {
         return identifier;
     }

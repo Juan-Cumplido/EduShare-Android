@@ -1,4 +1,4 @@
-package com.example.edushareandroid.model.base_de_datos;
+package com.example.edushareandroid.ui.crearcuenta;
 
 public class UsuarioRegistro {
     public UsuarioRegistro(String correo, String contrasenia, String nombreUsuario, String nombre, String primerApellido, String segundoApellido, int idInstitucion,String fotoPerfil) {

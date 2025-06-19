@@ -8,15 +8,10 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.edushareandroid.model.base_de_datos.DejarSeguirRequest;
-import com.example.edushareandroid.model.base_de_datos.PublicacionesResponse;
+import com.example.edushareandroid.ui.publicaciones.PublicacionesResponse;
 import com.example.edushareandroid.ui.perfil.DocumentoResponse;
 import com.example.edushareandroid.ui.perfil.PerfilResponse;
-import com.example.edushareandroid.model.base_de_datos.PerfilResponseList;
-import com.example.edushareandroid.model.base_de_datos.SeguimientoRequest;
 import com.example.edushareandroid.ui.perfil.UsuarioPerfil;
-import com.example.edushareandroid.model.base_de_datos.UsuarioPerfilRecuperado;
-import com.example.edushareandroid.model.base_de_datos.VerificacionSeguimientoResponse;
 import com.example.edushareandroid.network.api.ApiResponse;
 import com.example.edushareandroid.network.api.ApiService;
 
@@ -31,8 +26,9 @@ public class UsuarioRepository {
 
     private final ApiService apiService;
     private final Context context;
+
     public UsuarioRepository(Context context, ApiService apiService) {
-        this.context = context.getApplicationContext(); // para evitar fugas
+        this.context = context.getApplicationContext();
         this.apiService = apiService;
     }
 
@@ -149,7 +145,7 @@ public class UsuarioRepository {
 
         return resultado;
     }
-    // Método para obtener publicaciones por ID de usuario
+
     public LiveData<PublicacionesResult> obtenerPublicacionesPorUsuario(int idUsuario) {
         MutableLiveData<PublicacionesResult> resultado = new MutableLiveData<>();
 
@@ -183,7 +179,6 @@ public class UsuarioRepository {
         return resultado;
     }
 
-    // Clase para encapsular el resultado de las publicaciones
     public static class PublicacionesResult {
         private final boolean success;
         private final String message;

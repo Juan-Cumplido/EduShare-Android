@@ -1,4 +1,4 @@
-package com.example.edushareandroid.model.adapter;
+package com.example.edushareandroid.ui.vistachat;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.edushareandroid.R;
-import com.example.edushareandroid.model.bd.Message;
 
 import java.util.List;
 
@@ -35,10 +34,10 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         if (viewType == VIEW_TYPE_PROPIO) {
-            View view = inflater.inflate(R.layout.item_mensaje_propio, parent, false);
+            View view = inflater.inflate(R.layout.item_mensaje_mio, parent, false);
             return new MensajePropioViewHolder(view);
         } else {
-            View view = inflater.inflate(R.layout.item_mensaje_ajeno, parent, false);
+            View view = inflater.inflate(R.layout.item_mensaje_otro, parent, false);
             return new MensajeAjenoViewHolder(view);
         }
     }

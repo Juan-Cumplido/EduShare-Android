@@ -5,7 +5,7 @@ public class PerfilResponse {
     private boolean error;
     private int estado;
     private String mensaje;
-    private UsuarioPerfil datos; // Aquí está tu perfil
+    private UsuarioPerfil datos;
 
     public boolean isError() {
         return error;
