@@ -204,6 +204,35 @@
                         tools:text="Para visualizar completamente el documento es necesario iniciar sesión" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+            <!-- Tarjeta para las estadísticas -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Título de la sección de estadísticas -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Estadísticas de Interacción"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Gráfica de vistas y descargas -->
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/bar_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <!-- Sección de interacción -->
             <LinearLayout

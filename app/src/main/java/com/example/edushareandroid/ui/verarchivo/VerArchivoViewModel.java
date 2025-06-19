@@ -42,8 +42,6 @@ public class VerArchivoViewModel extends AndroidViewModel {
         return repository.eliminarComentario(context, idComentario);
     }
 
-    // ====== NUEVOS MÉTODOS ======
-
     public LiveData<ApiResponse> darLike(Context context, int idPublicacion) {
         return repository.darLike(idPublicacion, context);
     }

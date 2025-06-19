@@ -29,6 +29,10 @@ import com.example.edushareandroid.network.grpc.FileServiceClient;
 import com.example.edushareandroid.ui.perfil.DocumentoResponse;
 import com.example.edushareandroid.utils.ImageUtil;
 import com.example.edushareandroid.utils.SesionUsuario;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -53,7 +57,7 @@ public class VerArchivoFragment extends Fragment {
     private VerArchivoViewModel viewModel;
     private File archivoTemporalPdf = null;
     private static final int REQUEST_CODE_CREATE_DOCUMENT = 1001;
-
+    private BarChart barChart;
     // Variables para el manejo de likes
     private boolean liked = false;
     private int likeCount = 0;
@@ -65,7 +69,7 @@ public class VerArchivoFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(VerArchivoViewModel.class);
         estaLogueado = SesionUsuario.isUsuarioLogueado(requireContext());
         documento = VerArchivoFragmentArgs.fromBundle(getArguments()).getDocumento();
-
+        barChart = binding.getRoot().findViewById(R.id.bar_chart);
         if (documento == null) {
             Toast.makeText(getContext(), "Error: Documento no disponible", Toast.LENGTH_SHORT).show();
             return binding.getRoot();
@@ -75,15 +79,11 @@ public class VerArchivoFragment extends Fragment {
         configurarDocumento();
         configurarComentarios();
         configurarListeners();
-
-        // Registrar visualización al entrar al fragment
         registrarVisualizacion();
-
-        // Verificar si ya le dio like (solo si está logueado)
         if (estaLogueado) {
             verificarEstadoLike();
         }
-
+        setChartData();
         return binding.getRoot();
     }
 
@@ -106,7 +106,6 @@ public class VerArchivoFragment extends Fragment {
         binding.rvComentarios.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvComentarios.setAdapter(adapter);
 
-        // Observar comentarios
         viewModel.getComentarios().observe(getViewLifecycleOwner(), nuevosComentarios -> {
             if (nuevosComentarios != null) {
                 comentarios.clear();
@@ -118,12 +117,10 @@ public class VerArchivoFragment extends Fragment {
             }
         });
 
-        // Cargar comentarios iniciales
         viewModel.cargarComentarios(documento.getIdPublicacion());
     }
 
     private void configurarListeners() {
-        // Botón abrir documento
         binding.btnAbrirDocumento.setOnClickListener(v -> {
             if (archivoTemporalPdf != null && archivoTemporalPdf.exists()) {
                 abrirArchivoLocal(archivoTemporalPdf);
@@ -132,7 +129,6 @@ public class VerArchivoFragment extends Fragment {
             }
         });
 
-        // Botón descargar documento
         binding.btnDescargarDocumento.setOnClickListener(v -> {
             if (!estaLogueado) {
                 Toast.makeText(getContext(), "Inicia sesión para descargar", Toast.LENGTH_SHORT).show();
@@ -147,7 +143,6 @@ public class VerArchivoFragment extends Fragment {
             }
         });
 
-        // Botón enviar comentario
         binding.btnEnviarComentario.setOnClickListener(v -> {
             if (!estaLogueado) {
                 Toast.makeText(getContext(), "Inicia sesión para comentar", Toast.LENGTH_SHORT).show();
@@ -163,7 +158,6 @@ public class VerArchivoFragment extends Fragment {
             crearComentario(texto);
         });
 
-        // Botón like
         binding.btnLike.setOnClickListener(v -> {
             if (!estaLogueado) {
                 Toast.makeText(getContext(), "Inicia sesión para dar like", Toast.LENGTH_SHORT).show();
@@ -173,12 +167,10 @@ public class VerArchivoFragment extends Fragment {
         });
     }
 
-    // ====== MÉTODOS PARA INTERACCIONES ======
-
     private void registrarVisualizacion() {
         viewModel.registrarVisualizacion(documento.getIdPublicacion())
                 .observe(getViewLifecycleOwner(), response -> {
-                    if (response != null && !response.isError()){
+                    if (response != null && !response.isError()) {
                         Log.d("VerArchivo", "Visualización registrada correctamente");
                     } else {
                         Log.e("VerArchivo", "Error al registrar visualización");
@@ -189,7 +181,7 @@ public class VerArchivoFragment extends Fragment {
     private void registrarDescarga() {
         viewModel.registrarDescarga(requireContext(), documento.getIdPublicacion())
                 .observe(getViewLifecycleOwner(), response -> {
-                    if (response != null && !response.isError()){
+                    if (response != null && !response.isError()) {
                         documento.setNumeroDescargas(documento.getNumeroDescargas() + 1);
                         binding.txtDescargas.setText(formatNumber(documento.getNumeroDescargas()) + " descargas");
                     } else {
@@ -220,7 +212,7 @@ public class VerArchivoFragment extends Fragment {
         if (liked) {
             viewModel.quitarLike(requireContext(), documento.getIdPublicacion())
                     .observe(getViewLifecycleOwner(), response -> {
-                        if (response != null && !response.isError()){
+                        if (response != null && !response.isError()) {
                             liked = false;
                             likeCount = Math.max(0, likeCount - 1);
                             actualizarLikeUI();
@@ -230,10 +222,9 @@ public class VerArchivoFragment extends Fragment {
                         }
                     });
         } else {
-            // Dar like
             viewModel.darLike(requireContext(), documento.getIdPublicacion())
                     .observe(getViewLifecycleOwner(), response -> {
-                        if (response != null && !response.isError()){
+                        if (response != null && !response.isError()) {
                             liked = true;
                             likeCount++;
                             actualizarLikeUI();
@@ -258,7 +249,6 @@ public class VerArchivoFragment extends Fragment {
                 .observe(getViewLifecycleOwner(), respuesta -> {
                     if (respuesta != null && respuesta.isSuccess()) {
                         Toast.makeText(getContext(), "Comentario publicado", Toast.LENGTH_SHORT).show();
-                        // Recargar comentarios
                         viewModel.cargarComentarios(documento.getIdPublicacion());
                     } else {
                         Toast.makeText(getContext(), "Error al publicar comentario", Toast.LENGTH_SHORT).show();
@@ -278,8 +268,6 @@ public class VerArchivoFragment extends Fragment {
                 });
     }
 
-    // ====== MÉTODOS DE CONFIGURACIÓN DE DOCUMENTO ======
-
     private void configurarDocumento() {
         binding.txtTituloDocumento.setText(documento.getTitulo());
         binding.txtSubtitulo.setText(documento.getResuContenido());
@@ -294,14 +282,10 @@ public class VerArchivoFragment extends Fragment {
         setEstadoColor(documento.getEstado());
         descargarYMostrarImagen(documento.getRuta());
         descargarDocumentoTemporal(documento.getRuta());
-
-        // Mostrar advertencia si es necesario
         if (documento.getNumeroVisualizaciones() > 100 && !estaLogueado) {
             binding.txtAdvertencia.setVisibility(View.VISIBLE);
         }
     }
-
-    // ====== MÉTODOS AUXILIARES ======
 
     private String formatNumber(int number) {
         if (number < 1000) return String.valueOf(number);
@@ -309,22 +293,30 @@ public class VerArchivoFragment extends Fragment {
         return String.format(Locale.getDefault(), "%.1fM", number / 1000000.0);
     }
 
+    private void setChartData() {
+        ArrayList<BarEntry> entriesVistas = new ArrayList<>();
+        ArrayList<BarEntry> entriesDescargas = new ArrayList<>();
+        entriesVistas.add(new BarEntry(0f, documento.getNumeroVisualizaciones()));
+        entriesDescargas.add(new BarEntry(1f, documento.getNumeroDescargas()));
+        BarDataSet dataSetVistas = new BarDataSet(entriesVistas, "Vistas");
+        dataSetVistas.setColor(ContextCompat.getColor(requireContext(), R.color.blue_light));
+        BarDataSet dataSetDescargas = new BarDataSet(entriesDescargas, "Descargas");
+        dataSetDescargas.setColor(ContextCompat.getColor(requireContext(), R.color.black));
+        BarData data = new BarData(dataSetVistas, dataSetDescargas);
+        barChart.setData(data);
+        barChart.getDescription().setEnabled(false);
+        barChart.animateY(1000);
+        barChart.getLegend().setEnabled(true);
+    }
+
+
     private String formatTimeAgo(String fecha) {
         try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
             format.setTimeZone(TimeZone.getTimeZone("UTC"));
             Date past = format.parse(fecha);
-            Date now = new Date();
-
-            long seconds = TimeUnit.MILLISECONDS.toSeconds(now.getTime() - past.getTime());
-            long minutes = TimeUnit.MILLISECONDS.toMinutes(now.getTime() - past.getTime());
-            long hours = TimeUnit.MILLISECONDS.toHours(now.getTime() - past.getTime());
-            long days = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
-
-            if (seconds < 60) return "hace unos segundos";
-            if (minutes < 60) return minutes + " min atrás";
-            if (hours < 24) return hours + " h atrás";
-            return days + " días atrás";
+            SimpleDateFormat newFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            return newFormat.format(past);
         } catch (Exception e) {
             return fecha;
         }
@@ -346,8 +338,6 @@ public class VerArchivoFragment extends Fragment {
                 binding.txtEstado.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
         }
     }
-
-    // ====== MÉTODOS PARA MANEJO DE ARCHIVOS ======
 
     private void descargarDocumentoTemporal(String rutaRemota) {
         fileServiceClient = new FileServiceClient();
@@ -452,19 +442,15 @@ public class VerArchivoFragment extends Fragment {
     private void guardarArchivoEn(Uri destinoUri) {
         try {
             if (archivoTemporalPdf == null || !archivoTemporalPdf.exists()) return;
-
             InputStream in = new FileInputStream(archivoTemporalPdf);
             OutputStream out = requireContext().getContentResolver().openOutputStream(destinoUri);
-
             byte[] buffer = new byte[4096];
             int length;
             while ((length = in.read(buffer)) > 0) {
                 out.write(buffer, 0, length);
             }
-
             in.close();
             out.close();
-
             Toast.makeText(getContext(), "Archivo guardado exitosamente", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(getContext(), "Error al guardar el archivo", Toast.LENGTH_SHORT).show();

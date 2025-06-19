@@ -22,22 +22,25 @@ import com.example.edushareandroid.network.grpc.FileServiceClient;
 import com.example.edushareandroid.utils.ImageUtil;
 import com.example.edushareandroid.utils.SesionUsuario;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ComentarioAdapter extends RecyclerView.Adapter<ComentarioAdapter.ComentarioViewHolder> {
 
     private List<Comentario> comentarios;
     private OnItemClickListener listener;
     private Context context;
-    private FileServiceClient fileServiceClient; // <-- Aquí agregamos la instancia
+    private FileServiceClient fileServiceClient;
     private final int idUsuarioLogueado;
 
     public interface OnItemClickListener {
         void onEliminarClick(int position);
     }
 
-    public ComentarioAdapter(Context context, List<Comentario> comentarios,int idUsuarioLogueado, OnItemClickListener listener, FileServiceClient fileServiceClient) {
+    public ComentarioAdapter(Context context, List<Comentario> comentarios, int idUsuarioLogueado, OnItemClickListener listener, FileServiceClient fileServiceClient) {
         this.context = context;
         this.comentarios = comentarios != null ? comentarios : new ArrayList<>();
         this.idUsuarioLogueado = idUsuarioLogueado;
@@ -71,10 +74,20 @@ public class ComentarioAdapter extends RecyclerView.Adapter<ComentarioAdapter.Co
             nombreUsuario = sb.toString();
         }
         holder.txtNombreUsuario.setText(nombreUsuario);
-        holder.txtFechaComentario.setText(comentario.getFecha());
+
+        String fechaComentario = comentario.getFecha();
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());  // Formato deseado
+        try {
+            Date date = inputFormat.parse(fechaComentario);
+            String formattedDate = outputFormat.format(date);
+            holder.txtFechaComentario.setText(formattedDate);
+        } catch (Exception e) {
+            holder.txtFechaComentario.setText(fechaComentario);
+        }
+
         holder.txtComentario.setText(comentario.getContenido());
 
-        // Descarga la imagen usando FileServiceClient (gRPC)
         String coverImagePath = comentario.getFotoPerfil();
         if (coverImagePath != null && !coverImagePath.isEmpty()) {
             fileServiceClient.downloadImage(coverImagePath, new FileServiceClient.DownloadCallback() {
@@ -102,6 +115,7 @@ public class ComentarioAdapter extends RecyclerView.Adapter<ComentarioAdapter.Co
         } else {
             holder.imgAvatar.setImageResource(R.drawable.ic_perfil);
         }
+
         int idLogueado = SesionUsuario.obtenerDatosUsuario(context).getIdUsuario();
         Log.d("ComentarioAdapter", "ID logueado: " + idLogueado);
         if (comentario.getIdUsuarioRegistrado() == idLogueado) {
@@ -116,6 +130,7 @@ public class ComentarioAdapter extends RecyclerView.Adapter<ComentarioAdapter.Co
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

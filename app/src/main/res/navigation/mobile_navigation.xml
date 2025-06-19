@@ -131,6 +131,7 @@
         android:label="Login"
         tools:layout="@layout/login"> <!-- El layout de tu LoginActivity -->
         <!-- Deep Link para navegar desde cualquier parte de la app -->
-        <deepLink app:uri="edushare://login" />
+        <deepLink app:uri="edushare://login"
+            tools:ignore="DeepLinkInActivityDestination" />
     </activity>
 </navigation>

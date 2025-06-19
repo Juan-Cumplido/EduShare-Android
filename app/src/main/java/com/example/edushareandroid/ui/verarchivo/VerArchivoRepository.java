@@ -33,7 +33,7 @@ public class VerArchivoRepository {
 
     public VerArchivoRepository(Context context) {
         this.apiService = RetrofitClient.getApiService(context);
-        this.context = context.getApplicationContext(); // Usar ApplicationContext para evitar fugas de memoria
+        this.context = context.getApplicationContext();
     }
 
 
@@ -119,7 +119,6 @@ public class VerArchivoRepository {
             public void onResponse(Call<RespuestaConDatos<List<Comentario>>> call, Response<RespuestaConDatos<List<Comentario>>> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        // Cambiar getResultado() por getEstado() acorde a tu RespuestaBase actualizada
                         if (response.body().getEstado() == 200) {
                             Log.i(TAG, "obtenerComentarios éxito: " + response.body().getDatos().size() + " comentarios");
                             liveData.postValue(response.body().getDatos());
@@ -146,6 +145,7 @@ public class VerArchivoRepository {
 
         return liveData;
     }
+
     public LiveData<ApiResponse> darLike(int idPublicacion, Context context) {
         MutableLiveData<ApiResponse> liveData = new MutableLiveData<>();
         String token = "Bearer " + SesionUsuario.obtenerToken(context);

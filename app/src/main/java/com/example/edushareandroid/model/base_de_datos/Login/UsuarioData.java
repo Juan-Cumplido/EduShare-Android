@@ -9,6 +9,7 @@ public class UsuarioData {
     private String nombreUsuario;
     private String fotoPerfil;
     private String tipoAcceso;
+
     public int getIdUsuario() {
         return idUsuario;
     }

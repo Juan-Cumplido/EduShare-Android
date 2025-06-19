@@ -3,6 +3,7 @@ package com.example.edushareandroid.ui.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,9 +14,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.edushareandroid.MainActivity;
 import com.example.edushareandroid.R;
+import com.example.edushareandroid.model.base_de_datos.Login.UsuarioData;
 import com.example.edushareandroid.ui.crearcuenta.CreateAccountActivity;
 import com.example.edushareandroid.ui.recuperarcontrasenia.RecoverypasswordActivity;
 import com.example.edushareandroid.utils.HashUtil;
+import com.example.edushareandroid.network.websocket.WebSocketManager;
+
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,6 +59,43 @@ public class LoginActivity extends AppCompatActivity {
                 loginViewModel.manejarRespuestaLogin(response, this);
 
                 Toast.makeText(this, "¡Inicio de sesión exitoso!", Toast.LENGTH_SHORT).show();
+
+                // ✅ Obtener datos del usuario
+                UsuarioData usuario = response.getDatos();
+                int idUsuario = usuario.getIdUsuario();
+
+                // ✅ Guardar ID de usuario para acceso global
+                getSharedPreferences("sesion", MODE_PRIVATE)
+                        .edit()
+                        .putString("usuario_id", String.valueOf(idUsuario))
+                        .apply();
+
+                // ✅ Conectar a WebSocket
+                WebSocketManager.getInstance().connect(new WebSocketManager.WebSocketCallback() {
+                    @Override
+                    public void onMessageReceived(String action, JSONObject data) {
+                        Log.d("WebSocket", "Acción: " + action + " - Datos: " + data.toString());
+
+                        // Aquí puedes implementar lógica de UI si necesitas reaccionar a eventos
+                        // Por ejemplo, si `action.equals("notificacion")`, mostrar una notificación local
+                    }
+
+                    @Override
+                    public void onConnectionOpened() {
+                        Log.d("WebSocket", "✅ Conexión WebSocket establecida.");
+                    }
+
+                    @Override
+                    public void onConnectionClosed() {
+                        Log.d("WebSocket", "⚠️ Conexión WebSocket cerrada.");
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e("WebSocket", "❌ Error en WebSocket: " + error);
+                    }
+                }, String.valueOf(idUsuario));
+
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
             } else {
@@ -61,15 +103,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         loginViewModel.getErrorMessage().observe(this, mensaje -> {
             if (mensaje != null) {
                 Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
             }
         });
-
 
         findViewById(R.id.btn_olvido_contraseña).setOnClickListener(v ->
                 startActivity(new Intent(this, RecoverypasswordActivity.class))
