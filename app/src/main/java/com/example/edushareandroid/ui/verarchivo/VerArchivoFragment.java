@@ -89,7 +89,6 @@ public class VerArchivoFragment extends Fragment {
 
     private void inicializarUI() {
         binding.txtAdvertencia.setVisibility(estaLogueado ? View.GONE : View.VISIBLE);
-        binding.btnDescargarDocumento.setEnabled(estaLogueado);
         binding.clNuevoComentario.setVisibility(estaLogueado ? View.VISIBLE : View.GONE);
     }
 
@@ -122,6 +121,11 @@ public class VerArchivoFragment extends Fragment {
 
     private void configurarListeners() {
         binding.btnAbrirDocumento.setOnClickListener(v -> {
+            if (!estaLogueado) {
+                Toast.makeText(getContext(), "Inicie sesión para abrir el documento", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             if (archivoTemporalPdf != null && archivoTemporalPdf.exists()) {
                 abrirArchivoLocal(archivoTemporalPdf);
             } else {
@@ -131,7 +135,7 @@ public class VerArchivoFragment extends Fragment {
 
         binding.btnDescargarDocumento.setOnClickListener(v -> {
             if (!estaLogueado) {
-                Toast.makeText(getContext(), "Inicia sesión para descargar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Inicie sesión para descargar el documento", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -166,6 +170,7 @@ public class VerArchivoFragment extends Fragment {
             toggleLike();
         });
     }
+
 
     private void registrarVisualizacion() {
         viewModel.registrarVisualizacion(documento.getIdPublicacion())

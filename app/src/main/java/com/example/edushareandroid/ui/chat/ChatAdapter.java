@@ -51,15 +51,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
             navController.navigate(R.id.action_navigation_chat_to_vistaChatFragment, bundle);
 
             String chatId = chat.getId();
-            int userId = SesionUsuario.obtenerDatosUsuario(v.getContext()).getIdUsuario();
-            String username = SesionUsuario.obtenerDatosUsuario(v.getContext()).getNombreUsuario();
+            String userId = String.valueOf(SesionUsuario.obtenerDatosUsuario(v.getContext()).getIdUsuario());
+            String username = "Erick";
 
             WebSocketManager.getInstance().unirseChat(chatId, userId, username);
         });
 
         holder.verMasButton.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putString("chatId", chat.getId());
+            bundle.putString("IdChat", chat.getId());
             bundle.putString("titulo", chat.getTitulo());
             bundle.putString("descripcion", chat.getDescripcion());
             bundle.putString("fecha", chat.getFecha());
@@ -68,10 +68,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
             navController.navigate(R.id.action_navigation_chat_to_vistaChatFragment, bundle);
 
             String chatId = chat.getId();
-            int userId = SesionUsuario.obtenerDatosUsuario(v.getContext()).getIdUsuario();
-            String username = SesionUsuario.obtenerDatosUsuario(v.getContext()).getNombreUsuario();
+            String idUsuario = String.valueOf(SesionUsuario.obtenerDatosUsuario(v.getContext()).getIdUsuario());
+            String username = "USUARIO";
 
-            WebSocketManager.getInstance().unirseChat(chatId, userId, username);
+            WebSocketManager.getInstance().unirseChat(chatId, idUsuario, username);
         });
     }
 

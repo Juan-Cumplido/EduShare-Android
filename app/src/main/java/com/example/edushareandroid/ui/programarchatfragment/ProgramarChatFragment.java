@@ -180,9 +180,6 @@ public class ProgramarChatFragment extends Fragment {
                     binding.btnGuardarChat.setEnabled(false);
                     binding.btnGuardarChat.setText("Enviando...");
 
-                    String nombreUsuario = SesionUsuario.obtenerDatosUsuario(requireContext()).getNombreUsuario();
-                    Log.d(TAG, "Nombre de usuario: " + nombreUsuario);
-
                     JSONObject chatData = new JSONObject();
                     try {
                         chatData.put("Titulo", titulo);
@@ -190,7 +187,7 @@ public class ProgramarChatFragment extends Fragment {
                         chatData.put("Fecha", fecha);
                         chatData.put("Hora", hora);
                         chatData.put("IdAutor", usuarioId);
-                        chatData.put("Autor", nombreUsuario);
+                        chatData.put("Autor", "USUARIO");
                         chatData.put("NivelEducativo", "General");
                         chatData.put("Rama", "General");
                         chatData.put("Materia", "General");

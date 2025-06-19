@@ -320,20 +320,20 @@ public class WebSocketManager {
         }
     }
 
-    public void unirseChat(String idChat, int idUsuario, String nombreUsuario) {
+    public void unirseChat(String idChat, String idUsuario, String NombreUsuario) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("accion", "unirse_chat");
             obj.put("IdChat", idChat);
             obj.put("IdUsuario", idUsuario);
-            obj.put("NombreUsuario", nombreUsuario);
+            obj.put("NombreUsuario", "USUARIO");
             enviar(obj);
         } catch (JSONException e) {
             Log.e(TAG, "Error al unirse a chat", e);
         }
     }
 
-    public void salirChat(String idChat, int idUsuario) {
+    public void salirChat(String idChat, String idUsuario) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("accion", "salir_chat");
@@ -352,19 +352,20 @@ public class WebSocketManager {
             obj.put("IdChat", idChat);
             obj.put("IdMensaje", idMensaje);
             obj.put("IdUsuario", idUsuario);
-            obj.put("NombreUsuario", nombreUsuario);
+            obj.put("NombreUsuario", "USUARIO");
             enviar(obj);
         } catch (JSONException e) {
             Log.e(TAG, "Error al eliminar mensaje", e);
         }
     }
 
-    public void enviarMensajeChat(String idChat, String nombreUsuario, String hora, String fotoPerfil, String mensaje) {
+    public void enviarMensajeChat(String idChat, String idUsuario, String nombreUsuario, String hora, String fotoPerfil, String mensaje) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("accion", "enviar_mensaje");
             obj.put("IdChat", idChat);
-            obj.put("NombreUsuario", nombreUsuario);
+            obj.put("IdUsuario", idUsuario);
+            obj.put("NombreUsuario", "USUARIO");
             obj.put("Hora", hora);
             obj.put("FotoPerfil", fotoPerfil);
             obj.put("Mensaje", mensaje);
@@ -373,6 +374,7 @@ public class WebSocketManager {
             Log.e(TAG, "Error al enviar mensaje de chat", e);
         }
     }
+
 
     public void enviarNotificacionAccion(String titulo, String mensaje, String tipo, String fecha, String usuarioDestinoId) {
         try {

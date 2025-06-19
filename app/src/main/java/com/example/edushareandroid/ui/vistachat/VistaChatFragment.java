@@ -44,6 +44,7 @@ public class VistaChatFragment extends Fragment {
         txtUsuarioDetalle = binding.txtUsuarioDetalle;
 
         if (getArguments() != null) {
+            chatId = getArguments().getString("IdChat");
             String titulo = getArguments().getString("titulo");
             String descripcion = getArguments().getString("descripcion");
             String fecha = getArguments().getString("fecha");
@@ -54,6 +55,9 @@ public class VistaChatFragment extends Fragment {
             txtDescripcionDetalle.setText(descripcion);
             txtFechaHoraDetalle.setText(fecha + " " + hora);
             txtUsuarioDetalle.setText(usuario);
+
+            int usuarioId = SesionUsuario.obtenerDatosUsuario(requireContext()).getIdUsuario();
+            String nombreUsuario = SesionUsuario.obtenerDatosUsuario(requireContext()).getNombreUsuario();
         }
 
         setupChat();
@@ -91,18 +95,19 @@ public class VistaChatFragment extends Fragment {
     }
 
     private void enviarMensajeWebSocket(String mensajeTexto) {
-        int usuarioId = SesionUsuario.obtenerDatosUsuario(getContext()).getIdUsuario();
+        String usuarioId = String.valueOf(SesionUsuario.obtenerDatosUsuario(getContext()).getIdUsuario());
         String nombreUsuario = SesionUsuario.obtenerDatosUsuario(getContext()).getNombreUsuario();
         String hora = obtenerFechaActual();
 
-        WebSocketManager.getInstance().enviarMensajeChat(chatId, nombreUsuario, hora, "", mensajeTexto);
+        WebSocketManager.getInstance().enviarMensajeChat(chatId, usuarioId, nombreUsuario, hora, "", mensajeTexto);
     }
+
 
     private void setUpWebSocketListener() {
         WebSocketManager.getInstance().setCallback(new WebSocketManager.WebSocketCallback() {
             @Override
             public void onMessageReceived(String action, JSONObject data) {
-                if ("mensaje_recibido".equals(action)) {
+                if ("mensaje_chat".equals(action)) {
                     String autor = data.optString("NombreUsuario", "");
                     String mensaje = data.optString("Mensaje", "");
                     String fecha = data.optString("Hora", "");
