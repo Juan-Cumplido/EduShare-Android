@@ -91,24 +91,14 @@ public class VistaChatFragment extends Fragment {
         binding.btnEnviarMensaje.setOnClickListener(v -> {
             String nuevoMensaje = binding.edtMensaje.getText().toString().trim();
             if (!TextUtils.isEmpty(nuevoMensaje)) {
-                String id = String.valueOf(System.currentTimeMillis());
-                String autor = SesionUsuario.obtenerDatosUsuario(getContext()).getNombreUsuario();
-                String fecha = obtenerFechaActual();
-                boolean esPropio = true;
-
-                // Agregar mensaje localmente primero
-                Message mensaje = new Message(id, autor, nuevoMensaje, fecha, esPropio);
-                mensajes.add(mensaje);
-                adapter.notifyItemInserted(mensajes.size() - 1);
-                binding.rvMensajes.scrollToPosition(mensajes.size() - 1);
                 binding.edtMensaje.setText("");
 
-                // Enviar mensaje por WebSocket
                 enviarMensajeWebSocket(nuevoMensaje);
 
-                Log.d(TAG, "Mensaje enviado: " + nuevoMensaje);
+                Log.d(TAG, "Mensaje enviado al servidor: " + nuevoMensaje);
             }
         });
+
     }
 
     private void enviarMensajeWebSocket(String mensajeTexto) {
@@ -128,18 +118,14 @@ public class VistaChatFragment extends Fragment {
     }
 
     private void setUpWebSocketListener() {
-        // Crear un callback compuesto que mantenga la funcionalidad original
-        // y agregue la funcionalidad del chat
         WebSocketManager.WebSocketCallback chatCallback = new WebSocketManager.WebSocketCallback() {
             @Override
             public void onMessageReceived(String action, JSONObject data) {
                 Log.d(TAG, "Mensaje WebSocket recibido - Acción: " + action + ", Data: " + data.toString());
 
-                // Manejar mensajes de chat
                 if ("mensaje_chat".equals(action) || "enviar_mensaje".equals(action)) {
                     String chatIdRecibido = data.optString("IdChat", "");
 
-                    // Solo procesar si es del chat actual
                     if (chatId != null && chatId.equals(chatIdRecibido)) {
                         String autorId = data.optString("IdUsuario", "");
                         String autor = data.optString("NombreUsuario", "Usuario");
@@ -147,18 +133,14 @@ public class VistaChatFragment extends Fragment {
                         String fecha = data.optString("Hora", "");
                         String id = data.optString("IdMensaje", String.valueOf(System.currentTimeMillis()));
 
-                        // Verificar que no sea nuestro propio mensaje
                         String miUsuarioId = String.valueOf(SesionUsuario.obtenerDatosUsuario(getContext()).getIdUsuario());
                         if (!autorId.equals(miUsuarioId)) {
-                            // Ejecutar en el hilo principal
                             mainHandler.post(() -> recibirMensaje(id, autor, mensaje, fecha));
                         }
                     }
                 }
 
-                // Manejar notificaciones del sistema
                 if ("notificacion".equals(action)) {
-                    // Esto lo maneja el WebSocketManager internamente
                     Log.d(TAG, "Notificación recibida: " + data.toString());
                 }
             }
@@ -166,7 +148,6 @@ public class VistaChatFragment extends Fragment {
             @Override
             public void onConnectionOpened() {
                 Log.d(TAG, "Conexión WebSocket abierta");
-                // Reintentarse al chat si la conexión se reabre
                 if (chatId != null) {
                     mainHandler.postDelayed(() -> unirseAlChat(), 1000);
                 }
@@ -183,7 +164,6 @@ public class VistaChatFragment extends Fragment {
             }
         };
 
-        // Establecer el callback
         WebSocketManager.getInstance().setCallback(chatCallback);
     }
 
@@ -211,10 +191,8 @@ public class VistaChatFragment extends Fragment {
         super.onResume();
         WebSocketManager.getInstance().startReconnections();
 
-        // Reestablecer el callback al volver al fragmento
         setUpWebSocketListener();
 
-        // Reunirse al chat
         if (chatId != null) {
             mainHandler.postDelayed(() -> unirseAlChat(), 500);
         }
@@ -223,15 +201,12 @@ public class VistaChatFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        // No detener las reconexiones aquí si quieres seguir recibiendo notificaciones
-        // WebSocketManager.getInstance().stopReconnections();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
 
-        // Salir del chat cuando se destruye la vista
         if (chatId != null) {
             String usuarioId = String.valueOf(SesionUsuario.obtenerDatosUsuario(getContext()).getIdUsuario());
             WebSocketManager.getInstance().salirChat(chatId, usuarioId);
